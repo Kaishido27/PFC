@@ -28,88 +28,145 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            tabControlAdv1 = new Syncfusion.Windows.Forms.Tools.TabControlAdv();
-            tabPageAdv1 = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            tabPageAdv2 = new Syncfusion.Windows.Forms.Tools.TabPageAdv();
-            designTimeTabTypeLoader = new Syncfusion.Reflection.TypeLoader(components);
-            ((System.ComponentModel.ISupportInitialize)tabControlAdv1).BeginInit();
-            tabControlAdv1.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            pnlSideBar = new Panel();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            ProductTab = new Syncfusion.WinForms.Controls.SfButton();
+            pictureBox1 = new PictureBox();
+            DashboardTab = new Syncfusion.WinForms.Controls.SfButton();
+            Report = new Syncfusion.WinForms.Controls.SfButton();
+            pnlMainContent = new Panel();
+            pnlSideBar.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // tabControlAdv1
+            // pnlSideBar
             // 
-            tabControlAdv1.ActiveTabFont = new Font("Segoe UI", 9F);
-            tabControlAdv1.Alignment = TabAlignment.Left;
-            tabControlAdv1.BackColor = Color.DeepSkyBlue;
-            tabControlAdv1.BeforeTouchSize = new Size(1288, 948);
-            tabControlAdv1.CanOverrideStyle = true;
-            tabControlAdv1.Controls.Add(tabPageAdv1);
-            tabControlAdv1.Controls.Add(tabPageAdv2);
-            tabControlAdv1.FocusOnTabClick = false;
-            tabControlAdv1.ItemSize = new Size(200, 105);
-            tabControlAdv1.Location = new Point(0, 85);
-            tabControlAdv1.Name = "tabControlAdv1";
-            tabControlAdv1.Office2010ColorTheme = Syncfusion.Windows.Forms.Office2010Theme.Silver;
-            tabControlAdv1.Padding = new Point(2, 3);
-            tabControlAdv1.RotateTextWhenVertical = true;
-            tabControlAdv1.Size = new Size(1288, 948);
-            tabControlAdv1.TabGap = 14;
-            tabControlAdv1.TabIndex = 3;
-            tabControlAdv1.TabPanelBackColor = SystemColors.Control;
-            tabControlAdv1.TabStyle = typeof(Syncfusion.Windows.Forms.Tools.TabRendererIE7);
-            tabControlAdv1.ThemeName = "TabRendererIE7";
-            tabControlAdv1.ThemeStyle.PrimitiveButtonStyle.DisabledNextPageImage = null;
+            pnlSideBar.BackColor = SystemColors.ControlLight;
+            pnlSideBar.Controls.Add(tableLayoutPanel1);
+            pnlSideBar.Dock = DockStyle.Right;
+            pnlSideBar.Location = new Point(1105, 0);
+            pnlSideBar.Name = "pnlSideBar";
+            pnlSideBar.Size = new Size(317, 753);
+            pnlSideBar.TabIndex = 2;
             // 
-            // tabPageAdv1
+            // tableLayoutPanel1
             // 
-            tabPageAdv1.BackColor = Color.PapayaWhip;
-            tabPageAdv1.Image = null;
-            tabPageAdv1.ImageSize = new Size(20, 20);
-            tabPageAdv1.Location = new Point(209, 1);
-            tabPageAdv1.Name = "tabPageAdv1";
-            tabPageAdv1.ShowCloseButton = true;
-            tabPageAdv1.Size = new Size(1077, 945);
-            tabPageAdv1.TabIndex = 1;
-            tabPageAdv1.Text = "tabPageAdv1";
-            tabPageAdv1.ThemesEnabled = false;
+            tableLayoutPanel1.BackColor = SystemColors.Control;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(ProductTab, 0, 3);
+            tableLayoutPanel1.Controls.Add(pictureBox1, 0, 0);
+            tableLayoutPanel1.Controls.Add(DashboardTab, 0, 2);
+            tableLayoutPanel1.Controls.Add(Report, 0, 4);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.ForeColor = SystemColors.ButtonHighlight;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 6;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 127F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Size = new Size(317, 753);
+            tableLayoutPanel1.TabIndex = 1;
             // 
-            // tabPageAdv2
+            // ProductTab
             // 
-            tabPageAdv2.Image = null;
-            tabPageAdv2.ImageSize = new Size(20, 20);
-            tabPageAdv2.Location = new Point(209, 1);
-            tabPageAdv2.Name = "tabPageAdv2";
-            tabPageAdv2.ShowCloseButton = true;
-            tabPageAdv2.Size = new Size(1077, 945);
-            tabPageAdv2.TabIndex = 2;
-            tabPageAdv2.Text = "tabPageAdv2";
-            tabPageAdv2.ThemesEnabled = false;
+            ProductTab.Dock = DockStyle.Fill;
+            ProductTab.FlatStyle = FlatStyle.Flat;
+            ProductTab.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ProductTab.ForeColor = Color.Black;
+            ProductTab.Location = new Point(3, 225);
+            ProductTab.Name = "ProductTab";
+            ProductTab.Padding = new Padding(60, 0, 0, 0);
+            ProductTab.Size = new Size(311, 69);
+            ProductTab.Style.ForeColor = Color.Black;
+            ProductTab.TabIndex = 2;
+            ProductTab.Text = "Products";
+            ProductTab.TextAlign = ContentAlignment.MiddleLeft;
+            ProductTab.Click += ProductTab_Click;
             // 
-            // designTimeTabTypeLoader
+            // pictureBox1
             // 
-            designTimeTabTypeLoader.InvokeMemberName = "TabStyleName";
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(311, 121);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            // 
+            // DashboardTab
+            // 
+            DashboardTab.Dock = DockStyle.Fill;
+            DashboardTab.FlatStyle = FlatStyle.Flat;
+            DashboardTab.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            DashboardTab.ForeColor = Color.Black;
+            DashboardTab.Location = new Point(3, 150);
+            DashboardTab.Name = "DashboardTab";
+            DashboardTab.Padding = new Padding(60, 0, 0, 0);
+            DashboardTab.Size = new Size(311, 69);
+            DashboardTab.Style.ForeColor = Color.Black;
+            DashboardTab.TabIndex = 1;
+            DashboardTab.Text = "Dashboard";
+            DashboardTab.TextAlign = ContentAlignment.MiddleLeft;
+            DashboardTab.Click += DashboardTab_Click;
+            // 
+            // Report
+            // 
+            Report.Dock = DockStyle.Fill;
+            Report.FlatStyle = FlatStyle.Flat;
+            Report.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Report.ForeColor = Color.Black;
+            Report.Location = new Point(3, 300);
+            Report.Name = "Report";
+            Report.Padding = new Padding(60, 0, 0, 0);
+            Report.Size = new Size(311, 69);
+            Report.Style.FocusedForeColor = Color.Black;
+            Report.Style.ForeColor = Color.Black;
+            Report.Style.PressedForeColor = Color.Black;
+            Report.TabIndex = 3;
+            Report.Text = "Reports";
+            Report.TextAlign = ContentAlignment.MiddleLeft;
+            Report.Click += Report_Click;
+            // 
+            // pnlMainContent
+            // 
+            pnlMainContent.Dock = DockStyle.Fill;
+            pnlMainContent.Location = new Point(0, 0);
+            pnlMainContent.Name = "pnlMainContent";
+            pnlMainContent.Size = new Size(1105, 753);
+            pnlMainContent.TabIndex = 3;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Info;
-            ClientSize = new Size(1902, 1033);
-            Controls.Add(tabControlAdv1);
+            BackColor = SystemColors.Control;
+            ClientSize = new Size(1422, 753);
+            Controls.Add(pnlMainContent);
+            Controls.Add(pnlSideBar);
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main";
-            ((System.ComponentModel.ISupportInitialize)tabControlAdv1).EndInit();
-            tabControlAdv1.ResumeLayout(false);
+            pnlSideBar.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Syncfusion.Windows.Forms.Tools.TabControlAdv tabControlAdv1;
-        private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv1;
-        private Syncfusion.Windows.Forms.Tools.TabPageAdv tabPageAdv2;
-        private Syncfusion.Reflection.TypeLoader designTimeTabTypeLoader;
+        private Panel pnlSideBar;
+        private PictureBox pictureBox1;
+        private Syncfusion.WinForms.Controls.SfButton DashboardTab;
+        private Syncfusion.WinForms.Controls.SfButton ProductTab;
+        private TableLayoutPanel tableLayoutPanel1;
+        private Syncfusion.WinForms.Controls.SfButton Report;
+        private Panel pnlMainContent;
     }
 }
