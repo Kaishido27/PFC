@@ -11,11 +11,11 @@ namespace PFC.Domain.Models
         public int Id { get; set; }
         public int  OrderId { get; set; }
         public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
+        public virtual Product? Product { get; set; }
         public ProductSize SelectedSize { get; set; }
 
-        public decimal UnitCost => Product.SizeOptions.FirstOrDefault(s => s.Size == SelectedSize)?.Cost ?? 0m;
-        public decimal UnitPrice => Product.SizeOptions.FirstOrDefault(s => s.Size == SelectedSize)?.Price ?? 0m;
+        public decimal UnitCost => Product?.SizeOptions?.FirstOrDefault(s => s.Size == SelectedSize)?.Cost ?? 0m;
+        public decimal UnitPrice => Product?.SizeOptions?.FirstOrDefault(s => s.Size == SelectedSize)?.Price ?? 0m;
 
         public int Quantity { get; set; }
 

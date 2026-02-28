@@ -8,6 +8,6 @@ namespace PFC.Domain.Models
 {
     public enum AddOns
     {
-
+        SingleShot,CofeeJelly,BlueberryJam,StrawberryJam,PoppingBobba
     }
 }

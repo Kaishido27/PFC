@@ -8,6 +8,6 @@ namespace PFC.Domain.Models
 {
     public enum Category
     {
-        Caffeinated, Soda , NonCaffeinated
+        IcedCoffee,HotCoffee,FlavoredMilk,Matcha,Soda 
     }
 }
