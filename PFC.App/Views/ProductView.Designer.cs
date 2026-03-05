@@ -32,7 +32,8 @@
             panel1 = new Panel();
             panel2 = new Panel();
             flwCartItems = new FlowLayoutPanel();
-            panel5 = new Panel();
+            btnConfirmOrder = new Panel();
+            btnConfirm = new PFC.App.Controls.SfRoundedButton();
             lblGrandTotal = new Label();
             label4 = new Label();
             panel4 = new Panel();
@@ -50,7 +51,7 @@
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
-            panel5.SuspendLayout();
+            btnConfirmOrder.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)textBoxExt1).BeginInit();
@@ -82,7 +83,7 @@
             // 
             panel2.BorderStyle = BorderStyle.FixedSingle;
             panel2.Controls.Add(flwCartItems);
-            panel2.Controls.Add(panel5);
+            panel2.Controls.Add(btnConfirmOrder);
             panel2.Controls.Add(panel4);
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(0, 66);
@@ -92,23 +93,43 @@
             // 
             // flwCartItems
             // 
+            flwCartItems.AutoScroll = true;
             flwCartItems.Dock = DockStyle.Fill;
             flwCartItems.Location = new Point(0, 67);
             flwCartItems.Name = "flwCartItems";
-            flwCartItems.Size = new Size(273, 639);
+            flwCartItems.Size = new Size(273, 684);
             flwCartItems.TabIndex = 2;
             // 
-            // panel5
+            // btnConfirmOrder
             // 
-            panel5.BorderStyle = BorderStyle.FixedSingle;
-            panel5.Controls.Add(lblGrandTotal);
-            panel5.Controls.Add(label4);
-            panel5.Dock = DockStyle.Bottom;
-            panel5.Location = new Point(0, 706);
-            panel5.Margin = new Padding(3, 0, 3, 3);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(273, 226);
-            panel5.TabIndex = 1;
+            btnConfirmOrder.BorderStyle = BorderStyle.FixedSingle;
+            btnConfirmOrder.Controls.Add(btnConfirm);
+            btnConfirmOrder.Controls.Add(lblGrandTotal);
+            btnConfirmOrder.Controls.Add(label4);
+            btnConfirmOrder.Dock = DockStyle.Bottom;
+            btnConfirmOrder.Location = new Point(0, 751);
+            btnConfirmOrder.Margin = new Padding(3, 0, 3, 3);
+            btnConfirmOrder.Name = "btnConfirmOrder";
+            btnConfirmOrder.Size = new Size(273, 181);
+            btnConfirmOrder.TabIndex = 1;
+            // 
+            // btnConfirm
+            // 
+            btnConfirm.BackColor = Color.ForestGreen;
+            btnConfirm.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnConfirm.ForeColor = Color.White;
+            btnConfirm.Location = new Point(12, 118);
+            btnConfirm.Name = "btnConfirm";
+            btnConfirm.Size = new Size(236, 45);
+            btnConfirm.Style.BackColor = Color.ForestGreen;
+            btnConfirm.Style.FocusedBorder = null;
+            btnConfirm.Style.ForeColor = Color.White;
+            btnConfirm.Style.HoverBackColor = Color.LimeGreen;
+            btnConfirm.Style.PressedBackColor = Color.LimeGreen;
+            btnConfirm.TabIndex = 12;
+            btnConfirm.Text = "+ Confirm Order";
+            btnConfirm.UseVisualStyleBackColor = false;
+            btnConfirm.Click += btnConfirmOrder_Click;
             // 
             // lblGrandTotal
             // 
@@ -215,7 +236,7 @@
             // 
             btnSoda.FlatStyle = FlatStyle.Flat;
             btnSoda.Font = new Font("Segoe UI Semibold", 9F);
-            btnSoda.Location = new Point(395, 41);
+            btnSoda.Location = new Point(418, 43);
             btnSoda.Name = "btnSoda";
             btnSoda.Size = new Size(54, 35);
             btnSoda.Style.FocusedBackColor = Color.LemonChiffon;
@@ -230,7 +251,7 @@
             // 
             btnMatcha.FlatStyle = FlatStyle.Flat;
             btnMatcha.Font = new Font("Segoe UI Semibold", 9F);
-            btnMatcha.Location = new Point(318, 41);
+            btnMatcha.Location = new Point(341, 43);
             btnMatcha.Name = "btnMatcha";
             btnMatcha.Size = new Size(71, 35);
             btnMatcha.Style.FocusedBackColor = Color.LemonChiffon;
@@ -245,7 +266,7 @@
             // 
             btnFlavMilk.FlatStyle = FlatStyle.Flat;
             btnFlavMilk.Font = new Font("Segoe UI Semibold", 9F);
-            btnFlavMilk.Location = new Point(204, 41);
+            btnFlavMilk.Location = new Point(227, 43);
             btnFlavMilk.Name = "btnFlavMilk";
             btnFlavMilk.Size = new Size(108, 35);
             btnFlavMilk.Style.FocusedBackColor = Color.LemonChiffon;
@@ -260,7 +281,7 @@
             // 
             btnHotCoffee.FlatStyle = FlatStyle.Flat;
             btnHotCoffee.Font = new Font("Segoe UI Semibold", 9F);
-            btnHotCoffee.Location = new Point(105, 41);
+            btnHotCoffee.Location = new Point(128, 43);
             btnHotCoffee.Name = "btnHotCoffee";
             btnHotCoffee.Size = new Size(93, 35);
             btnHotCoffee.Style.FocusedBackColor = Color.LemonChiffon;
@@ -275,7 +296,7 @@
             // 
             btnIcedCoffee.FlatStyle = FlatStyle.Flat;
             btnIcedCoffee.Font = new Font("Segoe UI Semibold", 9F);
-            btnIcedCoffee.Location = new Point(6, 41);
+            btnIcedCoffee.Location = new Point(29, 43);
             btnIcedCoffee.Name = "btnIcedCoffee";
             btnIcedCoffee.Size = new Size(93, 35);
             btnIcedCoffee.Style.FocusedBackColor = Color.LemonChiffon;
@@ -322,8 +343,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
+            btnConfirmOrder.ResumeLayout(false);
+            btnConfirmOrder.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
@@ -340,7 +361,7 @@
         private Panel panel2;
         private Panel panel3;
         private Panel panel4;
-        private Panel panel5;
+        private Panel btnConfirmOrder;
         private Label label3;
         private Label label2;
         private Controls.SfRoundedButton btnIcedCoffee;
@@ -355,5 +376,6 @@
         private FlowLayoutPanel flwCartItems;
         private Label label4;
         private Label lblGrandTotal;
+        private Controls.SfRoundedButton btnConfirm;
     }
 }

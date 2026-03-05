@@ -9,16 +9,35 @@ namespace PFC.App.Forms
 {
     public partial class AddProductForm : Form
     {
+        // ==========================================
+        // FIELDS & PROPERTIES
+        // ==========================================
+        #region Fields & Properties
+
         private BindingList<ProductSizeOption> _sizeOptions = new BindingList<ProductSizeOption>();
+
+        #endregion
+
+        // ==========================================
+        // CONSTRUCTOR
+        // ==========================================
+        #region Constructor
 
         public AddProductForm()
         {
             InitializeComponent();
         }
 
+        #endregion
+
+        // ==========================================
+        // SETUP METHODS
+        // ==========================================
+        #region Setup Methods
+
         private void AddProductForm_Load(object sender, EventArgs e)
         {
-            // Configure combo column and bind its values to the enum
+            // 1. Configure combo column and bind its values to the enum
             if (dataGridView1.Columns["Sizeoption"] is DataGridViewComboBoxColumn sizeCol)
             {
                 sizeCol.DataSource = Enum.GetValues(typeof(ProductSize));
@@ -36,26 +55,36 @@ namespace PFC.App.Forms
                 costCol.DataPropertyName = nameof(ProductSizeOption.Cost);
             }
 
-            // Disable automatic new-row; we'll add rows explicitly via the Add Size button
+            // 2. Grid Settings: Disable automatic new-row; we'll add rows explicitly via the Add Size button
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false; // removal handled via Actions button
             dataGridView1.DataSource = _sizeOptions;
 
-            // Bind category combobox
+            // 3. Bind category combobox
             cmbCategory.DataSource = Enum.GetValues(typeof(Category));
 
-            // Start with one row so the user has a place to begin
+            // 4. Start with one row so the user has a place to begin
             if (_sizeOptions.Count == 0)
             {
                 _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.EightOz, Price = 0m, Cost = 0m });
             }
         }
 
+        #endregion
+
+        // ==========================================
+        // EVENT HANDLERS
+        // ==========================================
+        #region Event Handlers
+
+        // --- Grid Actions ---
+
         private void SfRoundedButtonAddSize_Click(object? sender, EventArgs e)
         {
             // Add an empty size option row (user will edit Size/Price/Cost)
             _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.EightOz, Price = 0m, Cost = 0m });
+
             // Focus the new row in the grid for convenience
             var idx = _sizeOptions.Count - 1;
             dataGridView1.CurrentCell = dataGridView1.Rows[idx].Cells["Sizeoption"];
@@ -67,6 +96,8 @@ namespace PFC.App.Forms
             if (e.RowIndex < 0) return;
 
             var col = dataGridView1.Columns[e.ColumnIndex];
+
+            // Handle the "Actions" delete button inside the grid
             if (string.Equals(col.Name, "Actions", StringComparison.OrdinalIgnoreCase))
             {
                 var item = dataGridView1.Rows[e.RowIndex].DataBoundItem as ProductSizeOption;
@@ -81,8 +112,11 @@ namespace PFC.App.Forms
             }
         }
 
+        // --- Save & Cancel Actions ---
+
         private void btnSave_Click(object? sender, EventArgs e)
         {
+            // 1. Basic Validation
             var name = txtName.Text?.Trim();
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -96,7 +130,7 @@ namespace PFC.App.Forms
                 return;
             }
 
-            // Validate and check duplicates
+            // 2. Check for Duplicate Sizes
             var duplicateSizes = _sizeOptions.GroupBy(s => s.Size).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
             if (duplicateSizes.Any())
             {
@@ -104,6 +138,7 @@ namespace PFC.App.Forms
                 return;
             }
 
+            // 3. Validate Prices and Costs
             foreach (var so in _sizeOptions)
             {
                 if (so.Price <= 0m)
@@ -124,6 +159,7 @@ namespace PFC.App.Forms
                 return;
             }
 
+            // 4. Map to Domain Model
             var product = new Product
             {
                 Name = name,
@@ -139,6 +175,7 @@ namespace PFC.App.Forms
                 })
                 .ToList();
 
+            // 5. Save to Database
             try
             {
                 using var db = new AppDbContext();
@@ -158,9 +195,10 @@ namespace PFC.App.Forms
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // Ensure a single well-defined cancel behavior.
-            // If the designer already set DialogResult, this is still safe and idempotent.
             DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        #endregion
     }
 }

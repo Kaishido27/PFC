@@ -1,30 +1,36 @@
-﻿using System;
+﻿using PFC.Domain.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PFC.Domain.Models;
 
 namespace PFC.App.Forms
 {
     public partial class OrderEntryForm : Form
     {
-        // --- Properties & Fields ---
+        // ==========================================
+        // FIELDS & PROPERTIES
+        // ==========================================
+        #region Fields & Properties
+
         public OrderDetail? ResultingDetail { get; private set; }
         private Product _product;
 
-        // --- Constructor ---
+        #endregion
+
+        // ==========================================
+        // CONSTRUCTOR
+        // ==========================================
+        #region Constructor
+
         public OrderEntryForm(Product product)
         {
             InitializeComponent();
             _product = product;
 
             // 1. Initial UI Setup
-            lblProductName.Text = _product.Name;
+            lblProductName.Text = _product.Name ?? "Unknown Product";
             lblProductCategory.Text = FormatEnumName(_product.Category.ToString());
             numQuantity.Value = 1;
 
@@ -32,22 +38,22 @@ namespace PFC.App.Forms
             SetupSizeComboBox();
             PopulateAddOns();
 
-            
-
             // 3. Run initial calculation to update the label immediately
             UpdateLiveTotal();
         }
 
+        #endregion
+
         // ==========================================
         // SETUP METHODS
         // ==========================================
+        #region Setup Methods
 
         private void SetupSizeComboBox()
         {
             if (_product.SizeOptions != null && _product.SizeOptions.Any())
             {
                 cboSizes.DataSource = _product.SizeOptions.ToList();
-                
             }
         }
 
@@ -62,9 +68,48 @@ namespace PFC.App.Forms
             }
         }
 
+        #endregion
+
         // ==========================================
-        // UI EVENT HANDLERS (Wire these in the Designer!)
+        // CORE LOGIC & HELPERS
         // ==========================================
+        #region Core Logic & Helpers
+
+        private void UpdateLiveTotal()
+        {
+            // 1. Base price from the ProductSizeOption class
+            decimal unitPrice = 0m;
+            if (cboSizes.SelectedItem is ProductSizeOption selectedOption)
+            {
+                unitPrice = selectedOption.Price; // Now we can safely access .Price!
+            }
+
+            // 2. Add-on price (₱10 per selected item)
+            int addOnCount = chkAddOns.CheckedItems.Count;
+            decimal addOnPrice = addOnCount * 10m;
+
+            // 3. Final math
+            int quantity = (int)numQuantity.Value;
+            decimal finalTotal = (unitPrice + addOnPrice) * quantity;
+
+            // 4. Update the UI
+            if (lblLiveTotal != null)
+            {
+                lblLiveTotal.Text = $"Total: ₱{finalTotal:N2}";
+            }
+        }
+
+        private string FormatEnumName(string name)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(name, "([a-z])([A-Z])", "$1 $2");
+        }
+
+        #endregion
+
+        // ==========================================
+        // UI EVENT HANDLERS
+        // ==========================================
+        #region UI Event Handlers
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
@@ -112,39 +157,6 @@ namespace PFC.App.Forms
             }
         }
 
-        // ==========================================
-        // CORE LOGIC & HELPERS
-        // ==========================================
-
-        private void UpdateLiveTotal()
-        {
-            // 1. Base price from the ProductSizeOption class
-            decimal unitPrice = 0m;
-            if (cboSizes.SelectedItem is ProductSizeOption selectedOption)
-            {
-                unitPrice = selectedOption.Price; // Now we can safely access .Price!
-            }
-
-            // 2. Add-on price (₱10 per selected item)
-            int addOnCount = chkAddOns.CheckedItems.Count;
-            decimal addOnPrice = addOnCount * 10m;
-
-            // 3. Final math
-            int quantity = (int)numQuantity.Value;
-            decimal finalTotal = (unitPrice + addOnPrice) * quantity;
-
-            // 4. Update the UI
-            if (lblLiveTotal != null)
-            {
-                lblLiveTotal.Text = $"Total: ₱{finalTotal:N2}";
-            }
-        }
-
-        private string FormatEnumName(string name)
-        {
-            return System.Text.RegularExpressions.Regex.Replace(name, "([a-z])([A-Z])", "$1 $2");
-        }
-
         private void cboSizes_Format(object sender, ListControlConvertEventArgs e)
         {
             if (e.ListItem is ProductSizeOption option)
@@ -154,5 +166,7 @@ namespace PFC.App.Forms
                 e.Value = $"{prettyName} (₱{option.Price:N2})";
             }
         }
+
+        #endregion
     }
 }
