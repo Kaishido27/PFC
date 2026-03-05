@@ -38,9 +38,17 @@
             dtpEndDate = new DateTimePicker();
             lblSeparator = new Label();
             dtpStartDate = new DateTimePicker();
+            dgvReports = new DataGridView();
+            label4 = new Label();
+            panel2 = new Panel();
+            lblGrandCost = new Label();
+            lblGrandRevenue = new Label();
+            lblGrandProfit = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvReports).BeginInit();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // btnExport
@@ -120,6 +128,7 @@
             cmbDateRange.Name = "cmbDateRange";
             cmbDateRange.Size = new Size(150, 28);
             cmbDateRange.TabIndex = 3;
+            cmbDateRange.SelectedIndexChanged += CmbDateRange_SelectedIndexChanged;
             // 
             // dtpEndDate
             // 
@@ -128,6 +137,7 @@
             dtpEndDate.Name = "dtpEndDate";
             dtpEndDate.Size = new Size(130, 27);
             dtpEndDate.TabIndex = 2;
+            dtpEndDate.ValueChanged += DatePickers_ValueChanged;
             // 
             // lblSeparator
             // 
@@ -147,23 +157,90 @@
             dtpStartDate.Name = "dtpStartDate";
             dtpStartDate.Size = new Size(130, 27);
             dtpStartDate.TabIndex = 0;
+            dtpStartDate.ValueChanged += DatePickers_ValueChanged;
+            // 
+            // dgvReports
+            // 
+            dgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvReports.Location = new Point(40, 281);
+            dgvReports.Name = "dgvReports";
+            dgvReports.RowHeadersWidth = 51;
+            dgvReports.Size = new Size(673, 281);
+            dgvReports.TabIndex = 6;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            label4.Location = new Point(40, 241);
+            label4.Name = "label4";
+            label4.Size = new Size(268, 37);
+            label4.TabIndex = 7;
+            label4.Text = "Transaction History";
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.Bisque;
+            panel2.Controls.Add(lblGrandProfit);
+            panel2.Controls.Add(lblGrandRevenue);
+            panel2.Controls.Add(lblGrandCost);
+            panel2.Location = new Point(40, 559);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(673, 54);
+            panel2.TabIndex = 8;
+            // 
+            // lblGrandCost
+            // 
+            lblGrandCost.AutoSize = true;
+            lblGrandCost.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandCost.Location = new Point(52, 20);
+            lblGrandCost.Name = "lblGrandCost";
+            lblGrandCost.Size = new Size(75, 20);
+            lblGrandCost.TabIndex = 0;
+            lblGrandCost.Text = "Total Cost";
+            // 
+            // lblGrandRevenue
+            // 
+            lblGrandRevenue.AutoSize = true;
+            lblGrandRevenue.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandRevenue.Location = new Point(242, 20);
+            lblGrandRevenue.Name = "lblGrandRevenue";
+            lblGrandRevenue.Size = new Size(105, 20);
+            lblGrandRevenue.TabIndex = 1;
+            lblGrandRevenue.Text = "Total Revenue";
+            // 
+            // lblGrandProfit
+            // 
+            lblGrandProfit.AutoSize = true;
+            lblGrandProfit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandProfit.Location = new Point(457, 20);
+            lblGrandProfit.Name = "lblGrandProfit";
+            lblGrandProfit.Size = new Size(84, 20);
+            lblGrandProfit.TabIndex = 2;
+            lblGrandProfit.Text = "Total Profit";
             // 
             // ReportsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            Controls.Add(panel2);
+            Controls.Add(label4);
+            Controls.Add(dgvReports);
             Controls.Add(gradientPanel1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(panel1);
             Name = "ReportsView";
-            Size = new Size(1105, 753);
+            Size = new Size(1105, 832);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
             gradientPanel1.ResumeLayout(false);
             gradientPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvReports).EndInit();
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -180,5 +257,11 @@
         private DateTimePicker dtpEndDate;
         private ComboBox cmbDateRange;
         private Button btnExport;
+        private DataGridView dgvReports;
+        private Label label4;
+        private Panel panel2;
+        private Label lblGrandCost;
+        private Label lblGrandProfit;
+        private Label lblGrandRevenue;
     }
 }
