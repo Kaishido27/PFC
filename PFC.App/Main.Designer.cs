@@ -46,9 +46,9 @@
             pnlSideBar.BackColor = SystemColors.ControlLight;
             pnlSideBar.Controls.Add(tableLayoutPanel1);
             pnlSideBar.Dock = DockStyle.Right;
-            pnlSideBar.Location = new Point(1105, 0);
+            pnlSideBar.Location = new Point(1391, 0);
             pnlSideBar.Name = "pnlSideBar";
-            pnlSideBar.Size = new Size(317, 753);
+            pnlSideBar.Size = new Size(296, 753);
             pnlSideBar.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -71,7 +71,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(317, 753);
+            tableLayoutPanel1.Size = new Size(296, 753);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // ProductTab
@@ -83,7 +83,7 @@
             ProductTab.Location = new Point(3, 225);
             ProductTab.Name = "ProductTab";
             ProductTab.Padding = new Padding(60, 0, 0, 0);
-            ProductTab.Size = new Size(311, 69);
+            ProductTab.Size = new Size(290, 69);
             ProductTab.Style.ForeColor = Color.Black;
             ProductTab.TabIndex = 2;
             ProductTab.Text = "Products";
@@ -96,7 +96,7 @@
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(3, 3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(311, 121);
+            pictureBox1.Size = new Size(290, 121);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -110,7 +110,7 @@
             DashboardTab.Location = new Point(3, 150);
             DashboardTab.Name = "DashboardTab";
             DashboardTab.Padding = new Padding(60, 0, 0, 0);
-            DashboardTab.Size = new Size(311, 69);
+            DashboardTab.Size = new Size(290, 69);
             DashboardTab.Style.ForeColor = Color.Black;
             DashboardTab.TabIndex = 1;
             DashboardTab.Text = "Dashboard";
@@ -126,7 +126,7 @@
             Report.Location = new Point(3, 300);
             Report.Name = "Report";
             Report.Padding = new Padding(60, 0, 0, 0);
-            Report.Size = new Size(311, 69);
+            Report.Size = new Size(290, 69);
             Report.Style.FocusedForeColor = Color.Black;
             Report.Style.ForeColor = Color.Black;
             Report.Style.PressedForeColor = Color.Black;
@@ -140,7 +140,7 @@
             pnlMainContent.Dock = DockStyle.Fill;
             pnlMainContent.Location = new Point(0, 0);
             pnlMainContent.Name = "pnlMainContent";
-            pnlMainContent.Size = new Size(1105, 753);
+            pnlMainContent.Size = new Size(1391, 753);
             pnlMainContent.TabIndex = 3;
             // 
             // Main
@@ -148,7 +148,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1422, 753);
+            ClientSize = new Size(1687, 753);
             Controls.Add(pnlMainContent);
             Controls.Add(pnlSideBar);
             Name = "Main";

@@ -170,12 +170,12 @@
             // 
             // btnSave
             // 
-            btnSave.BackColor = Color.Transparent;
+            btnSave.BackColor = Color.White;
             btnSave.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSave.Location = new Point(346, 446);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(116, 35);
-            btnSave.Style.BackColor = Color.Transparent;
+            btnSave.Style.BackColor = Color.White;
             btnSave.Style.FocusedBorder = null;
             btnSave.Style.HoverBackColor = Color.FromArgb(128, 255, 128);
             btnSave.Style.HoverForeColor = Color.Black;

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pfcRoundedGradientPanel1 = new PfcRoundedGradientPanel();
+            btnEdit = new Button();
             lblPrice = new Label();
             lblCategory = new Label();
             lblName = new Label();
@@ -40,6 +41,7 @@
             // 
             pfcRoundedGradientPanel1.BorderColor = Color.White;
             pfcRoundedGradientPanel1.BorderStyle = BorderStyle.None;
+            pfcRoundedGradientPanel1.Controls.Add(btnEdit);
             pfcRoundedGradientPanel1.Controls.Add(lblPrice);
             pfcRoundedGradientPanel1.Controls.Add(lblCategory);
             pfcRoundedGradientPanel1.Controls.Add(lblName);
@@ -48,6 +50,16 @@
             pfcRoundedGradientPanel1.Name = "pfcRoundedGradientPanel1";
             pfcRoundedGradientPanel1.Size = new Size(226, 265);
             pfcRoundedGradientPanel1.TabIndex = 0;
+            // 
+            // btnEdit
+            // 
+            btnEdit.BackColor = Color.Transparent;
+            btnEdit.Image = Properties.Resources.edit_minimized;
+            btnEdit.Location = new Point(178, 3);
+            btnEdit.Name = "btnEdit";
+            btnEdit.Size = new Size(45, 48);
+            btnEdit.TabIndex = 3;
+            btnEdit.UseVisualStyleBackColor = false;
             // 
             // lblPrice
             // 
@@ -87,6 +99,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(pfcRoundedGradientPanel1);
+            Margin = new Padding(10, 5, 3, 3);
             Name = "ProductItem";
             Size = new Size(226, 265);
             ((System.ComponentModel.ISupportInitialize)pfcRoundedGradientPanel1).EndInit();
@@ -101,5 +114,6 @@
         private Label lblName;
         private Label lblPrice;
         private Label lblCategory;
+        private Button btnEdit;
     }
 }
