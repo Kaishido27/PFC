@@ -44,7 +44,7 @@
             lblTotalProfit = new Label();
             label6 = new Label();
             gradientPanel1 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
-            dataGridView1 = new DataGridView();
+            dgvRecentTransactions = new DataGridView();
             label5 = new Label();
             label7 = new Label();
             panel1.SuspendLayout();
@@ -58,7 +58,7 @@
             pnlTotalProfit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).BeginInit();
             SuspendLayout();
             // 
             // panel1
@@ -238,7 +238,7 @@
             // 
             gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.WhiteSmoke, Color.Beige);
             tableLayoutPanel1.SetColumnSpan(gradientPanel1, 2);
-            gradientPanel1.Controls.Add(dataGridView1);
+            gradientPanel1.Controls.Add(dgvRecentTransactions);
             gradientPanel1.Controls.Add(label5);
             gradientPanel1.Controls.Add(label7);
             gradientPanel1.Dock = DockStyle.Fill;
@@ -247,15 +247,15 @@
             gradientPanel1.Size = new Size(716, 436);
             gradientPanel1.TabIndex = 4;
             // 
-            // dataGridView1
+            // dgvRecentTransactions
             // 
-            dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(22, 87);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(657, 324);
-            dataGridView1.TabIndex = 5;
+            dgvRecentTransactions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvRecentTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRecentTransactions.Location = new Point(22, 87);
+            dgvRecentTransactions.Name = "dgvRecentTransactions";
+            dgvRecentTransactions.RowHeadersWidth = 51;
+            dgvRecentTransactions.Size = new Size(657, 324);
+            dgvRecentTransactions.TabIndex = 5;
             // 
             // label5
             // 
@@ -306,7 +306,7 @@
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
             gradientPanel1.ResumeLayout(false);
             gradientPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).EndInit();
             ResumeLayout(false);
         }
 
@@ -330,6 +330,6 @@
         private Syncfusion.Windows.Forms.Tools.GradientPanel gradientPanel1;
         private Label label5;
         private Label label7;
-        private DataGridView dataGridView1;
+        private DataGridView dgvRecentTransactions;
     }
 }
