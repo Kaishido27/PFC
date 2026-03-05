@@ -20,6 +20,8 @@ namespace PFC.App.Views
         private List<Product> _allProducts = new List<Product>();
         private Category _currentFilter = Category.IcedCoffee; // Default filter
         private Order _currentOrder = new Order(); // The active cart holding the user's current session
+        private System.Windows.Forms.Timer _searchTimer = new System.Windows.Forms.Timer();// The timer that creates the smooth search delay
+
 
         #endregion
 
@@ -32,6 +34,9 @@ namespace PFC.App.Views
         {
             InitializeComponent();
             SetupDoubleBuffering();
+
+            _searchTimer.Interval = 500; // Wait 300ms after the user stops typing
+            _searchTimer.Tick += SearchTimer_Tick;
 
             // Load initial data (this will apply the default filter)
             LoadProducts();
@@ -97,9 +102,23 @@ namespace PFC.App.Views
         private void ApplyFilterAndDisplay()
         {
             var items = _allProducts == null
-                ? Enumerable.Empty<Product>()
-                : _allProducts.Where(p => p.Category == _currentFilter);
+             ? Enumerable.Empty<Product>()
+        :        _allProducts.AsEnumerable();
 
+            // Safely grab what the user typed (ignore empty spaces)
+            string searchText = txtSearch.Text?.Trim() ?? "";
+
+            // If the search box is empty (or says your placeholder text), use the Category tabs
+            if (string.IsNullOrEmpty(searchText) || searchText == "Search Products")
+            {
+                items = items.Where(p => p.Category == _currentFilter);
+            }
+            else
+            {
+                // GLOBAL SEARCH
+                items = items.Where(p => p.Name != null &&
+                                         p.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase));
+            }
             DisplayProducts(items);
         }
 
@@ -199,6 +218,15 @@ namespace PFC.App.Views
             {
                 lblGrandTotal.Text = $"Total: ₱{_currentOrder.TotalAmount:N2}";
             }
+
+            if (lblItemCount != null)
+            {
+                // Sums up the 'Quantity' of every row in the cart!
+                int totalItems = _currentOrder.Details.Sum(d => d.Quantity);
+
+                // Update the text (handles plural "Items" vs singular "Item")
+                lblItemCount.Text = totalItems == 1 ? "1 Item" : $"{totalItems} Items";
+            }
         }
 
         private void btnConfirmOrder_Click(object sender, EventArgs e)
@@ -260,6 +288,21 @@ namespace PFC.App.Views
             {
                 LoadProducts();
             }
+        }
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            // Every time the user types a letter, refresh the screen!
+            _searchTimer.Stop();
+            _searchTimer.Start();
+        }
+
+        private void SearchTimer_Tick(object? sender, EventArgs e)
+        {
+            // 1. Stop the timer so it doesn't keep firing
+            _searchTimer.Stop();
+
+            // 2. Now run the heavy filtering and drawing logic!
+            ApplyFilterAndDisplay();
         }
 
         #endregion

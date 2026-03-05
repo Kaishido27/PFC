@@ -140,11 +140,12 @@
             // 
             // numQuantity
             // 
-            numQuantity.BeforeTouchSize = new Size(253, 27);
-            numQuantity.Location = new Point(25, 507);
+            numQuantity.BeforeTouchSize = new Size(253, 34);
+            numQuantity.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            numQuantity.Location = new Point(25, 516);
             numQuantity.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numQuantity.Name = "numQuantity";
-            numQuantity.Size = new Size(253, 27);
+            numQuantity.Size = new Size(253, 34);
             numQuantity.TabIndex = 8;
             numQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
             numQuantity.ValueChanged += numQuantity_ValueChanged;
@@ -203,6 +204,7 @@
             // 
             // cboSizes
             // 
+            cboSizes.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cboSizes.FormattingEnabled = true;
             cboSizes.Location = new Point(325, 146);
             cboSizes.Name = "cboSizes";
