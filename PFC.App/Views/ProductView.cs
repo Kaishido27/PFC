@@ -58,6 +58,8 @@ namespace PFC.App.Views
             }
         }
 
+        
+
         #endregion
 
         // ==========================================
@@ -161,6 +163,15 @@ namespace PFC.App.Views
             flowLayoutPanel1.Visible = prevVisible;
         }
 
+        private bool IsAuthorized()
+        {
+            using (var auth = new AuthForm())
+            {
+                // ShowDialog pauses execution and waits for the user to finish the AuthForm
+                return auth.ShowDialog() == DialogResult.OK;
+            }
+        }
+
         #endregion
 
         // ==========================================
@@ -185,9 +196,10 @@ namespace PFC.App.Views
             }
         }
 
-        // NEW: Method to open the Edit Product dialog
+        // Method to open the Edit Product dialog
         private void OpenEditProductDialog(Product product)
         {
+            if (!IsAuthorized()) return;
             using var editForm = new EditProductForm(product.Id);
             if (editForm.ShowDialog(this) == DialogResult.OK)
             {
@@ -295,10 +307,17 @@ namespace PFC.App.Views
         // Add Product Menu
         private void btnAddProduct_Click(object? sender, EventArgs e)
         {
-            using var dlg = new AddProductForm();
-            if (dlg.ShowDialog(this) == DialogResult.OK)
+            // 1. Security Check
+            if (!IsAuthorized()) return;
+
+            // 2. If authorized, proceed with original logic
+            using (var addForm = new AddProductForm())
             {
-                LoadProducts();
+                if (addForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Refresh the product list to show the new item
+                    LoadProducts();
+                }
             }
         }
         private void txtSearch_TextChanged(object sender, EventArgs e)

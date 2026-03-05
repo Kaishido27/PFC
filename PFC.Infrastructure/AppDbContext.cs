@@ -17,6 +17,8 @@ namespace PFC.Infrastructure
         public DbSet <Order> Orders { get; set; }
         public DbSet <OrderDetail> OrderDetails { get; set; }
 
+        public DbSet<SystemSetting> SystemSettings { get; set; }
+
         public AppDbContext() { }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -32,6 +34,19 @@ namespace PFC.Infrastructure
             }
 
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // This is "Data Seeding"
+            modelBuilder.Entity<SystemSetting>().HasData(new SystemSetting
+            {
+                Id = 1,
+                AdminPassword = "1234", // Your initial secret key
+                MasterKey = "0000" // Your initial master key
+            });
         }
     }
 }

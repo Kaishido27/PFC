@@ -47,15 +47,14 @@
             btnFlavMilk = new PFC.App.Controls.SfRoundedButton();
             btnHotCoffee = new PFC.App.Controls.SfRoundedButton();
             btnIcedCoffee = new PFC.App.Controls.SfRoundedButton();
+            panel5 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            CategoryPicture = new PictureBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             btnConfirmOrder.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtSearch).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)CategoryPicture).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -308,25 +307,21 @@
             btnIcedCoffee.Text = "Iced Coffee";
             btnIcedCoffee.Click += BtnIcedCoffee_Click;
             // 
+            // panel5
+            // 
+            panel5.Dock = DockStyle.Right;
+            panel5.Location = new Point(946, 168);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(387, 832);
+            panel5.TabIndex = 7;
+            // 
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(275, 168);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(672, 832);
-            flowLayoutPanel1.TabIndex = 6;
-            // 
-            // CategoryPicture
-            // 
-            CategoryPicture.BackColor = Color.Transparent;
-            CategoryPicture.BackgroundImageLayout = ImageLayout.Center;
-            CategoryPicture.Dock = DockStyle.Right;
-            CategoryPicture.Image = Properties.Resources.logo;
-            CategoryPicture.Location = new Point(947, 168);
-            CategoryPicture.Name = "CategoryPicture";
-            CategoryPicture.Size = new Size(386, 832);
-            CategoryPicture.TabIndex = 5;
-            CategoryPicture.TabStop = false;
+            flowLayoutPanel1.Size = new Size(671, 832);
+            flowLayoutPanel1.TabIndex = 8;
             // 
             // ProductView
             // 
@@ -335,7 +330,7 @@
             AutoScroll = true;
             BackColor = Color.White;
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(CategoryPicture);
+            Controls.Add(panel5);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -351,7 +346,6 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)txtSearch).EndInit();
-            ((System.ComponentModel.ISupportInitialize)CategoryPicture).EndInit();
             ResumeLayout(false);
         }
 
@@ -372,11 +366,11 @@
         private Controls.SfRoundedButton btnHotCoffee;
         private Controls.SfRoundedButton btnAddProduct;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt txtSearch;
-        private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel flwCartItems;
         private Label label4;
         private Label lblGrandTotal;
         private Controls.SfRoundedButton btnConfirm;
-        private PictureBox CategoryPicture;
+        private Panel panel5;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }
