@@ -18,7 +18,7 @@ namespace PFC.App.Controls
         // 1. The Property to store the product data
         public Product? ProductData { get; private set; }
 
-        // New: event to signal the product was clicked (encapsulates child click wiring)
+        // event to signal the product was clicked (encapsulates child click wiring)
         public event EventHandler<ProductEventArgs>? ProductClicked;
 
         public ProductItem()

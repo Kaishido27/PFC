@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             pnlSideBar = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             ProductTab = new Syncfusion.WinForms.Controls.SfButton();
-            pictureBox1 = new PictureBox();
             DashboardTab = new Syncfusion.WinForms.Controls.SfButton();
             Report = new Syncfusion.WinForms.Controls.SfButton();
             pnlMainContent = new Panel();
+            pictureBox1 = new PictureBox();
             pnlSideBar.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -46,9 +45,9 @@
             pnlSideBar.BackColor = SystemColors.ControlLight;
             pnlSideBar.Controls.Add(tableLayoutPanel1);
             pnlSideBar.Dock = DockStyle.Right;
-            pnlSideBar.Location = new Point(1391, 0);
+            pnlSideBar.Location = new Point(1363, 0);
             pnlSideBar.Name = "pnlSideBar";
-            pnlSideBar.Size = new Size(296, 753);
+            pnlSideBar.Size = new Size(346, 753);
             pnlSideBar.TabIndex = 2;
             // 
             // tableLayoutPanel1
@@ -57,9 +56,9 @@
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(ProductTab, 0, 3);
-            tableLayoutPanel1.Controls.Add(pictureBox1, 0, 0);
             tableLayoutPanel1.Controls.Add(DashboardTab, 0, 2);
             tableLayoutPanel1.Controls.Add(Report, 0, 4);
+            tableLayoutPanel1.Controls.Add(pictureBox1, 0, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.ForeColor = SystemColors.ButtonHighlight;
             tableLayoutPanel1.Location = new Point(0, 0);
@@ -71,7 +70,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 75F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(296, 753);
+            tableLayoutPanel1.Size = new Size(346, 753);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // ProductTab
@@ -83,23 +82,12 @@
             ProductTab.Location = new Point(3, 225);
             ProductTab.Name = "ProductTab";
             ProductTab.Padding = new Padding(60, 0, 0, 0);
-            ProductTab.Size = new Size(290, 69);
+            ProductTab.Size = new Size(340, 69);
             ProductTab.Style.ForeColor = Color.Black;
             ProductTab.TabIndex = 2;
             ProductTab.Text = "Products";
             ProductTab.TextAlign = ContentAlignment.MiddleLeft;
-            ProductTab.Click += ProductTab_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(3, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(290, 121);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
+            ProductTab.Click += this.ProductTab_Click;
             // 
             // DashboardTab
             // 
@@ -110,12 +98,12 @@
             DashboardTab.Location = new Point(3, 150);
             DashboardTab.Name = "DashboardTab";
             DashboardTab.Padding = new Padding(60, 0, 0, 0);
-            DashboardTab.Size = new Size(290, 69);
+            DashboardTab.Size = new Size(340, 69);
             DashboardTab.Style.ForeColor = Color.Black;
             DashboardTab.TabIndex = 1;
             DashboardTab.Text = "Dashboard";
             DashboardTab.TextAlign = ContentAlignment.MiddleLeft;
-            DashboardTab.Click += DashboardTab_Click;
+            DashboardTab.Click += this.DashboardTab_Click;
             // 
             // Report
             // 
@@ -126,29 +114,39 @@
             Report.Location = new Point(3, 300);
             Report.Name = "Report";
             Report.Padding = new Padding(60, 0, 0, 0);
-            Report.Size = new Size(290, 69);
+            Report.Size = new Size(340, 69);
             Report.Style.FocusedForeColor = Color.Black;
             Report.Style.ForeColor = Color.Black;
             Report.Style.PressedForeColor = Color.Black;
             Report.TabIndex = 3;
             Report.Text = "Reports";
             Report.TextAlign = ContentAlignment.MiddleLeft;
-            Report.Click += Report_Click;
+            Report.Click += this.Report_Click;
             // 
             // pnlMainContent
             // 
             pnlMainContent.Dock = DockStyle.Fill;
             pnlMainContent.Location = new Point(0, 0);
             pnlMainContent.Name = "pnlMainContent";
-            pnlMainContent.Size = new Size(1391, 753);
+            pnlMainContent.Size = new Size(1363, 753);
             pnlMainContent.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = Properties.Resources.logo_main;
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(340, 121);
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
             // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
-            ClientSize = new Size(1687, 753);
+            ClientSize = new Size(1709, 753);
             Controls.Add(pnlMainContent);
             Controls.Add(pnlSideBar);
             Name = "Main";
@@ -162,11 +160,11 @@
 
         #endregion
         private Panel pnlSideBar;
-        private PictureBox pictureBox1;
         private Syncfusion.WinForms.Controls.SfButton DashboardTab;
         private Syncfusion.WinForms.Controls.SfButton ProductTab;
         private TableLayoutPanel tableLayoutPanel1;
         private Syncfusion.WinForms.Controls.SfButton Report;
         private Panel pnlMainContent;
+        private PictureBox pictureBox1;
     }
 }
