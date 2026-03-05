@@ -137,6 +137,7 @@
             // 
             // pnlDailySales
             // 
+            pnlDailySales.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Color.Snow);
             pnlDailySales.BorderColor = Color.White;
             pnlDailySales.Controls.Add(lblDailySales);
             pnlDailySales.Controls.Add(label4);
@@ -250,6 +251,7 @@
             // dataGridView1
             // 
             dataGridView1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(22, 87);
             dataGridView1.Name = "dataGridView1";

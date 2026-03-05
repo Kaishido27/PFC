@@ -204,13 +204,13 @@
             // 
             textBoxExt1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBoxExt1.BackColor = SystemColors.Info;
-            textBoxExt1.BeforeTouchSize = new Size(249, 27);
+            textBoxExt1.BeforeTouchSize = new Size(352, 27);
             textBoxExt1.Border3DStyle = Border3DStyle.Flat;
-            textBoxExt1.Location = new Point(749, 19);
+            textBoxExt1.Location = new Point(520, 47);
             textBoxExt1.Name = "textBoxExt1";
             textBoxExt1.Office2010ColorScheme = Syncfusion.Windows.Forms.Office2010Theme.Silver;
             textBoxExt1.PlaceholderText = "Search Products";
-            textBoxExt1.Size = new Size(249, 27);
+            textBoxExt1.Size = new Size(352, 27);
             textBoxExt1.TabIndex = 8;
             // 
             // btnAddProduct
@@ -219,7 +219,7 @@
             btnAddProduct.BackColor = Color.Tan;
             btnAddProduct.FlatStyle = FlatStyle.Flat;
             btnAddProduct.Font = new Font("Segoe UI Semibold", 9F);
-            btnAddProduct.Location = new Point(782, 52);
+            btnAddProduct.Location = new Point(890, 43);
             btnAddProduct.Name = "btnAddProduct";
             btnAddProduct.Size = new Size(148, 35);
             btnAddProduct.Style.BackColor = Color.Tan;
