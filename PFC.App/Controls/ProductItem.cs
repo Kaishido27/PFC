@@ -90,39 +90,47 @@ namespace PFC.App.Controls
             {
                 // choose primary color per category, keep beige as secondary
                 Color primary;
-                Color secondary = Color.Beige;
-                GradientStyle style = GradientStyle.ForwardDiagonal;
+                Color secondary;
+                GradientStyle style = GradientStyle.Horizontal;
 
                 switch (category)
                 {
                     case Category.Matcha:
-                        // green and beige
-                        primary = Color.FromArgb(72, 201, 176); // teal-green
+                        // Forest Green and leaf green
+                        primary = Color.FromArgb(28, 59, 30);
+                        secondary = Color.FromArgb(93, 131, 67);
+
                         break;
                     case Category.FlavoredMilk:
-                        // pink and beige
-                        primary = Color.FromArgb(255, 182, 193); // light pink
+                        // Deep Berry and Soft pink
+                        primary = Color.FromArgb(224, 118, 132);
+                        secondary = Color.FromArgb(134, 41, 51);
+
                         break;
                     case Category.Soda:
-                        // dark / black and beige
-                        primary = Color.FromArgb(45, 45, 45); // dark gray (~black)
+                        // Midnight Blue and Royal Blue
+                        primary = Color.FromArgb(42, 75, 143);
+                        secondary = Color.FromArgb(12, 24, 68);
                         break;
                     case Category.HotCoffee:
-                        // darker brown and beige
-                        primary = Color.FromArgb(115, 74, 18); // dark coffee brown
+                        // Roasted Bean and Tawny
+                        primary = Color.FromArgb(175, 123, 75);
+                        secondary = Color.FromArgb(50, 27, 19);
                         break;
                     case Category.IcedCoffee:
                     default:
-                        // keep the iced coffee color used previously
-                        primary = Color.BurlyWood;
+                        //Deep Espresso and Caramel
+                        primary = Color.FromArgb(181, 122, 73);
+                        secondary = Color.FromArgb(60, 26, 15);
+
                         break;
                 }
 
-                
+
                 // set new gradient brush info (Syncfusion BrushInfo) to change the gradient colors
                 pfcRoundedGradientPanel1.BackgroundColor = new BrushInfo(style, primary, secondary);
 
-                // Optional: tweak border or text color for contrast
+                //Optional: tweak border or text color for contrast
                 var textColor = GetContrastingTextColor(primary);
                 lblName.ForeColor = textColor;
                 lblPrice.ForeColor = textColor;
