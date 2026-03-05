@@ -18,10 +18,9 @@ namespace PFC.App.Views
         #region Fields
 
         private List<Product> _allProducts = new List<Product>();
-        private Category _currentFilter = Category.IcedCoffee; // Default filter
-        private Order _currentOrder = new Order(); // The active cart holding the user's current session
-        private System.Windows.Forms.Timer _searchTimer = new System.Windows.Forms.Timer();// The timer that creates the smooth search delay
-
+        private Category _currentFilter = Category.IcedCoffee;
+        private Order _currentOrder = new Order();
+        private System.Windows.Forms.Timer _searchTimer = new System.Windows.Forms.Timer();
 
         #endregion
 
@@ -35,22 +34,19 @@ namespace PFC.App.Views
             InitializeComponent();
             SetupDoubleBuffering();
 
-            _searchTimer.Interval = 500; // Wait 300ms after the user stops typing
+            _searchTimer.Interval = 500;
             _searchTimer.Tick += SearchTimer_Tick;
 
-            // Load initial data (this will apply the default filter)
             LoadProducts();
         }
 
         private void SetupDoubleBuffering()
         {
-            // Improve painting / reduce flicker on the main control
             SetStyle(ControlStyles.OptimizedDoubleBuffer |
                      ControlStyles.AllPaintingInWmPaint |
                      ControlStyles.UserPaint, true);
             DoubleBuffered = true;
 
-            // Enable double buffering on FlowLayoutPanel via reflection
             try
             {
                 var prop = typeof(FlowLayoutPanel).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
@@ -150,7 +146,12 @@ namespace PFC.App.Views
             {
                 var item = new ProductItem();
                 item.SetProduct(prod);
+                
+                // Wire up the Product Click (for ordering)
                 item.ProductClicked += (s, e) => OpenOrderDialog(e.Product);
+                
+                // NEW: Wire up the Edit Click (for editing)
+                item.EditClicked += (s, e) => OpenEditProductDialog(e.Product);
 
                 flowLayoutPanel1.Controls.Add(item);
             }
@@ -181,6 +182,17 @@ namespace PFC.App.Views
                         RefreshOrderSidebar();
                     }
                 }
+            }
+        }
+
+        // NEW: Method to open the Edit Product dialog
+        private void OpenEditProductDialog(Product product)
+        {
+            using var editForm = new EditProductForm(product.Id);
+            if (editForm.ShowDialog(this) == DialogResult.OK)
+            {
+                // Reload products to reflect changes
+                LoadProducts();
             }
         }
 

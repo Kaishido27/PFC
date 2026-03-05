@@ -31,10 +31,6 @@
             gradientPanel1 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
             sfRoundedButtonAddSize = new PFC.App.Controls.SfRoundedButton();
             dataGridView1 = new DataGridView();
-            Sizeoption = new DataGridViewComboBoxColumn();
-            Price = new DataGridViewTextBoxColumn();
-            Cost = new DataGridViewTextBoxColumn();
-            Actions = new DataGridViewButtonColumn();
             label5 = new Label();
             cmbCategory = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             btnCancel = new PFC.App.Controls.SfRoundedButton();
@@ -44,6 +40,10 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
+            Sizeoption = new DataGridViewComboBoxColumn();
+            Price = new DataGridViewTextBoxColumn();
+            Cost = new DataGridViewTextBoxColumn();
+            Actions = new DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -102,37 +102,6 @@
             dataGridView1.TabIndex = 12;
             dataGridView1.CellContentClick += DataGridView1_CellContentClick;
             // 
-            // Sizeoption
-            // 
-            Sizeoption.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
-            Sizeoption.HeaderText = "Size";
-            Sizeoption.MinimumWidth = 6;
-            Sizeoption.Name = "Sizeoption";
-            Sizeoption.Width = 165;
-            // 
-            // Price
-            // 
-            Price.HeaderText = "Price";
-            Price.MinimumWidth = 6;
-            Price.Name = "Price";
-            Price.Width = 125;
-            // 
-            // Cost
-            // 
-            Cost.HeaderText = "Cost";
-            Cost.MinimumWidth = 6;
-            Cost.Name = "Cost";
-            Cost.Width = 125;
-            // 
-            // Actions
-            // 
-            Actions.HeaderText = "Actions";
-            Actions.MinimumWidth = 6;
-            Actions.Name = "Actions";
-            Actions.Text = "Delete";
-            Actions.UseColumnTextForButtonValue = true;
-            Actions.Width = 110;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -187,7 +156,7 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(243, 24);
+            txtName.BeforeTouchSize = new Size(243, 27);
             txtName.BorderStyle = BorderStyle.None;
             txtName.CornerRadius = 7;
             txtName.Location = new Point(52, 120);
@@ -240,6 +209,37 @@
             label1.Size = new Size(149, 31);
             label1.TabIndex = 2;
             label1.Text = "Add Product";
+            // 
+            // Sizeoption
+            // 
+            Sizeoption.DisplayStyle = DataGridViewComboBoxDisplayStyle.ComboBox;
+            Sizeoption.HeaderText = "Size";
+            Sizeoption.MinimumWidth = 6;
+            Sizeoption.Name = "Sizeoption";
+            Sizeoption.Width = 165;
+            // 
+            // Price
+            // 
+            Price.HeaderText = "Price";
+            Price.MinimumWidth = 6;
+            Price.Name = "Price";
+            Price.Width = 125;
+            // 
+            // Cost
+            // 
+            Cost.HeaderText = "Cost";
+            Cost.MinimumWidth = 6;
+            Cost.Name = "Cost";
+            Cost.Width = 125;
+            // 
+            // Actions
+            // 
+            Actions.HeaderText = "Actions";
+            Actions.MinimumWidth = 6;
+            Actions.Name = "Actions";
+            Actions.Text = "Delete";
+            Actions.UseColumnTextForButtonValue = true;
+            Actions.Width = 110;
             // 
             // AddProductForm
             // 
