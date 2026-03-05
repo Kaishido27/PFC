@@ -53,7 +53,7 @@
             // 
             // gradientPanel1
             // 
-            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, Color.LimeGreen, Color.Beige);
+            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, Color.FromArgb(227, 199, 166), Color.FromArgb(245, 230, 211));
             gradientPanel1.Controls.Add(sfRoundedButtonAddSize);
             gradientPanel1.Controls.Add(dataGridView1);
             gradientPanel1.Controls.Add(label5);
@@ -73,27 +73,31 @@
             // 
             // sfRoundedButtonAddSize
             // 
+            sfRoundedButtonAddSize.BackColor = Color.White;
             sfRoundedButtonAddSize.FlatStyle = FlatStyle.Flat;
             sfRoundedButtonAddSize.Font = new Font("Segoe UI Semibold", 9F);
-            sfRoundedButtonAddSize.Location = new Point(20, 196);
+            sfRoundedButtonAddSize.Location = new Point(20, 190);
             sfRoundedButtonAddSize.Name = "sfRoundedButtonAddSize";
             sfRoundedButtonAddSize.Size = new Size(120, 27);
+            sfRoundedButtonAddSize.Style.BackColor = Color.White;
             sfRoundedButtonAddSize.Style.FocusedBackColor = Color.LemonChiffon;
             sfRoundedButtonAddSize.Style.FocusedBorder = null;
             sfRoundedButtonAddSize.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
             sfRoundedButtonAddSize.Style.HoverForeColor = Color.Black;
             sfRoundedButtonAddSize.TabIndex = 11;
             sfRoundedButtonAddSize.Text = "Add Size";
+            sfRoundedButtonAddSize.UseVisualStyleBackColor = false;
             sfRoundedButtonAddSize.Click += SfRoundedButtonAddSize_Click;
             // 
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Sizeoption, Price, Cost, Actions });
-            dataGridView1.Location = new Point(20, 230);
+            dataGridView1.GridColor = SystemColors.HighlightText;
+            dataGridView1.Location = new Point(52, 229);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(553, 171);
+            dataGridView1.Size = new Size(553, 186);
             dataGridView1.TabIndex = 12;
             dataGridView1.CellContentClick += DataGridView1_CellContentClick;
             // 
@@ -133,7 +137,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.Location = new Point(20, 166);
+            label5.Location = new Point(20, 161);
             label5.Name = "label5";
             label5.Size = new Size(221, 25);
             label5.TabIndex = 10;
@@ -142,7 +146,7 @@
             // cmbCategory
             // 
             cmbCategory.Height = 28;
-            cmbCategory.Location = new Point(346, 116);
+            cmbCategory.Location = new Point(356, 116);
             cmbCategory.Name = "cmbCategory";
             cmbCategory.Size = new Size(249, 28);
             cmbCategory.TabIndex = 9;
@@ -150,12 +154,12 @@
             // 
             // btnCancel
             // 
-            btnCancel.BackColor = Color.IndianRed;
+            btnCancel.BackColor = Color.White;
             btnCancel.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCancel.Location = new Point(525, 426);
+            btnCancel.Location = new Point(489, 446);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(116, 35);
-            btnCancel.Style.BackColor = Color.IndianRed;
+            btnCancel.Style.BackColor = Color.White;
             btnCancel.Style.FocusedBorder = null;
             btnCancel.Style.HoverBackColor = Color.Red;
             btnCancel.Style.HoverForeColor = Color.Black;
@@ -166,12 +170,12 @@
             // 
             // btnSave
             // 
-            btnSave.BackColor = Color.FromArgb(192, 255, 192);
+            btnSave.BackColor = Color.Transparent;
             btnSave.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSave.Location = new Point(403, 426);
+            btnSave.Location = new Point(346, 446);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(116, 35);
-            btnSave.Style.BackColor = Color.FromArgb(192, 255, 192);
+            btnSave.Style.BackColor = Color.Transparent;
             btnSave.Style.FocusedBorder = null;
             btnSave.Style.HoverBackColor = Color.FromArgb(128, 255, 128);
             btnSave.Style.HoverForeColor = Color.Black;
@@ -185,7 +189,7 @@
             txtName.BeforeTouchSize = new Size(243, 24);
             txtName.BorderStyle = BorderStyle.None;
             txtName.CornerRadius = 7;
-            txtName.Location = new Point(20, 116);
+            txtName.Location = new Point(52, 120);
             txtName.MinimumSize = new Size(28, 24);
             txtName.Name = "txtName";
             txtName.PlaceholderText = "e.g Spanish Latte";
@@ -197,7 +201,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(346, 88);
+            label4.Location = new Point(356, 88);
             label4.Name = "label4";
             label4.Size = new Size(88, 25);
             label4.TabIndex = 5;
@@ -208,7 +212,7 @@
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(20, 88);
+            label3.Location = new Point(52, 88);
             label3.Name = "label3";
             label3.Size = new Size(136, 25);
             label3.TabIndex = 4;

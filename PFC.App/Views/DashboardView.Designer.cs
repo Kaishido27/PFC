@@ -236,6 +236,7 @@
             // 
             // gradientPanel1
             // 
+            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.WhiteSmoke, Color.Beige);
             tableLayoutPanel1.SetColumnSpan(gradientPanel1, 2);
             gradientPanel1.Controls.Add(dataGridView1);
             gradientPanel1.Controls.Add(label5);
