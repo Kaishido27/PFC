@@ -160,13 +160,13 @@
             // 
             textBoxExt1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             textBoxExt1.BackColor = SystemColors.Info;
-            textBoxExt1.BeforeTouchSize = new Size(338, 27);
+            textBoxExt1.BeforeTouchSize = new Size(249, 27);
             textBoxExt1.Border3DStyle = Border3DStyle.Flat;
-            textBoxExt1.Location = new Point(660, 19);
+            textBoxExt1.Location = new Point(749, 19);
             textBoxExt1.Name = "textBoxExt1";
             textBoxExt1.Office2010ColorScheme = Syncfusion.Windows.Forms.Office2010Theme.Silver;
             textBoxExt1.PlaceholderText = "Search Products";
-            textBoxExt1.Size = new Size(338, 27);
+            textBoxExt1.Size = new Size(249, 27);
             textBoxExt1.TabIndex = 8;
             // 
             // btnAddProduct
@@ -274,9 +274,10 @@
             CategoryPicture.BackColor = Color.Transparent;
             CategoryPicture.BackgroundImageLayout = ImageLayout.Center;
             CategoryPicture.Dock = DockStyle.Right;
-            CategoryPicture.Location = new Point(1057, 168);
+            CategoryPicture.Image = Properties.Resources.logo;
+            CategoryPicture.Location = new Point(947, 168);
             CategoryPicture.Name = "CategoryPicture";
-            CategoryPicture.Size = new Size(276, 832);
+            CategoryPicture.Size = new Size(386, 832);
             CategoryPicture.TabIndex = 5;
             CategoryPicture.TabStop = false;
             // 
@@ -285,7 +286,7 @@
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(275, 168);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(782, 832);
+            flowLayoutPanel1.Size = new Size(672, 832);
             flowLayoutPanel1.TabIndex = 6;
             // 
             // ProductView
