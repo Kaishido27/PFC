@@ -37,24 +37,24 @@
             lblGrandTotal = new Label();
             label4 = new Label();
             panel4 = new Panel();
-            label3 = new Label();
+            lblItemCount = new Label();
             label2 = new Label();
             panel3 = new Panel();
-            textBoxExt1 = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            txtSearch = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             btnAddProduct = new PFC.App.Controls.SfRoundedButton();
             btnSoda = new PFC.App.Controls.SfRoundedButton();
             btnMatcha = new PFC.App.Controls.SfRoundedButton();
             btnFlavMilk = new PFC.App.Controls.SfRoundedButton();
             btnHotCoffee = new PFC.App.Controls.SfRoundedButton();
             btnIcedCoffee = new PFC.App.Controls.SfRoundedButton();
-            CategoryPicture = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            CategoryPicture = new PictureBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             btnConfirmOrder.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)textBoxExt1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSearch).BeginInit();
             ((System.ComponentModel.ISupportInitialize)CategoryPicture).BeginInit();
             SuspendLayout();
             // 
@@ -155,7 +155,7 @@
             // panel4
             // 
             panel4.BorderStyle = BorderStyle.FixedSingle;
-            panel4.Controls.Add(label3);
+            panel4.Controls.Add(lblItemCount);
             panel4.Controls.Add(label2);
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 0);
@@ -163,17 +163,17 @@
             panel4.Size = new Size(273, 67);
             panel4.TabIndex = 0;
             // 
-            // label3
+            // lblItemCount
             // 
-            label3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.Orange;
-            label3.Location = new Point(190, 25);
-            label3.Name = "label3";
-            label3.Size = new Size(62, 20);
-            label3.TabIndex = 1;
-            label3.Text = "0 Items";
+            lblItemCount.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            lblItemCount.AutoSize = true;
+            lblItemCount.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblItemCount.ForeColor = Color.Orange;
+            lblItemCount.Location = new Point(190, 25);
+            lblItemCount.Name = "lblItemCount";
+            lblItemCount.Size = new Size(62, 20);
+            lblItemCount.TabIndex = 1;
+            lblItemCount.Text = "0 Items";
             // 
             // label2
             // 
@@ -187,7 +187,7 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(textBoxExt1);
+            panel3.Controls.Add(txtSearch);
             panel3.Controls.Add(btnAddProduct);
             panel3.Controls.Add(btnSoda);
             panel3.Controls.Add(btnMatcha);
@@ -200,18 +200,19 @@
             panel3.Size = new Size(1058, 102);
             panel3.TabIndex = 3;
             // 
-            // textBoxExt1
+            // txtSearch
             // 
-            textBoxExt1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            textBoxExt1.BackColor = SystemColors.Info;
-            textBoxExt1.BeforeTouchSize = new Size(249, 27);
-            textBoxExt1.Border3DStyle = Border3DStyle.Flat;
-            textBoxExt1.Location = new Point(749, 19);
-            textBoxExt1.Name = "textBoxExt1";
-            textBoxExt1.Office2010ColorScheme = Syncfusion.Windows.Forms.Office2010Theme.Silver;
-            textBoxExt1.PlaceholderText = "Search Products";
-            textBoxExt1.Size = new Size(249, 27);
-            textBoxExt1.TabIndex = 8;
+            txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            txtSearch.BackColor = SystemColors.Info;
+            txtSearch.BeforeTouchSize = new Size(249, 27);
+            txtSearch.Border3DStyle = Border3DStyle.Flat;
+            txtSearch.Location = new Point(588, 43);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Office2010ColorScheme = Syncfusion.Windows.Forms.Office2010Theme.Silver;
+            txtSearch.PlaceholderText = "Search Products";
+            txtSearch.Size = new Size(249, 27);
+            txtSearch.TabIndex = 8;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // btnAddProduct
             // 
@@ -219,9 +220,9 @@
             btnAddProduct.BackColor = Color.Tan;
             btnAddProduct.FlatStyle = FlatStyle.Flat;
             btnAddProduct.Font = new Font("Segoe UI Semibold", 9F);
-            btnAddProduct.Location = new Point(782, 52);
+            btnAddProduct.Location = new Point(859, 27);
             btnAddProduct.Name = "btnAddProduct";
-            btnAddProduct.Size = new Size(148, 35);
+            btnAddProduct.Size = new Size(148, 51);
             btnAddProduct.Style.BackColor = Color.Tan;
             btnAddProduct.Style.FocusedBackColor = Color.LemonChiffon;
             btnAddProduct.Style.FocusedBorder = null;
@@ -307,6 +308,14 @@
             btnIcedCoffee.Text = "Iced Coffee";
             btnIcedCoffee.Click += BtnIcedCoffee_Click;
             // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Location = new Point(275, 168);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(672, 832);
+            flowLayoutPanel1.TabIndex = 6;
+            // 
             // CategoryPicture
             // 
             CategoryPicture.BackColor = Color.Transparent;
@@ -318,14 +327,6 @@
             CategoryPicture.Size = new Size(386, 832);
             CategoryPicture.TabIndex = 5;
             CategoryPicture.TabStop = false;
-            // 
-            // flowLayoutPanel1
-            // 
-            flowLayoutPanel1.Dock = DockStyle.Fill;
-            flowLayoutPanel1.Location = new Point(275, 168);
-            flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(672, 832);
-            flowLayoutPanel1.TabIndex = 6;
             // 
             // ProductView
             // 
@@ -349,7 +350,7 @@
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)textBoxExt1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSearch).EndInit();
             ((System.ComponentModel.ISupportInitialize)CategoryPicture).EndInit();
             ResumeLayout(false);
         }
@@ -362,7 +363,7 @@
         private Panel panel3;
         private Panel panel4;
         private Panel btnConfirmOrder;
-        private Label label3;
+        private Label lblItemCount;
         private Label label2;
         private Controls.SfRoundedButton btnIcedCoffee;
         private Controls.SfRoundedButton btnSoda;
@@ -370,12 +371,12 @@
         private Controls.SfRoundedButton btnFlavMilk;
         private Controls.SfRoundedButton btnHotCoffee;
         private Controls.SfRoundedButton btnAddProduct;
-        private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxExt1;
-        private PictureBox CategoryPicture;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt txtSearch;
         private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel flwCartItems;
         private Label label4;
         private Label lblGrandTotal;
         private Controls.SfRoundedButton btnConfirm;
+        private PictureBox CategoryPicture;
     }
 }

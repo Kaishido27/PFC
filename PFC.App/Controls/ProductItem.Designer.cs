@@ -29,10 +29,11 @@
         private void InitializeComponent()
         {
             pfcRoundedGradientPanel1 = new PfcRoundedGradientPanel();
+            lblAvailableSizes = new Label();
+            ClickEdit = new PictureBox();
             lblPrice = new Label();
             lblCategory = new Label();
             lblName = new Label();
-            ClickEdit = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pfcRoundedGradientPanel1).BeginInit();
             pfcRoundedGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ClickEdit).BeginInit();
@@ -42,6 +43,7 @@
             // 
             pfcRoundedGradientPanel1.BorderColor = Color.White;
             pfcRoundedGradientPanel1.BorderStyle = BorderStyle.None;
+            pfcRoundedGradientPanel1.Controls.Add(lblAvailableSizes);
             pfcRoundedGradientPanel1.Controls.Add(ClickEdit);
             pfcRoundedGradientPanel1.Controls.Add(lblPrice);
             pfcRoundedGradientPanel1.Controls.Add(lblCategory);
@@ -51,6 +53,31 @@
             pfcRoundedGradientPanel1.Name = "pfcRoundedGradientPanel1";
             pfcRoundedGradientPanel1.Size = new Size(226, 265);
             pfcRoundedGradientPanel1.TabIndex = 0;
+            // 
+            // lblAvailableSizes
+            // 
+            lblAvailableSizes.AutoSize = true;
+            lblAvailableSizes.BackColor = Color.Transparent;
+            lblAvailableSizes.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblAvailableSizes.Location = new Point(13, 94);
+            lblAvailableSizes.Margin = new Padding(3, 5, 3, 0);
+            lblAvailableSizes.MinimumSize = new Size(100, 0);
+            lblAvailableSizes.Name = "lblAvailableSizes";
+            lblAvailableSizes.Size = new Size(100, 20);
+            lblAvailableSizes.TabIndex = 4;
+            lblAvailableSizes.Text = "Sizes";
+            // 
+            // ClickEdit
+            // 
+            ClickEdit.BackColor = Color.Transparent;
+            ClickEdit.Image = Properties.Resources.edit_minimized;
+            ClickEdit.Location = new Point(182, 3);
+            ClickEdit.Name = "ClickEdit";
+            ClickEdit.Size = new Size(41, 42);
+            ClickEdit.SizeMode = PictureBoxSizeMode.StretchImage;
+            ClickEdit.TabIndex = 3;
+            ClickEdit.TabStop = false;
+            ClickEdit.Click += ClickEdit_Click;
             // 
             // lblPrice
             // 
@@ -85,18 +112,6 @@
             lblName.TabIndex = 0;
             lblName.Text = "Name";
             // 
-            // ClickEdit
-            // 
-            ClickEdit.BackColor = Color.Transparent;
-            ClickEdit.Image = Properties.Resources.edit_minimized;
-            ClickEdit.Location = new Point(182, 3);
-            ClickEdit.Name = "ClickEdit";
-            ClickEdit.Size = new Size(41, 42);
-            ClickEdit.SizeMode = PictureBoxSizeMode.StretchImage;
-            ClickEdit.TabIndex = 3;
-            ClickEdit.TabStop = false;
-            ClickEdit.Click += ClickEdit_Click;
-            // 
             // ProductItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -119,5 +134,6 @@
         private Label lblPrice;
         private Label lblCategory;
         private PictureBox ClickEdit;
+        private Label lblAvailableSizes;
     }
 }

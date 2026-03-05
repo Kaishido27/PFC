@@ -59,10 +59,16 @@ namespace PFC.App.Controls
             {
                 decimal minPrice = product.SizeOptions.Min(s => s.Price);
                 lblPrice.Text = $"Starts at {minPrice:C}";
+
+                var sizeList = product.SizeOptions
+                      .Select(s => FormatEnumName(s.Size.ToString()))
+                      .ToList();
+                lblAvailableSizes.Text = string.Join("\n", sizeList);
             }
             else
             {
                 lblPrice.Text = "Price N/A";
+                lblAvailableSizes.Text = "No sizes setup";
             }
 
             // Apply category-based gradient theme
@@ -120,6 +126,7 @@ namespace PFC.App.Controls
                 lblName.ForeColor = textColor;
                 lblPrice.ForeColor = textColor;
                 lblCategory.ForeColor = textColor;
+                lblAvailableSizes.ForeColor = textColor;
             }
             catch
             {
