@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
-            listBox1 = new ListBox();
+            flwCartItems = new FlowLayoutPanel();
             panel5 = new Panel();
+            lblGrandTotal = new Label();
+            label4 = new Label();
             panel4 = new Panel();
             label3 = new Label();
             label2 = new Label();
@@ -45,11 +46,11 @@
             btnFlavMilk = new PFC.App.Controls.SfRoundedButton();
             btnHotCoffee = new PFC.App.Controls.SfRoundedButton();
             btnIcedCoffee = new PFC.App.Controls.SfRoundedButton();
-            backStageView1 = new Syncfusion.Windows.Forms.BackStageView(components);
             CategoryPicture = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
+            panel5.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)textBoxExt1).BeginInit();
@@ -79,7 +80,8 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(listBox1);
+            panel2.BorderStyle = BorderStyle.FixedSingle;
+            panel2.Controls.Add(flwCartItems);
             panel2.Controls.Add(panel5);
             panel2.Controls.Add(panel4);
             panel2.Dock = DockStyle.Left;
@@ -88,25 +90,46 @@
             panel2.Size = new Size(275, 934);
             panel2.TabIndex = 2;
             // 
-            // listBox1
+            // flwCartItems
             // 
-            listBox1.Dock = DockStyle.Fill;
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(0, 67);
-            listBox1.Margin = new Padding(3, 3, 3, 0);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(275, 641);
-            listBox1.TabIndex = 2;
+            flwCartItems.Dock = DockStyle.Fill;
+            flwCartItems.Location = new Point(0, 67);
+            flwCartItems.Name = "flwCartItems";
+            flwCartItems.Size = new Size(273, 639);
+            flwCartItems.TabIndex = 2;
             // 
             // panel5
             // 
             panel5.BorderStyle = BorderStyle.FixedSingle;
+            panel5.Controls.Add(lblGrandTotal);
+            panel5.Controls.Add(label4);
             panel5.Dock = DockStyle.Bottom;
-            panel5.Location = new Point(0, 708);
+            panel5.Location = new Point(0, 706);
             panel5.Margin = new Padding(3, 0, 3, 3);
             panel5.Name = "panel5";
-            panel5.Size = new Size(275, 226);
+            panel5.Size = new Size(273, 226);
             panel5.TabIndex = 1;
+            // 
+            // lblGrandTotal
+            // 
+            lblGrandTotal.AutoSize = true;
+            lblGrandTotal.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandTotal.ForeColor = Color.DarkGreen;
+            lblGrandTotal.Location = new Point(140, 20);
+            lblGrandTotal.Name = "lblGrandTotal";
+            lblGrandTotal.Size = new Size(101, 23);
+            lblGrandTotal.TabIndex = 3;
+            lblGrandTotal.Text = "Total Order";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.Location = new Point(12, 20);
+            label4.Name = "label4";
+            label4.Size = new Size(107, 23);
+            label4.TabIndex = 2;
+            label4.Text = "Total Order:";
             // 
             // panel4
             // 
@@ -116,7 +139,7 @@
             panel4.Dock = DockStyle.Top;
             panel4.Location = new Point(0, 0);
             panel4.Name = "panel4";
-            panel4.Size = new Size(275, 67);
+            panel4.Size = new Size(273, 67);
             panel4.TabIndex = 0;
             // 
             // label3
@@ -125,7 +148,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = Color.Orange;
-            label3.Location = new Point(192, 25);
+            label3.Location = new Point(190, 25);
             label3.Name = "label3";
             label3.Size = new Size(62, 20);
             label3.TabIndex = 1;
@@ -263,12 +286,6 @@
             btnIcedCoffee.Text = "Iced Coffee";
             btnIcedCoffee.Click += BtnIcedCoffee_Click;
             // 
-            // backStageView1
-            // 
-            backStageView1.BackStage = null;
-            backStageView1.HostControl = null;
-            backStageView1.HostForm = null;
-            // 
             // CategoryPicture
             // 
             CategoryPicture.BackColor = Color.Transparent;
@@ -305,6 +322,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
@@ -321,7 +340,6 @@
         private Panel panel2;
         private Panel panel3;
         private Panel panel4;
-        private ListBox listBox1;
         private Panel panel5;
         private Label label3;
         private Label label2;
@@ -331,9 +349,11 @@
         private Controls.SfRoundedButton btnFlavMilk;
         private Controls.SfRoundedButton btnHotCoffee;
         private Controls.SfRoundedButton btnAddProduct;
-        private Syncfusion.Windows.Forms.BackStageView backStageView1;
         private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxExt1;
         private PictureBox CategoryPicture;
         private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flwCartItems;
+        private Label label4;
+        private Label lblGrandTotal;
     }
 }

@@ -14,6 +14,8 @@ namespace PFC.App.Views
     {
         private List<Product> _allProducts = new List<Product>();
         private Category _currentFilter = Category.IcedCoffee; // default filter
+        private Order _currentOrder = new Order(); // The active cart holding the user's current session
+
 
         public ProductView()
         {
@@ -152,10 +154,65 @@ namespace PFC.App.Views
             }
         }
 
-        // Placeholder 
+        //Placeholder 
         private void OpenOrderDialog(PFC.Domain.Models.Product product)
         {
-            MessageBox.Show($"Open order dialog for: {product.Name ?? "Unknown"}", "Product Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            // 1. Instantiate the form we just built, passing the clicked product
+            using (var orderForm = new OrderEntryForm(product))
+            {
+                // 2. Show it as a blocking pop-up. The code waits here until the user closes it.
+                if (orderForm.ShowDialog(this) == DialogResult.OK)
+                {
+                    // 3. The user clicked Confirm! Grab the populated OrderDetail
+                    OrderDetail? newItem = orderForm.ResultingDetail;
+                    
+                    if (newItem != null)
+                    {
+                        // 4. Add it to our active cart
+                        _currentOrder.Details.Add(newItem);
+
+                        // 5. Tell the UI to update the sidebar
+                        RefreshOrderSidebar();
+                    }
+                }
+            }
+        }
+         private void RefreshOrderSidebar()
+         {
+            // 1. Clear the old list before redrawing
+            flwCartItems.Controls.Clear();
+
+            // 2. Loop through every item currently in the cart
+            foreach (var item in _currentOrder.Details.ToList()) // .ToList() prevents modification errors
+            {
+                // Create the new UserControl
+                var cartControl = new PFC.App.Controls.CartItemControl();
+
+                // Pass the data to it
+                cartControl.SetData(item);
+
+                // Adjust the width so it fills the panel but leaves room for the scrollbar
+                cartControl.Width = flwCartItems.Width - 25;
+
+                // Wire up the Remove event!
+                cartControl.RemoveClicked += (sender, e) =>
+                {
+                    // Remove it from our memory model
+                    _currentOrder.Details.Remove(item);
+
+                    // Refresh the UI to reflect the deletion
+                    RefreshOrderSidebar();
+                };
+
+                // Add it to the FlowLayoutPanel
+                flwCartItems.Controls.Add(cartControl);
+            }
+
+            // 3. Update the Grand Total at the very bottom
+            if (lblGrandTotal != null)
+            {
+                lblGrandTotal.Text = $"Total: ₱{_currentOrder.TotalAmount:N2}";
+            }
         }
     }
-}
+ }

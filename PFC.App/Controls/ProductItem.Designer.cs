@@ -29,19 +29,20 @@
         private void InitializeComponent()
         {
             pfcRoundedGradientPanel1 = new PfcRoundedGradientPanel();
-            btnEdit = new Button();
             lblPrice = new Label();
             lblCategory = new Label();
             lblName = new Label();
+            ClickEdit = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pfcRoundedGradientPanel1).BeginInit();
             pfcRoundedGradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)ClickEdit).BeginInit();
             SuspendLayout();
             // 
             // pfcRoundedGradientPanel1
             // 
             pfcRoundedGradientPanel1.BorderColor = Color.White;
             pfcRoundedGradientPanel1.BorderStyle = BorderStyle.None;
-            pfcRoundedGradientPanel1.Controls.Add(btnEdit);
+            pfcRoundedGradientPanel1.Controls.Add(ClickEdit);
             pfcRoundedGradientPanel1.Controls.Add(lblPrice);
             pfcRoundedGradientPanel1.Controls.Add(lblCategory);
             pfcRoundedGradientPanel1.Controls.Add(lblName);
@@ -50,16 +51,6 @@
             pfcRoundedGradientPanel1.Name = "pfcRoundedGradientPanel1";
             pfcRoundedGradientPanel1.Size = new Size(226, 265);
             pfcRoundedGradientPanel1.TabIndex = 0;
-            // 
-            // btnEdit
-            // 
-            btnEdit.BackColor = Color.Transparent;
-            btnEdit.Image = Properties.Resources.edit_minimized;
-            btnEdit.Location = new Point(178, 3);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(45, 48);
-            btnEdit.TabIndex = 3;
-            btnEdit.UseVisualStyleBackColor = false;
             // 
             // lblPrice
             // 
@@ -94,6 +85,18 @@
             lblName.TabIndex = 0;
             lblName.Text = "Name";
             // 
+            // ClickEdit
+            // 
+            ClickEdit.BackColor = Color.Transparent;
+            ClickEdit.Image = Properties.Resources.edit_minimized;
+            ClickEdit.Location = new Point(182, 3);
+            ClickEdit.Name = "ClickEdit";
+            ClickEdit.Size = new Size(41, 42);
+            ClickEdit.SizeMode = PictureBoxSizeMode.StretchImage;
+            ClickEdit.TabIndex = 3;
+            ClickEdit.TabStop = false;
+            ClickEdit.Click += ClickEdit_Click;
+            // 
             // ProductItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -105,6 +108,7 @@
             ((System.ComponentModel.ISupportInitialize)pfcRoundedGradientPanel1).EndInit();
             pfcRoundedGradientPanel1.ResumeLayout(false);
             pfcRoundedGradientPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)ClickEdit).EndInit();
             ResumeLayout(false);
         }
 
@@ -114,6 +118,6 @@
         private Label lblName;
         private Label lblPrice;
         private Label lblCategory;
-        private Button btnEdit;
+        private PictureBox ClickEdit;
     }
 }

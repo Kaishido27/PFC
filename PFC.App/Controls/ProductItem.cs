@@ -27,19 +27,7 @@ namespace PFC.App.Controls
 
             // Forward clicks on the control itself
             this.Click += OnAnyClick;
-
-            // Wire existing child controls (designer-created)
-            foreach (Control child in Controls)
-            {
-                child.Click += OnAnyClick;
-            }
-        }
-
-        // Ensure dynamically added child controls also forward clicks
-        protected override void OnControlAdded(ControlEventArgs e)
-        {
-            base.OnControlAdded(e);
-            e.Control.Click += OnAnyClick;
+            pfcRoundedGradientPanel1.Click += OnAnyClick;
         }
 
         // 2. The Method to bind data to the labels
@@ -148,6 +136,11 @@ namespace PFC.App.Controls
             // luminance calculation
             double luminance = (0.299 * bg.R + 0.587 * bg.G + 0.114 * bg.B) / 255;
             return luminance > 0.6 ? Color.Black : Color.White;
+        }
+
+        private void ClickEdit_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -13,79 +13,146 @@ namespace PFC.App.Forms
 {
     public partial class OrderEntryForm : Form
     {
-        public OrderDetail ResultingDetail { get; private set; }
+        // --- Properties & Fields ---
+        public OrderDetail? ResultingDetail { get; private set; }
         private Product _product;
 
+        // --- Constructor ---
         public OrderEntryForm(Product product)
         {
             InitializeComponent();
             _product = product;
 
-            // 1. Set Product Name
+            // 1. Initial UI Setup
             lblProductName.Text = _product.Name;
             lblProductCategory.Text = FormatEnumName(_product.Category.ToString());
+            numQuantity.Value = 1;
 
-            // 2. Setup Size ComboBox
+            // 2. Load Data into Controls
+            SetupSizeComboBox();
+            PopulateAddOns();
+
+            
+
+            // 3. Run initial calculation to update the label immediately
+            UpdateLiveTotal();
+        }
+
+        // ==========================================
+        // SETUP METHODS
+        // ==========================================
+
+        private void SetupSizeComboBox()
+        {
             if (_product.SizeOptions != null && _product.SizeOptions.Any())
             {
                 cboSizes.DataSource = _product.SizeOptions.ToList();
-                cboSizes.DisplayMember = "Size";
+                
             }
-
-            // 3. Setup Add-ons CheckedListBox from Enum
-            PopulateAddOns();
-
-            // 4. Default Quantity
-            numQuantity.Value = 1;
-
         }
 
         private void PopulateAddOns()
         {
-            // Clear existing items just in case
             chkAddOns.Items.Clear();
-            chkAddOns.Format += ChkAddOns_Format;
-            // Loop through all values in your AddOns enum
+            chkAddOns.FormattingEnabled = true;
+
             foreach (AddOns addon in Enum.GetValues(typeof(AddOns)))
             {
-                // We add the actual enum value to the list
                 chkAddOns.Items.Add(addon);
             }
         }
-        private void ChkAddOns_Format(object? sender, ListControlConvertEventArgs e)
-        {
-            // If the item is our AddOns enum, format its string representation
-            if (e.ListItem is AddOns addon)
-            {
-                e.Value = FormatEnumName(addon.ToString());
-            }
-        }
 
+        // ==========================================
+        // UI EVENT HANDLERS (Wire these in the Designer!)
+        // ==========================================
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            // Extract the checked items and cast them directly back to your AddOns enum
             List<AddOns> selectedAddOns = chkAddOns.CheckedItems
                                                    .Cast<AddOns>()
                                                    .ToList();
 
-            // Build the OrderDetail using Object Initializer
+            // Grab the selected option from the combobox
+            var selectedOption = (ProductSizeOption)cboSizes.SelectedItem!;
+
             ResultingDetail = new OrderDetail
             {
                 Product = _product,
                 ProductId = _product.Id,
-                SelectedSize = (ProductSize)cboSizes.SelectedItem,
+                SelectedSize = selectedOption.Size, // Extract the enum from the option class!
                 Quantity = (int)numQuantity.Value,
-                AddOns = selectedAddOns // Plugs perfectly into your List<AddOns>!
+                AddOns = selectedAddOns
             };
 
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
 
+        private void cboSizes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateLiveTotal();
+        }
+
+        private void numQuantity_ValueChanged(object sender, EventArgs e)
+        {
+            UpdateLiveTotal();
+        }
+
+        private void chkAddOns_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            // Wait for the UI to actually register the checkmark before calculating
+            this.BeginInvoke(new Action(UpdateLiveTotal));
+        }
+
+        private void ChkAddOns_Format(object? sender, ListControlConvertEventArgs e)
+        {
+            if (e.ListItem is AddOns addon)
+            {
+                e.Value = FormatEnumName(addon.ToString());
+            }
+        }
+
+        // ==========================================
+        // CORE LOGIC & HELPERS
+        // ==========================================
+
+        private void UpdateLiveTotal()
+        {
+            // 1. Base price from the ProductSizeOption class
+            decimal unitPrice = 0m;
+            if (cboSizes.SelectedItem is ProductSizeOption selectedOption)
+            {
+                unitPrice = selectedOption.Price; // Now we can safely access .Price!
+            }
+
+            // 2. Add-on price (₱10 per selected item)
+            int addOnCount = chkAddOns.CheckedItems.Count;
+            decimal addOnPrice = addOnCount * 10m;
+
+            // 3. Final math
+            int quantity = (int)numQuantity.Value;
+            decimal finalTotal = (unitPrice + addOnPrice) * quantity;
+
+            // 4. Update the UI
+            if (lblLiveTotal != null)
+            {
+                lblLiveTotal.Text = $"Total: ₱{finalTotal:N2}";
+            }
+        }
+
         private string FormatEnumName(string name)
         {
             return System.Text.RegularExpressions.Regex.Replace(name, "([a-z])([A-Z])", "$1 $2");
+        }
+
+        private void cboSizes_Format(object sender, ListControlConvertEventArgs e)
+        {
+            if (e.ListItem is ProductSizeOption option)
+            {
+                // Add spaces to the enum and append the price
+                string prettyName = FormatEnumName(option.Size.ToString());
+                e.Value = $"{prettyName} (₱{option.Price:N2})";
+            }
         }
     }
 }

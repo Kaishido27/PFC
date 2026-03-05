@@ -48,14 +48,14 @@ namespace PFC.App.Forms
             // Start with one row so the user has a place to begin
             if (_sizeOptions.Count == 0)
             {
-                _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.Eightoz, Price = 0m, Cost = 0m });
+                _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.EightOz, Price = 0m, Cost = 0m });
             }
         }
 
         private void SfRoundedButtonAddSize_Click(object? sender, EventArgs e)
         {
             // Add an empty size option row (user will edit Size/Price/Cost)
-            _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.Eightoz, Price = 0m, Cost = 0m });
+            _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.EightOz, Price = 0m, Cost = 0m });
             // Focus the new row in the grid for convenience
             var idx = _sizeOptions.Count - 1;
             dataGridView1.CurrentCell = dataGridView1.Rows[idx].Cells["Sizeoption"];

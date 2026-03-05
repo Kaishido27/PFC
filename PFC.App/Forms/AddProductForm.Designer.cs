@@ -96,7 +96,6 @@
             dataGridView1.GridColor = SystemColors.HighlightText;
             dataGridView1.Location = new Point(41, 229);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(578, 186);
             dataGridView1.TabIndex = 12;
@@ -216,15 +215,13 @@
             Sizeoption.HeaderText = "Size";
             Sizeoption.MinimumWidth = 6;
             Sizeoption.Name = "Sizeoption";
-            Sizeoption.ReadOnly = true;
-            Sizeoption.Width = 175;
+            Sizeoption.Width = 165;
             // 
             // Price
             // 
             Price.HeaderText = "Price";
             Price.MinimumWidth = 6;
             Price.Name = "Price";
-            Price.ReadOnly = true;
             Price.Width = 125;
             // 
             // Cost
@@ -232,7 +229,6 @@
             Cost.HeaderText = "Cost";
             Cost.MinimumWidth = 6;
             Cost.Name = "Cost";
-            Cost.ReadOnly = true;
             Cost.Width = 125;
             // 
             // Actions
@@ -240,9 +236,9 @@
             Actions.HeaderText = "Actions";
             Actions.MinimumWidth = 6;
             Actions.Name = "Actions";
-            Actions.ReadOnly = true;
             Actions.Text = "Delete";
             Actions.UseColumnTextForButtonValue = true;
+            Actions.Width = 110;
             // 
             // AddProductForm
             // 

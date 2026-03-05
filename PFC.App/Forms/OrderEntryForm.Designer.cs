@@ -33,7 +33,6 @@
             lblProductCategory = new Label();
             lblProductName = new Label();
             label1 = new Label();
-            cboSizes = new Syncfusion.Windows.Forms.Tools.ComboBoxAdv();
             label2 = new Label();
             chkAddOns = new CheckedListBox();
             label3 = new Label();
@@ -42,10 +41,10 @@
             lblLiveTotal = new Label();
             btnConfirm = new PFC.App.Controls.SfRoundedButton();
             btnCancel = new PFC.App.Controls.SfRoundedButton();
+            cboSizes = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)pfcRoundedGradientPanel1).BeginInit();
             pfcRoundedGradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)cboSizes).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numQuantity).BeginInit();
             SuspendLayout();
             // 
@@ -53,6 +52,7 @@
             // 
             pfcRoundedGradientPanel1.BackColor = Color.Bisque;
             pfcRoundedGradientPanel1.Border3DStyle = Border3DStyle.Bump;
+            pfcRoundedGradientPanel1.BorderColor = Color.White;
             pfcRoundedGradientPanel1.BorderStyle = BorderStyle.None;
             pfcRoundedGradientPanel1.Controls.Add(pictureBox1);
             pfcRoundedGradientPanel1.Controls.Add(lblProductCategory);
@@ -106,16 +106,6 @@
             label1.TabIndex = 3;
             label1.Text = "SELECT SIZE:";
             // 
-            // cboSizes
-            // 
-            cboSizes.DropDownStyle = ComboBoxStyle.DropDownList;
-            cboSizes.Height = 28;
-            cboSizes.Location = new Point(335, 149);
-            cboSizes.Name = "cboSizes";
-            cboSizes.Size = new Size(246, 28);
-            cboSizes.TabIndex = 4;
-            cboSizes.TextBoxHeight = 28;
-            // 
             // label2
             // 
             label2.AutoSize = true;
@@ -135,6 +125,8 @@
             chkAddOns.Name = "chkAddOns";
             chkAddOns.Size = new Size(577, 154);
             chkAddOns.TabIndex = 6;
+            chkAddOns.ItemCheck += chkAddOns_ItemCheck;
+            chkAddOns.Format += ChkAddOns_Format;
             // 
             // label3
             // 
@@ -155,6 +147,7 @@
             numQuantity.Size = new Size(253, 27);
             numQuantity.TabIndex = 8;
             numQuantity.Value = new decimal(new int[] { 1, 0, 0, 0 });
+            numQuantity.ValueChanged += numQuantity_ValueChanged;
             // 
             // label4
             // 
@@ -181,7 +174,6 @@
             // btnConfirm
             // 
             btnConfirm.BackColor = Color.ForestGreen;
-            btnConfirm.DialogResult = DialogResult.Cancel;
             btnConfirm.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnConfirm.ForeColor = Color.White;
             btnConfirm.Location = new Point(60, 653);
@@ -195,9 +187,11 @@
             btnConfirm.TabIndex = 11;
             btnConfirm.Text = "+ Confirm Order";
             btnConfirm.UseVisualStyleBackColor = false;
+            btnConfirm.Click += btnConfirm_Click;
             // 
             // btnCancel
             // 
+            btnCancel.DialogResult = DialogResult.Cancel;
             btnCancel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancel.Location = new Point(335, 653);
             btnCancel.Name = "btnCancel";
@@ -207,12 +201,23 @@
             btnCancel.TabIndex = 12;
             btnCancel.Text = "Cancel";
             // 
+            // cboSizes
+            // 
+            cboSizes.FormattingEnabled = true;
+            cboSizes.Location = new Point(325, 146);
+            cboSizes.Name = "cboSizes";
+            cboSizes.Size = new Size(246, 28);
+            cboSizes.TabIndex = 13;
+            cboSizes.SelectedIndexChanged += cboSizes_SelectedIndexChanged;
+            cboSizes.Format += cboSizes_Format;
+            // 
             // OrderEntryForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Beige;
             ClientSize = new Size(632, 730);
+            Controls.Add(cboSizes);
             Controls.Add(btnCancel);
             Controls.Add(btnConfirm);
             Controls.Add(lblLiveTotal);
@@ -221,7 +226,6 @@
             Controls.Add(label3);
             Controls.Add(chkAddOns);
             Controls.Add(label2);
-            Controls.Add(cboSizes);
             Controls.Add(label1);
             Controls.Add(pfcRoundedGradientPanel1);
             FormBorderStyle = FormBorderStyle.None;
@@ -232,7 +236,6 @@
             pfcRoundedGradientPanel1.ResumeLayout(false);
             pfcRoundedGradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)cboSizes).EndInit();
             ((System.ComponentModel.ISupportInitialize)numQuantity).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -244,7 +247,6 @@
         private Label lblProductCategory;
         private Label lblProductName;
         private Label label1;
-        private Syncfusion.Windows.Forms.Tools.ComboBoxAdv cboSizes;
         private Label label2;
         private CheckedListBox chkAddOns;
         private Label label3;
@@ -254,5 +256,6 @@
         private Controls.SfRoundedButton btnConfirm;
         private Controls.SfRoundedButton btnCancel;
         private PictureBox pictureBox1;
+        private ComboBox cboSizes;
     }
 }

@@ -8,6 +8,6 @@ namespace PFC.Domain.Models
 {
     public enum ProductSize
     {
-        Eightoz,OneHundredTwentyoz,OneHundredSixtyoz,TwoHundredTwentyoz
+        EightOz,OneHundredTwentyOz,OneHundredSixtyOz,TwoHundredTwentyOz
     }
 }
