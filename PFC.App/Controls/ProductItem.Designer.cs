@@ -29,16 +29,15 @@
         private void InitializeComponent()
         {
             pfcRoundedGradientPanel1 = new PfcRoundedGradientPanel();
-            lblName = new Label();
-            lblCategory = new Label();
             lblPrice = new Label();
+            lblCategory = new Label();
+            lblName = new Label();
             ((System.ComponentModel.ISupportInitialize)pfcRoundedGradientPanel1).BeginInit();
             pfcRoundedGradientPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // pfcRoundedGradientPanel1
             // 
-            pfcRoundedGradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.BurlyWood, Color.Beige);
             pfcRoundedGradientPanel1.BorderColor = Color.White;
             pfcRoundedGradientPanel1.BorderStyle = BorderStyle.None;
             pfcRoundedGradientPanel1.Controls.Add(lblPrice);
@@ -47,50 +46,49 @@
             pfcRoundedGradientPanel1.Dock = DockStyle.Fill;
             pfcRoundedGradientPanel1.Location = new Point(0, 0);
             pfcRoundedGradientPanel1.Name = "pfcRoundedGradientPanel1";
-            pfcRoundedGradientPanel1.Size = new Size(205, 219);
+            pfcRoundedGradientPanel1.Size = new Size(226, 265);
             pfcRoundedGradientPanel1.TabIndex = 0;
+            // 
+            // lblPrice
+            // 
+            lblPrice.AutoSize = true;
+            lblPrice.BackColor = Color.Transparent;
+            lblPrice.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblPrice.Location = new Point(13, 220);
+            lblPrice.Name = "lblPrice";
+            lblPrice.Size = new Size(59, 28);
+            lblPrice.TabIndex = 2;
+            lblPrice.Text = "Price";
+            // 
+            // lblCategory
+            // 
+            lblCategory.AutoSize = true;
+            lblCategory.BackColor = Color.Transparent;
+            lblCategory.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblCategory.Location = new Point(23, 54);
+            lblCategory.Name = "lblCategory";
+            lblCategory.Size = new Size(72, 20);
+            lblCategory.TabIndex = 1;
+            lblCategory.Text = "Category";
             // 
             // lblName
             // 
             lblName.AutoSize = true;
             lblName.BackColor = Color.Transparent;
             lblName.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblName.Location = new Point(15, 19);
+            lblName.Location = new Point(13, 20);
             lblName.Name = "lblName";
             lblName.Size = new Size(62, 25);
-            lblName.TabIndex = 1;
+            lblName.TabIndex = 0;
             lblName.Text = "Name";
-            // 
-            // lblCategory
-            // 
-            lblCategory.AutoSize = true;
-            lblCategory.BackColor = Color.Transparent;
-            lblCategory.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblCategory.Location = new Point(31, 59);
-            lblCategory.Name = "lblCategory";
-            lblCategory.Size = new Size(69, 20);
-            lblCategory.TabIndex = 2;
-            lblCategory.Text = "Category";
-            // 
-            // lblPrice
-            // 
-            lblPrice.AutoSize = true;
-            lblPrice.BackColor = Color.Transparent;
-            lblPrice.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblPrice.Location = new Point(15, 157);
-            lblPrice.Name = "lblPrice";
-            lblPrice.Size = new Size(54, 25);
-            lblPrice.TabIndex = 3;
-            lblPrice.Text = "Price";
             // 
             // ProductItem
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(pfcRoundedGradientPanel1);
-            Margin = new Padding(10);
             Name = "ProductItem";
-            Size = new Size(205, 219);
+            Size = new Size(226, 265);
             ((System.ComponentModel.ISupportInitialize)pfcRoundedGradientPanel1).EndInit();
             pfcRoundedGradientPanel1.ResumeLayout(false);
             pfcRoundedGradientPanel1.PerformLayout();
@@ -100,8 +98,8 @@
         #endregion
 
         private PfcRoundedGradientPanel pfcRoundedGradientPanel1;
-        private Label lblCategory;
         private Label lblName;
         private Label lblPrice;
+        private Label lblCategory;
     }
 }

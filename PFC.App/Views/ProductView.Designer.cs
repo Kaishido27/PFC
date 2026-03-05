@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label1 = new Label();
             panel1 = new Panel();
             panel2 = new Panel();
@@ -37,17 +38,22 @@
             label3 = new Label();
             label2 = new Label();
             panel3 = new Panel();
+            textBoxExt1 = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
             btnAddProduct = new PFC.App.Controls.SfRoundedButton();
             btnSoda = new PFC.App.Controls.SfRoundedButton();
             btnMatcha = new PFC.App.Controls.SfRoundedButton();
             btnFlavMilk = new PFC.App.Controls.SfRoundedButton();
             btnHotCoffee = new PFC.App.Controls.SfRoundedButton();
             btnIcedCoffee = new PFC.App.Controls.SfRoundedButton();
+            backStageView1 = new Syncfusion.Windows.Forms.BackStageView(components);
+            CategoryPicture = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)textBoxExt1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)CategoryPicture).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -56,9 +62,9 @@
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(57, 16);
             label1.Name = "label1";
-            label1.Size = new Size(236, 31);
+            label1.Size = new Size(109, 31);
             label1.TabIndex = 0;
-            label1.Text = "Dashboard Overview";
+            label1.Text = "Products";
             // 
             // panel1
             // 
@@ -68,7 +74,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1105, 66);
+            panel1.Size = new Size(1333, 66);
             panel1.TabIndex = 1;
             // 
             // panel2
@@ -87,6 +93,7 @@
             listBox1.Dock = DockStyle.Fill;
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(0, 67);
+            listBox1.Margin = new Padding(3, 3, 3, 0);
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(275, 641);
             listBox1.TabIndex = 2;
@@ -136,6 +143,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(textBoxExt1);
             panel3.Controls.Add(btnAddProduct);
             panel3.Controls.Add(btnSoda);
             panel3.Controls.Add(btnMatcha);
@@ -145,22 +153,39 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(275, 66);
             panel3.Name = "panel3";
-            panel3.Size = new Size(830, 102);
+            panel3.Size = new Size(1058, 102);
             panel3.TabIndex = 3;
+            // 
+            // textBoxExt1
+            // 
+            textBoxExt1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            textBoxExt1.BackColor = SystemColors.Info;
+            textBoxExt1.BeforeTouchSize = new Size(338, 27);
+            textBoxExt1.Border3DStyle = Border3DStyle.Flat;
+            textBoxExt1.Location = new Point(660, 19);
+            textBoxExt1.Name = "textBoxExt1";
+            textBoxExt1.Office2010ColorScheme = Syncfusion.Windows.Forms.Office2010Theme.Silver;
+            textBoxExt1.PlaceholderText = "Search Products";
+            textBoxExt1.Size = new Size(338, 27);
+            textBoxExt1.TabIndex = 8;
             // 
             // btnAddProduct
             // 
+            btnAddProduct.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnAddProduct.BackColor = Color.Tan;
             btnAddProduct.FlatStyle = FlatStyle.Flat;
             btnAddProduct.Font = new Font("Segoe UI Semibold", 9F);
-            btnAddProduct.Location = new Point(566, 41);
+            btnAddProduct.Location = new Point(782, 52);
             btnAddProduct.Name = "btnAddProduct";
             btnAddProduct.Size = new Size(148, 35);
+            btnAddProduct.Style.BackColor = Color.Tan;
             btnAddProduct.Style.FocusedBackColor = Color.LemonChiffon;
             btnAddProduct.Style.FocusedBorder = null;
             btnAddProduct.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
             btnAddProduct.Style.HoverForeColor = Color.Black;
             btnAddProduct.TabIndex = 7;
             btnAddProduct.Text = "Add New Product";
+            btnAddProduct.UseVisualStyleBackColor = false;
             btnAddProduct.Click += btnAddProduct_Click;
             // 
             // btnSoda
@@ -176,6 +201,7 @@
             btnSoda.Style.HoverForeColor = Color.Black;
             btnSoda.TabIndex = 6;
             btnSoda.Text = "Soda";
+            btnSoda.Click += BtnSoda_Click;
             // 
             // btnMatcha
             // 
@@ -190,6 +216,7 @@
             btnMatcha.Style.HoverForeColor = Color.Black;
             btnMatcha.TabIndex = 5;
             btnMatcha.Text = "Matcha";
+            btnMatcha.Click += BtnMatcha_Click;
             // 
             // btnFlavMilk
             // 
@@ -204,6 +231,7 @@
             btnFlavMilk.Style.HoverForeColor = Color.Black;
             btnFlavMilk.TabIndex = 4;
             btnFlavMilk.Text = "Flavored Milk";
+            btnFlavMilk.Click += BtnFlavMilk_Click;
             // 
             // btnHotCoffee
             // 
@@ -218,6 +246,7 @@
             btnHotCoffee.Style.HoverForeColor = Color.Black;
             btnHotCoffee.TabIndex = 3;
             btnHotCoffee.Text = "Hot Coffee";
+            btnHotCoffee.Click += BtnHotCoffee_Click;
             // 
             // btnIcedCoffee
             // 
@@ -232,16 +261,32 @@
             btnIcedCoffee.Style.HoverForeColor = Color.Black;
             btnIcedCoffee.TabIndex = 2;
             btnIcedCoffee.Text = "Iced Coffee";
+            btnIcedCoffee.Click += BtnIcedCoffee_Click;
+            // 
+            // backStageView1
+            // 
+            backStageView1.BackStage = null;
+            backStageView1.HostControl = null;
+            backStageView1.HostForm = null;
+            // 
+            // CategoryPicture
+            // 
+            CategoryPicture.BackColor = Color.Transparent;
+            CategoryPicture.BackgroundImageLayout = ImageLayout.Center;
+            CategoryPicture.Dock = DockStyle.Right;
+            CategoryPicture.Location = new Point(1057, 168);
+            CategoryPicture.Name = "CategoryPicture";
+            CategoryPicture.Size = new Size(276, 832);
+            CategoryPicture.TabIndex = 5;
+            CategoryPicture.TabStop = false;
             // 
             // flowLayoutPanel1
             // 
-            flowLayoutPanel1.AutoScroll = true;
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(275, 168);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Padding = new Padding(20);
-            flowLayoutPanel1.Size = new Size(830, 832);
-            flowLayoutPanel1.TabIndex = 4;
+            flowLayoutPanel1.Size = new Size(782, 832);
+            flowLayoutPanel1.TabIndex = 6;
             // 
             // ProductView
             // 
@@ -250,17 +295,21 @@
             AutoScroll = true;
             BackColor = Color.White;
             Controls.Add(flowLayoutPanel1);
+            Controls.Add(CategoryPicture);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ProductView";
-            Size = new Size(1105, 1000);
+            Size = new Size(1333, 1000);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)textBoxExt1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)CategoryPicture).EndInit();
             ResumeLayout(false);
         }
 
@@ -275,12 +324,15 @@
         private Panel panel5;
         private Label label3;
         private Label label2;
-        private FlowLayoutPanel flowLayoutPanel1;
         private Controls.SfRoundedButton btnIcedCoffee;
         private Controls.SfRoundedButton btnSoda;
         private Controls.SfRoundedButton btnMatcha;
         private Controls.SfRoundedButton btnFlavMilk;
         private Controls.SfRoundedButton btnHotCoffee;
         private Controls.SfRoundedButton btnAddProduct;
+        private Syncfusion.Windows.Forms.BackStageView backStageView1;
+        private Syncfusion.Windows.Forms.Tools.TextBoxExt textBoxExt1;
+        private PictureBox CategoryPicture;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

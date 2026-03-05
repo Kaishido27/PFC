@@ -36,39 +36,7 @@ namespace PFC.App.Views
                 // ignore if reflection fails
             }
 
-            // Wire filter buttons using named handlers and ensure a single subscription
-            try
-            {
-                btnIcedCoffee.Click -= BtnIcedCoffee_Click;
-                btnIcedCoffee.Click += BtnIcedCoffee_Click;
 
-                btnHotCoffee.Click -= BtnHotCoffee_Click;
-                btnHotCoffee.Click += BtnHotCoffee_Click;
-
-                btnFlavMilk.Click -= BtnFlavMilk_Click;
-                btnFlavMilk.Click += BtnFlavMilk_Click;
-
-                btnMatcha.Click -= BtnMatcha_Click;
-                btnMatcha.Click += BtnMatcha_Click;
-
-                btnSoda.Click -= BtnSoda_Click;
-                btnSoda.Click += BtnSoda_Click;
-            }
-            catch
-            {
-                // If buttons not found at runtime (designer mismatch) ignore; fix names in designer.
-            }
-
-            // wire add product button (ensure single subscription)
-            try
-            {
-                btnAddProduct.Click -= btnAddProduct_Click;
-                btnAddProduct.Click += btnAddProduct_Click;
-            }
-            catch
-            {
-                // ignore if not present
-            }
 
             // Load initial data (this will apply default filter)
             LoadProducts();
@@ -109,7 +77,7 @@ namespace PFC.App.Views
         {
             _currentFilter = category;
             ApplyFilterAndDisplay();
-            UpdateFilterButtonVisuals();
+
         }
 
         private void ApplyFilterAndDisplay()
@@ -125,24 +93,6 @@ namespace PFC.App.Views
             }
 
             DisplayProducts(items);
-        }
-
-        private void UpdateFilterButtonVisuals()
-        {
-            // Update visual state for the filter buttons (uses explicit designer names).
-            try
-            {
-                // Reset styles (adjust as needed)
-                btnIcedCoffee.BackColor = (_currentFilter == Category.IcedCoffee) ? System.Drawing.Color.FromArgb(221, 184, 146) : SystemColors.Control;
-                btnHotCoffee.BackColor = (_currentFilter == Category.HotCoffee) ? System.Drawing.Color.FromArgb(221, 184, 146) : SystemColors.Control;
-                btnFlavMilk.BackColor = (_currentFilter == Category.FlavoredMilk) ? System.Drawing.Color.FromArgb(221, 184, 146) : SystemColors.Control;
-                btnMatcha.BackColor = (_currentFilter == Category.Matcha) ? System.Drawing.Color.FromArgb(221, 184, 146) : SystemColors.Control;
-                btnSoda.BackColor = (_currentFilter == Category.Soda) ? System.Drawing.Color.FromArgb(221, 184, 146) : SystemColors.Control;
-            }
-            catch
-            {
-                // ignore if any button missing
-            }
         }
 
         // Accept any enumerable and handle null gracefully
@@ -202,7 +152,7 @@ namespace PFC.App.Views
             }
         }
 
-        // Placeholder — replace with your actual order dialog creation and navigation
+        // Placeholder 
         private void OpenOrderDialog(PFC.Domain.Models.Product product)
         {
             MessageBox.Show($"Open order dialog for: {product.Name ?? "Unknown"}", "Product Selected", MessageBoxButtons.OK, MessageBoxIcon.Information);
