@@ -41,9 +41,9 @@
             dgvReports = new DataGridView();
             label4 = new Label();
             panel2 = new Panel();
-            lblGrandCost = new Label();
-            lblGrandRevenue = new Label();
             lblGrandProfit = new Label();
+            lblGrandRevenue = new Label();
+            lblGrandCost = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
@@ -161,6 +161,7 @@
             // 
             // dgvReports
             // 
+            dgvReports.BackgroundColor = SystemColors.ControlLightLight;
             dgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvReports.Location = new Point(40, 281);
             dgvReports.Name = "dgvReports";
@@ -189,15 +190,15 @@
             panel2.Size = new Size(673, 54);
             panel2.TabIndex = 8;
             // 
-            // lblGrandCost
+            // lblGrandProfit
             // 
-            lblGrandCost.AutoSize = true;
-            lblGrandCost.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGrandCost.Location = new Point(52, 20);
-            lblGrandCost.Name = "lblGrandCost";
-            lblGrandCost.Size = new Size(75, 20);
-            lblGrandCost.TabIndex = 0;
-            lblGrandCost.Text = "Total Cost";
+            lblGrandProfit.AutoSize = true;
+            lblGrandProfit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandProfit.Location = new Point(457, 20);
+            lblGrandProfit.Name = "lblGrandProfit";
+            lblGrandProfit.Size = new Size(84, 20);
+            lblGrandProfit.TabIndex = 2;
+            lblGrandProfit.Text = "Total Profit";
             // 
             // lblGrandRevenue
             // 
@@ -209,15 +210,15 @@
             lblGrandRevenue.TabIndex = 1;
             lblGrandRevenue.Text = "Total Revenue";
             // 
-            // lblGrandProfit
+            // lblGrandCost
             // 
-            lblGrandProfit.AutoSize = true;
-            lblGrandProfit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGrandProfit.Location = new Point(457, 20);
-            lblGrandProfit.Name = "lblGrandProfit";
-            lblGrandProfit.Size = new Size(84, 20);
-            lblGrandProfit.TabIndex = 2;
-            lblGrandProfit.Text = "Total Profit";
+            lblGrandCost.AutoSize = true;
+            lblGrandCost.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandCost.Location = new Point(52, 20);
+            lblGrandCost.Name = "lblGrandCost";
+            lblGrandCost.Size = new Size(75, 20);
+            lblGrandCost.TabIndex = 0;
+            lblGrandCost.Text = "Total Cost";
             // 
             // ReportsView
             // 

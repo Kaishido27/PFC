@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             gradientPanel1 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            btnDeleteProduct = new PFC.App.Controls.SfRoundedButton();
             label4 = new Label();
             label3 = new Label();
             btnCancel = new PFC.App.Controls.SfRoundedButton();
@@ -52,6 +53,8 @@
             // 
             // gradientPanel1
             // 
+            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.FromArgb(227, 199, 166), Color.FromArgb(245, 230, 211));
+            gradientPanel1.Controls.Add(btnDeleteProduct);
             gradientPanel1.Controls.Add(label4);
             gradientPanel1.Controls.Add(label3);
             gradientPanel1.Controls.Add(btnCancel);
@@ -68,11 +71,24 @@
             gradientPanel1.Size = new Size(643, 473);
             gradientPanel1.TabIndex = 0;
             // 
+            // btnDeleteProduct
+            // 
+            btnDeleteProduct.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
+            btnDeleteProduct.Location = new Point(217, 421);
+            btnDeleteProduct.Name = "btnDeleteProduct";
+            btnDeleteProduct.Size = new Size(123, 35);
+            btnDeleteProduct.Style.FocusedBorder = null;
+            btnDeleteProduct.Style.HoverBackColor = Color.FromArgb(255, 128, 128);
+            btnDeleteProduct.Style.PressedBackColor = Color.FromArgb(255, 128, 128);
+            btnDeleteProduct.TabIndex = 15;
+            btnDeleteProduct.Text = "Delete Product";
+            // 
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label4.Location = new Point(356, 92);
+            label4.Location = new Point(336, 89);
             label4.Name = "label4";
             label4.Size = new Size(90, 25);
             label4.TabIndex = 14;
@@ -81,8 +97,9 @@
             // label3
             // 
             label3.AutoSize = true;
+            label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold);
-            label3.Location = new Point(52, 92);
+            label3.Location = new Point(32, 89);
             label3.Name = "label3";
             label3.Size = new Size(134, 25);
             label3.TabIndex = 13;
@@ -95,6 +112,8 @@
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(116, 35);
             btnCancel.Style.FocusedBorder = null;
+            btnCancel.Style.HoverBackColor = Color.Silver;
+            btnCancel.Style.PressedBackColor = Color.Silver;
             btnCancel.TabIndex = 12;
             btnCancel.Text = "Cancel";
             btnCancel.Click += btnCancel_Click;
@@ -106,12 +125,15 @@
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(116, 35);
             btnSave.Style.FocusedBorder = null;
+            btnSave.Style.HoverBackColor = Color.FromArgb(128, 255, 128);
+            btnSave.Style.PressedBackColor = Color.FromArgb(128, 255, 128);
             btnSave.TabIndex = 11;
             btnSave.Text = "Save Product";
             btnSave.Click += btnSave_Click;
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = SystemColors.ControlLightLight;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Sizeoption, Price, Cost, Actions });
             dataGridView1.Location = new Point(32, 207);
@@ -119,7 +141,7 @@
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.Size = new Size(578, 186);
             dataGridView1.TabIndex = 9;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.CellContentClick += DataGridView1_CellContentClick;
             // 
             // Sizeoption
             // 
@@ -156,7 +178,7 @@
             // 
             sfRoundedButtonAddSize.BackColor = Color.Snow;
             sfRoundedButtonAddSize.Font = new Font("Segoe UI Semibold", 9F);
-            sfRoundedButtonAddSize.Location = new Point(20, 165);
+            sfRoundedButtonAddSize.Location = new Point(32, 165);
             sfRoundedButtonAddSize.Name = "sfRoundedButtonAddSize";
             sfRoundedButtonAddSize.Size = new Size(120, 27);
             sfRoundedButtonAddSize.Style.BackColor = Color.Snow;
@@ -164,7 +186,7 @@
             sfRoundedButtonAddSize.TabIndex = 8;
             sfRoundedButtonAddSize.Text = "Add Size";
             sfRoundedButtonAddSize.UseVisualStyleBackColor = false;
-            sfRoundedButtonAddSize.Click += sfRoundedButtonAddSize_Click;
+            sfRoundedButtonAddSize.Click += SfRoundedButtonAddSize_Click;
             // 
             // cmbCategory
             // 
@@ -173,7 +195,7 @@
             cmbCategory.ForeColor = Color.FromArgb(68, 68, 68);
             cmbCategory.Height = 34;
             cmbCategory.Items.AddRange(new object[] { "Iced Coffee", "Hot Coffee", "Flavored Milk", "Matcha", "Soda" });
-            cmbCategory.Location = new Point(356, 119);
+            cmbCategory.Location = new Point(336, 116);
             cmbCategory.Name = "cmbCategory";
             cmbCategory.Size = new Size(249, 34);
             cmbCategory.TabIndex = 6;
@@ -182,8 +204,8 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(249, 27);
-            txtName.Location = new Point(52, 120);
+            txtName.BeforeTouchSize = new Size(100, 27);
+            txtName.Location = new Point(32, 117);
             txtName.Name = "txtName";
             txtName.PlaceholderText = "\"e.g Vanilla Latte\"";
             txtName.Size = new Size(243, 27);
@@ -219,7 +241,9 @@
             Controls.Add(gradientPanel1);
             FormBorderStyle = FormBorderStyle.None;
             Name = "EditProductForm";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "EditProductForm";
+            Load += EditProductForm_Load;
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
             gradientPanel1.ResumeLayout(false);
             gradientPanel1.PerformLayout();
@@ -246,5 +270,6 @@
         private DataGridViewTextBoxColumn Price;
         private DataGridViewTextBoxColumn Cost;
         private DataGridViewButtonColumn Actions;
+        private Controls.SfRoundedButton btnDeleteProduct;
     }
 }

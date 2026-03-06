@@ -112,6 +112,7 @@
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             Name = "ChangePasswordForm";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "Chnage Password";
             ((System.ComponentModel.ISupportInitialize)txtNewValue).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtConfirmValue).EndInit();

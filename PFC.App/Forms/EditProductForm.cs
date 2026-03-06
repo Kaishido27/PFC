@@ -1,36 +1,47 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PFC.Domain.Models;
+﻿using PFC.Domain.Models;
 using PFC.Infrastructure;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Forms;
+using Microsoft.EntityFrameworkCore; // Added for .Include()
 
 namespace PFC.App.Forms
 {
     public partial class EditProductForm : Form
     {
-        private readonly int _productId;
-        private Product _product;
-        private BindingList<ProductSizeOption> _sizeOptions = new();
+        // ==========================================
+        // FIELDS & PROPERTIES
+        // ==========================================
+        #region Fields & Properties
 
+        private readonly int _productId;
+        private BindingList<ProductSizeOption> _sizeOptions = new BindingList<ProductSizeOption>();
+
+        #endregion
+
+        // ==========================================
+        // CONSTRUCTOR
+        // ==========================================
+        #region Constructor
+
+        // Require the Product ID to know which item we are editing
         public EditProductForm(int productId)
         {
             InitializeComponent();
             _productId = productId;
-            this.Load += EditProductForm_Load;
         }
+
+        #endregion
+
+        // ==========================================
+        // SETUP METHODS
+        // ==========================================
+        #region Setup Methods
 
         private void EditProductForm_Load(object sender, EventArgs e)
         {
-            SetupGrid();
-            SetupCategoryCombo();
-            LoadProductData();
-        }
-
-        private void SetupGrid()
-        {
-            // Configure combo column and bind its values to the enum
+            // 1. Configure combo column and bind its values to the enum
             if (dataGridView1.Columns["Sizeoption"] is DataGridViewComboBoxColumn sizeCol)
             {
                 sizeCol.DataSource = Enum.GetValues(typeof(ProductSize));
@@ -48,47 +59,72 @@ namespace PFC.App.Forms
                 costCol.DataPropertyName = nameof(ProductSizeOption.Cost);
             }
 
-            // Grid Settings: Disable automatic new-row; we'll add rows explicitly via the Add Size button
+            // 2. Grid Settings
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false; // removal handled via Actions button
-            dataGridView1.DataSource = _sizeOptions;
-        }
+            dataGridView1.AllowUserToDeleteRows = false;
 
-        private void SetupCategoryCombo()
-        {
+            // 3. Bind category combobox
             cmbCategory.DataSource = Enum.GetValues(typeof(Category));
+
+            // 4. Load Existing Product Data
+            LoadProductData();
+
+            // Bind the grid to our loaded options
+            dataGridView1.DataSource = _sizeOptions;
         }
 
         private void LoadProductData()
         {
-            using var db = new AppDbContext();
-            _product = db.Products.FirstOrDefault(p => p.Id == _productId);
-
-            if (_product == null)
+            try
             {
-                MessageBox.Show("Product not found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
-                return;
+                using var db = new AppDbContext();
+                var product = db.Products
+                    .Include(p => p.SizeOptions)
+                    .FirstOrDefault(p => p.Id == _productId);
+
+                if (product == null)
+                {
+                    MessageBox.Show("Product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Close();
+                    return;
+                }
+
+                // Populate UI
+                txtName.Text = product.Name;
+                cmbCategory.SelectedItem = product.Category;
+
+                // Populate the BindingList with existing size options
+                _sizeOptions.Clear();
+                foreach (var option in product.SizeOptions)
+                {
+                    _sizeOptions.Add(new ProductSizeOption
+                    {
+                        Size = option.Size,
+                        Price = option.Price,
+                        Cost = option.Cost
+                    });
+                }
             }
-
-            txtName.Text = _product.Name;
-            cmbCategory.SelectedItem = _product.Category;
-
-            foreach (var size in _product.SizeOptions ?? Enumerable.Empty<ProductSizeOption>())
+            catch (Exception ex)
             {
-                _sizeOptions.Add(size);
+                MessageBox.Show($"Error loading product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void sfRoundedButtonAddSize_Click(object sender, EventArgs e)
+        #endregion
+
+        // ==========================================
+        // EVENT HANDLERS
+        // ==========================================
+        #region Event Handlers
+
+        // --- Grid Actions ---
+
+        private void SfRoundedButtonAddSize_Click(object? sender, EventArgs e)
         {
-            _sizeOptions.Add(new ProductSizeOption
-            {
-                Size = ProductSize.EightOz,
-                Price = 0m,
-                Cost = 0m
-            });
+            // Add an empty size option row 
+            _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.EightOz, Price = 0m, Cost = 0m });
 
             // Focus the new row in the grid for convenience
             var idx = _sizeOptions.Count - 1;
@@ -96,7 +132,7 @@ namespace PFC.App.Forms
             dataGridView1.BeginEdit(true);
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridView1_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
 
@@ -117,7 +153,9 @@ namespace PFC.App.Forms
             }
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        // --- Save & Cancel Actions ---
+
+        private void btnSave_Click(object? sender, EventArgs e)
         {
             // 1. Basic Validation
             var name = txtName.Text?.Trim();
@@ -162,53 +200,53 @@ namespace PFC.App.Forms
                 return;
             }
 
-            // Save to database
+            // 4. Update Database
             try
             {
                 using var db = new AppDbContext();
-                var existing = db.Products
+                var product = db.Products
                     .Include(p => p.SizeOptions)
                     .FirstOrDefault(p => p.Id == _productId);
 
-                if (existing != null)
+                if (product == null)
                 {
-                    // Update basic properties
-                    existing.Name = name;
-                    existing.Category = category;
-
-                    // Clear existing size options
-                    existing.SizeOptions.Clear();
-
-                    // Add updated size options
-                    foreach (var so in _sizeOptions)
-                    {
-                        existing.SizeOptions.Add(new ProductSizeOption
-                        {
-                            Size = so.Size,
-                            Price = so.Price,
-                            Cost = so.Cost,
-                            ProductId = existing.Id
-                        });
-                    }
-
-                    db.SaveChanges();
+                    MessageBox.Show("Product no longer exists in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
-                MessageBox.Show("Product updated successfully!", "Success",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                DialogResult = DialogResult.OK;
-                Close();
+                // Update scalar properties
+                product.Name = name;
+                product.Category = category;
+
+                // Safely update collection: Remove old options and insert new ones
+                db.RemoveRange(product.SizeOptions);
+                product.SizeOptions = _sizeOptions
+                    .Select(so => new ProductSizeOption
+                    {
+                        Size = so.Size,
+                        Price = so.Price,
+                        Cost = so.Cost
+                    })
+                    .ToList();
+
+                db.SaveChanges();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error updating product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            DialogResult = DialogResult.OK;
+            Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
+
+        #endregion
     }
 }

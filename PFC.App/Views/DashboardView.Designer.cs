@@ -251,6 +251,7 @@
             // dgvRecentTransactions
             // 
             dgvRecentTransactions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvRecentTransactions.BackgroundColor = SystemColors.ControlLightLight;
             dgvRecentTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvRecentTransactions.Location = new Point(22, 87);
             dgvRecentTransactions.Name = "dgvRecentTransactions";
