@@ -118,26 +118,32 @@
             // 
             // btnOnline
             // 
+            btnOnline.BackColor = Color.Silver;
             btnOnline.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnOnline.Location = new Point(141, 88);
             btnOnline.Name = "btnOnline";
             btnOnline.Size = new Size(107, 35);
+            btnOnline.Style.BackColor = Color.Silver;
             btnOnline.Style.FocusedBorder = null;
             btnOnline.Style.HoverBackColor = Color.FromArgb(128, 255, 128);
             btnOnline.TabIndex = 14;
             btnOnline.Text = "ONLINE";
+            btnOnline.UseVisualStyleBackColor = false;
             btnOnline.Click += btnOnline_Click;
             // 
             // btnCash
             // 
+            btnCash.BackColor = Color.Silver;
             btnCash.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             btnCash.Location = new Point(12, 88);
             btnCash.Name = "btnCash";
             btnCash.Size = new Size(107, 35);
+            btnCash.Style.BackColor = Color.Silver;
             btnCash.Style.FocusedBorder = null;
             btnCash.Style.HoverBackColor = Color.FromArgb(128, 255, 128);
             btnCash.TabIndex = 13;
             btnCash.Text = "CASH";
+            btnCash.UseVisualStyleBackColor = false;
             btnCash.Click += btnCash_Click;
             // 
             // btnConfirm
@@ -149,7 +155,9 @@
             btnConfirm.Name = "btnConfirm";
             btnConfirm.Size = new Size(236, 45);
             btnConfirm.Style.BackColor = Color.ForestGreen;
+            btnConfirm.Style.FocusedBackColor = Color.ForestGreen;
             btnConfirm.Style.FocusedBorder = null;
+            btnConfirm.Style.FocusedForeColor = Color.White;
             btnConfirm.Style.ForeColor = Color.White;
             btnConfirm.Style.HoverBackColor = Color.LimeGreen;
             btnConfirm.Style.PressedBackColor = Color.LimeGreen;
@@ -231,7 +239,7 @@
             // 
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtSearch.BackColor = SystemColors.Info;
-            txtSearch.BeforeTouchSize = new Size(249, 27);
+            txtSearch.BeforeTouchSize = new Size(100, 27);
             txtSearch.Border3DStyle = Border3DStyle.Flat;
             txtSearch.Location = new Point(588, 43);
             txtSearch.Name = "txtSearch";
