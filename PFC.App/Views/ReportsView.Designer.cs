@@ -44,11 +44,27 @@
             lblGrandProfit = new Label();
             lblGrandRevenue = new Label();
             lblGrandCost = new Label();
+            gradientPanel2 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            label5 = new Label();
+            gradientPanel3 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            label6 = new Label();
+            gradientPanel4 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            label7 = new Label();
+            gradientPanel5 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            label8 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReports).BeginInit();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gradientPanel2).BeginInit();
+            gradientPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gradientPanel3).BeginInit();
+            gradientPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gradientPanel4).BeginInit();
+            gradientPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gradientPanel5).BeginInit();
+            gradientPanel5.SuspendLayout();
             SuspendLayout();
             // 
             // btnExport
@@ -72,7 +88,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1105, 66);
+            panel1.Size = new Size(1345, 66);
             panel1.TabIndex = 2;
             // 
             // label1
@@ -108,6 +124,7 @@
             // gradientPanel1
             // 
             gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.Beige, Color.Bisque);
+            gradientPanel1.Border3DStyle = Border3DStyle.Flat;
             gradientPanel1.BorderColor = Color.Transparent;
             gradientPanel1.Controls.Add(btnExport);
             gradientPanel1.Controls.Add(cmbDateRange);
@@ -163,7 +180,7 @@
             // 
             dgvReports.BackgroundColor = SystemColors.ControlLightLight;
             dgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReports.Location = new Point(40, 281);
+            dgvReports.Location = new Point(35, 453);
             dgvReports.Name = "dgvReports";
             dgvReports.RowHeadersWidth = 51;
             dgvReports.Size = new Size(673, 281);
@@ -173,7 +190,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label4.Location = new Point(40, 241);
+            label4.Location = new Point(25, 413);
             label4.Name = "label4";
             label4.Size = new Size(268, 37);
             label4.TabIndex = 7;
@@ -185,7 +202,7 @@
             panel2.Controls.Add(lblGrandProfit);
             panel2.Controls.Add(lblGrandRevenue);
             panel2.Controls.Add(lblGrandCost);
-            panel2.Location = new Point(40, 559);
+            panel2.Location = new Point(35, 731);
             panel2.Name = "panel2";
             panel2.Size = new Size(673, 54);
             panel2.TabIndex = 8;
@@ -220,11 +237,100 @@
             lblGrandCost.TabIndex = 0;
             lblGrandCost.Text = "Total Cost";
             // 
+            // gradientPanel2
+            // 
+            gradientPanel2.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, SystemColors.WindowText, SystemColors.Window);
+            gradientPanel2.Border3DStyle = Border3DStyle.Flat;
+            gradientPanel2.BorderColor = Color.Transparent;
+            gradientPanel2.Controls.Add(label5);
+            gradientPanel2.Location = new Point(40, 244);
+            gradientPanel2.Name = "gradientPanel2";
+            gradientPanel2.Size = new Size(280, 100);
+            gradientPanel2.TabIndex = 9;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Location = new Point(16, 13);
+            label5.Name = "label5";
+            label5.Size = new Size(118, 23);
+            label5.TabIndex = 11;
+            label5.Text = "Total Revenue";
+            // 
+            // gradientPanel3
+            // 
+            gradientPanel3.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, SystemColors.WindowText, SystemColors.Window);
+            gradientPanel3.Border3DStyle = Border3DStyle.Flat;
+            gradientPanel3.BorderColor = Color.Transparent;
+            gradientPanel3.Controls.Add(label6);
+            gradientPanel3.Location = new Point(338, 244);
+            gradientPanel3.Name = "gradientPanel3";
+            gradientPanel3.Size = new Size(280, 100);
+            gradientPanel3.TabIndex = 10;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Location = new Point(22, 13);
+            label6.Name = "label6";
+            label6.Size = new Size(93, 23);
+            label6.TabIndex = 12;
+            label6.Text = "Total Profit";
+            // 
+            // gradientPanel4
+            // 
+            gradientPanel4.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, SystemColors.WindowText, SystemColors.Window);
+            gradientPanel4.Border3DStyle = Border3DStyle.Flat;
+            gradientPanel4.BorderColor = Color.Transparent;
+            gradientPanel4.Controls.Add(label7);
+            gradientPanel4.Location = new Point(636, 244);
+            gradientPanel4.Name = "gradientPanel4";
+            gradientPanel4.Size = new Size(280, 100);
+            gradientPanel4.TabIndex = 10;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(13, 13);
+            label7.Name = "label7";
+            label7.Size = new Size(85, 23);
+            label7.TabIndex = 13;
+            label7.Text = "Total Cost";
+            // 
+            // gradientPanel5
+            // 
+            gradientPanel5.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, SystemColors.WindowText, SystemColors.Window);
+            gradientPanel5.Border3DStyle = Border3DStyle.Flat;
+            gradientPanel5.BorderColor = Color.Transparent;
+            gradientPanel5.Controls.Add(label8);
+            gradientPanel5.Location = new Point(936, 244);
+            gradientPanel5.Name = "gradientPanel5";
+            gradientPanel5.Size = new Size(280, 100);
+            gradientPanel5.TabIndex = 10;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label8.Location = new Point(18, 13);
+            label8.Name = "label8";
+            label8.Size = new Size(145, 23);
+            label8.TabIndex = 13;
+            label8.Text = " Avg. Order Value";
+            // 
             // ReportsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = Color.White;
+            Controls.Add(gradientPanel5);
+            Controls.Add(gradientPanel4);
+            Controls.Add(gradientPanel3);
+            Controls.Add(gradientPanel2);
             Controls.Add(panel2);
             Controls.Add(label4);
             Controls.Add(dgvReports);
@@ -233,7 +339,7 @@
             Controls.Add(label2);
             Controls.Add(panel1);
             Name = "ReportsView";
-            Size = new Size(1105, 832);
+            Size = new Size(1345, 905);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
@@ -242,6 +348,18 @@
             ((System.ComponentModel.ISupportInitialize)dgvReports).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gradientPanel2).EndInit();
+            gradientPanel2.ResumeLayout(false);
+            gradientPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gradientPanel3).EndInit();
+            gradientPanel3.ResumeLayout(false);
+            gradientPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gradientPanel4).EndInit();
+            gradientPanel4.ResumeLayout(false);
+            gradientPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gradientPanel5).EndInit();
+            gradientPanel5.ResumeLayout(false);
+            gradientPanel5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -264,5 +382,13 @@
         private Label lblGrandCost;
         private Label lblGrandProfit;
         private Label lblGrandRevenue;
+        private Syncfusion.Windows.Forms.Tools.GradientPanel gradientPanel2;
+        private Syncfusion.Windows.Forms.Tools.GradientPanel gradientPanel3;
+        private Syncfusion.Windows.Forms.Tools.GradientPanel gradientPanel4;
+        private Syncfusion.Windows.Forms.Tools.GradientPanel gradientPanel5;
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
     }
 }

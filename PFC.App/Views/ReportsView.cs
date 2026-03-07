@@ -13,6 +13,16 @@ namespace PFC.App.Views
     public partial class ReportsView : UserControl
     {
         // ==========================================
+        // FIELDS
+        // ==========================================
+        #region Fields
+        private Label? lblRevenueValue;
+        private Label? lblProfitValue;
+        private Label? lblCostValue;
+        private Label? lblAvgOrderValue;
+
+        #endregion
+        // ==========================================
         // CONSTRUCTOR
         // ==========================================
         #region Constructor
@@ -20,7 +30,34 @@ namespace PFC.App.Views
         public ReportsView()
         {
             InitializeComponent();
+            InitializeSummaryCards();
             InitializeDateRange();
+        }
+
+        private void InitializeSummaryCards()
+        {
+            // Create value labels for each summary card
+            lblRevenueValue = CreateValueLabel(gradientPanel2);
+            lblProfitValue = CreateValueLabel(gradientPanel3);
+            lblCostValue = CreateValueLabel(gradientPanel4);
+            lblAvgOrderValue = CreateValueLabel(gradientPanel5);
+        }
+
+        private Label CreateValueLabel(Syncfusion.Windows.Forms.Tools.GradientPanel parentPanel)
+        {
+            var valueLabel = new Label
+            {
+                AutoSize = false,
+                Font = new Font("Segoe UI", 18F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(64, 64, 64),
+                Location = new Point(16, 45),
+                Size = new Size(250, 40),
+                Text = "₱0.00",
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            parentPanel.Controls.Add(valueLabel);
+            return valueLabel;
         }
 
         private void InitializeDateRange()
@@ -67,11 +104,15 @@ namespace PFC.App.Views
                     decimal grandCost = orders.Sum(o => o.TotalCost);
                     decimal grandRevenue = orders.Sum(o => o.TotalAmount);
                     decimal grandProfit = orders.Sum(o => o.TotalProfit);
+                    decimal avgorderValue = orders.Count > 0 ? orders.Average(o => o.TotalAmount) : 0;
 
-                    //  Update Summary Labels
+                    //  Update Summary Labels (Bottom panel)
                     lblGrandCost.Text = $"Total Cost: ₱{grandCost:N2}";
                     lblGrandRevenue.Text = $"Total Revenue: ₱{grandRevenue:N2}";
                     lblGrandProfit.Text = $"Total Profit: ₱{grandProfit:N2}";
+
+                    //Update Summary Cards (Top panel)
+                    UpdateSummaryCards(grandRevenue, grandProfit, grandCost, avgorderValue);
 
                     // 3. Project into a readable format for the Grid
                     var reportData = orders.Select(o => new
@@ -96,13 +137,28 @@ namespace PFC.App.Views
                     if (dgvReports.Columns["Revenue"] != null) dgvReports.Columns["Revenue"].Width = 120;
                     if (dgvReports.Columns["Profit"] != null) dgvReports.Columns["Profit"].Width = 120;
 
-                    
+
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading report: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+        }
+        private void UpdateSummaryCards(decimal revenue, decimal profit, decimal cost, decimal avgOrder)
+        {
+            if (lblRevenueValue != null)
+                lblRevenueValue.Text = $"₱{revenue:N2}";
+
+            if (lblProfitValue != null)
+                lblProfitValue.Text = $"₱{profit:N2}";
+
+            if (lblCostValue != null)
+                lblCostValue.Text = $"₱{cost:N2}";
+
+            if (lblAvgOrderValue != null)
+                lblAvgOrderValue.Text = $"₱{avgOrder:N2}";
         }
 
         #endregion
@@ -195,6 +251,16 @@ namespace PFC.App.Views
                 try
                 {
                     StringBuilder sb = new StringBuilder();
+
+                    // Add summary section to export
+                    sb.AppendLine("=== SUMMARY REPORT ===");
+                    sb.AppendLine($"\"Date Range\",\"{dtpStartDate.Value:MMM dd, yyyy} - {dtpEndDate.Value:MMM dd, yyyy}\"");
+                    sb.AppendLine($"\"Total Revenue\",\"{lblRevenueValue?.Text}\"");
+                    sb.AppendLine($"\"Total Profit\",\"{lblProfitValue?.Text}\"");
+                    sb.AppendLine($"\"Total Cost\",\"{lblCostValue?.Text}\"");
+                    sb.AppendLine($"\"Average Order Value\",\"{lblAvgOrderValue?.Text}\"");
+                    sb.AppendLine();
+                    sb.AppendLine("=== TRANSACTION DETAILS ===");
 
                     // Headers
                     var headers = dgvReports.Columns.Cast<DataGridViewColumn>();
