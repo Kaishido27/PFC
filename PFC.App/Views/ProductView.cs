@@ -38,6 +38,8 @@ namespace PFC.App.Views
             _searchTimer.Tick += SearchTimer_Tick;
 
             LoadProducts();
+
+            btnCash_Click(this, EventArgs.Empty);
         }
 
         private void SetupDoubleBuffering()
@@ -282,35 +284,14 @@ namespace PFC.App.Views
                 // Clear the cart for the next customer
                 _currentOrder = new Order();
                 RefreshOrderSidebar();
+
+                btnCash_Click(this, EventArgs.Empty);
+
             }
             catch (Exception ex)
             {
                 string errorMsg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
                 MessageBox.Show($"Failed to save order to database:\n\n{errorMsg}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void SelectPaymentMethod(PaymentMethod method)
-        {
-            // 1. Update the actual order data
-            _currentOrder.PaymentMethod = method;
-
-            // 2. Change the button colors to show which is active
-            if (method == PaymentMethod.Cash)
-            {
-                btnCash.Style.BackColor = Color.ForestGreen; // Active color
-                btnCash.Style.ForeColor = Color.White;
-
-                btnOnline.Style.BackColor = Color.WhiteSmoke; // Inactive color
-                btnOnline.Style.ForeColor = Color.Black;
-            }
-            else if (method == PaymentMethod.Online)// Online
-            {
-                btnOnline.Style.BackColor = Color.ForestGreen; // Active color
-                btnOnline.Style.ForeColor = Color.White;
-
-                btnCash.Style.BackColor = Color.WhiteSmoke; // Inactive color
-                btnCash.Style.ForeColor = Color.Black;
             }
         }
 
@@ -362,12 +343,48 @@ namespace PFC.App.Views
 
         private void btnCash_Click(object sender, EventArgs e)
         {
-            SelectPaymentMethod(PaymentMethod.Cash);
+
+            _currentOrder.PaymentMethod = PaymentMethod.Cash;
+
+            btnCash.Style.BackColor = Color.DarkGreen;
+            btnCash.Style.FocusedBackColor = Color.DarkGreen;
+            btnCash.Style.HoverBackColor = Color.DarkGreen;
+
+            btnCash.Style.ForeColor = Color.White;
+            btnCash.Style.FocusedForeColor = Color.White;
+            btnCash.Style.HoverForeColor = Color.White;
+
+            
+            btnOnline.Style.BackColor = Color.WhiteSmoke;
+            btnOnline.Style.FocusedBackColor = Color.WhiteSmoke;
+            btnOnline.Style.HoverBackColor = Color.WhiteSmoke;
+
+            btnOnline.Style.ForeColor = Color.Black;
+            btnOnline.Style.FocusedForeColor = Color.Black;
+            btnOnline.Style.HoverForeColor = Color.Black;
         }
 
         private void btnOnline_Click(object sender, EventArgs e)
         {
-            SelectPaymentMethod(PaymentMethod.Online);
+            _currentOrder.PaymentMethod = PaymentMethod.Online;
+
+            btnOnline.Style.BackColor = Color.DarkGreen;
+            btnOnline.Style.FocusedBackColor = Color.DarkGreen;
+            btnOnline.Style.HoverBackColor = Color.DarkGreen;
+
+            btnOnline.Style.ForeColor = Color.White;
+            btnOnline.Style.FocusedForeColor = Color.White;
+            btnOnline.Style.HoverForeColor = Color.White;
+
+            // 2. Force CASH to be WhiteSmoke in ALL states
+            btnCash.Style.BackColor = Color.WhiteSmoke;
+            btnCash.Style.FocusedBackColor = Color.WhiteSmoke;
+            btnCash.Style.HoverBackColor = Color.WhiteSmoke;
+
+            btnCash.Style.ForeColor = Color.Black;
+            btnCash.Style.FocusedForeColor = Color.Black;
+            btnCash.Style.HoverForeColor = Color.Black;
+
         }
 
         #endregion
