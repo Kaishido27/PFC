@@ -71,11 +71,12 @@
             // 
             // btnExport
             // 
+            btnExport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnExport.BackColor = Color.Linen;
             btnExport.FlatAppearance.BorderSize = 0;
             btnExport.FlatStyle = FlatStyle.Flat;
             btnExport.ForeColor = Color.Black;
-            btnExport.Location = new Point(1115, 7);
+            btnExport.Location = new Point(1133, 9);
             btnExport.Name = "btnExport";
             btnExport.Size = new Size(140, 32);
             btnExport.TabIndex = 4;
@@ -91,7 +92,6 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1363, 66);
             panel1.Size = new Size(1345, 66);
             panel1.TabIndex = 2;
             // 
@@ -138,7 +138,7 @@
             gradientPanel1.Controls.Add(dtpStartDate);
             gradientPanel1.Location = new Point(40, 164);
             gradientPanel1.Name = "gradientPanel1";
-            gradientPanel1.Size = new Size(1274, 55);
+            gradientPanel1.Size = new Size(1295, 55);
             gradientPanel1.TabIndex = 5;
             // 
             // cmbDateRange
@@ -183,11 +183,10 @@
             // 
             // dgvReports
             // 
-            dgvReports.BackgroundColor = SystemColors.ControlLightLight;
+            dgvReports.BackgroundColor = SystemColors.Control;
             dgvReports.BorderStyle = BorderStyle.None;
             dgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReports.Location = new Point(2, 26);
-            dgvReports.Location = new Point(35, 453);
+            dgvReports.Location = new Point(3, 14);
             dgvReports.Name = "dgvReports";
             dgvReports.RowHeadersWidth = 51;
             dgvReports.Size = new Size(673, 278);
@@ -210,10 +209,9 @@
             panel2.Controls.Add(lblGrandRevenue);
             panel2.Controls.Add(lblGrandCost);
             panel2.Dock = DockStyle.Bottom;
-            panel2.Location = new Point(3, 303);
-            panel2.Location = new Point(35, 731);
+            panel2.Location = new Point(3, 293);
             panel2.Name = "panel2";
-            panel2.Size = new Size(672, 54);
+            panel2.Size = new Size(672, 64);
             panel2.TabIndex = 8;
             // 
             // lblGrandProfit
@@ -250,7 +248,7 @@
             // 
             groupBox1.Controls.Add(dgvReports);
             groupBox1.Controls.Add(panel2);
-            groupBox1.Location = new Point(40, 301);
+            groupBox1.Location = new Point(35, 457);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(678, 360);
             groupBox1.TabIndex = 9;
@@ -279,6 +277,7 @@
             // 
             // gradientPanel3
             // 
+            gradientPanel3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             gradientPanel3.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, SystemColors.WindowText, SystemColors.Window);
             gradientPanel3.Border3DStyle = Border3DStyle.Flat;
             gradientPanel3.BorderColor = Color.Transparent;
@@ -300,6 +299,7 @@
             // 
             // gradientPanel4
             // 
+            gradientPanel4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             gradientPanel4.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, SystemColors.WindowText, SystemColors.Window);
             gradientPanel4.Border3DStyle = Border3DStyle.Flat;
             gradientPanel4.BorderColor = Color.Transparent;
@@ -321,6 +321,7 @@
             // 
             // gradientPanel5
             // 
+            gradientPanel5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             gradientPanel5.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, SystemColors.WindowText, SystemColors.Window);
             gradientPanel5.Border3DStyle = Border3DStyle.Flat;
             gradientPanel5.BorderColor = Color.Transparent;
@@ -345,21 +346,19 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            Controls.Add(groupBox1);
             BackColor = Color.White;
+            Controls.Add(groupBox1);
             Controls.Add(gradientPanel5);
             Controls.Add(gradientPanel4);
             Controls.Add(gradientPanel3);
             Controls.Add(gradientPanel2);
-            Controls.Add(panel2);
             Controls.Add(label4);
             Controls.Add(gradientPanel1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(panel1);
             Name = "ReportsView";
-            Size = new Size(1363, 832);
-            Size = new Size(1345, 905);
+            Size = new Size(1345, 924);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();

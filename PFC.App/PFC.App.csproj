@@ -24,6 +24,7 @@
     <PackageReference Include="Syncfusion.SfSmithChart.WinForms" Version="32.2.7" />
     <PackageReference Include="Syncfusion.Shared.Base" Version="32.2.7" />
     <PackageReference Include="Syncfusion.Tools.Windows" Version="32.2.7" />
+ 
   </ItemGroup>
 
   <ItemGroup>
