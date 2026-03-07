@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PFC.Domain.Models;
 using PFC.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -119,6 +120,7 @@ namespace PFC.App.Views
                     {
                         OrderID = o.Id,
                         Date = o.OrderDate.ToString("MMM dd, yyyy hh:mm tt"),
+                        PaymentMethod = o.PaymentMethod,
                         TotalCost = $"₱{o.TotalCost:N2}",
                         Revenue = $"₱{o.TotalAmount:N2}",
                         Profit = $"₱{o.TotalProfit:N2}"
@@ -129,13 +131,15 @@ namespace PFC.App.Views
 
                     // Clean up UI look
                     dgvReports.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    dgvReports.RowHeadersVisible = false;
 
                     // Set individual column widths
-                    if (dgvReports.Columns["OrderID"] != null) dgvReports.Columns["OrderID"].Width = 80;
-                    if (dgvReports.Columns["Date"] != null) dgvReports.Columns["Date"].Width = 180;
-                    if (dgvReports.Columns["TotalCost"] != null) dgvReports.Columns["TotalCost"].Width = 120;
-                    if (dgvReports.Columns["Revenue"] != null) dgvReports.Columns["Revenue"].Width = 120;
-                    if (dgvReports.Columns["Profit"] != null) dgvReports.Columns["Profit"].Width = 120;
+                    if (dgvReports.Columns["OrderID"] != null) dgvReports.Columns["OrderID"].Width = 75;
+                    if (dgvReports.Columns["Date"] != null) dgvReports.Columns["Date"].Width = 175;
+                    if (dgvReports.Columns["PaymentMethod"] != null) dgvReports.Columns["PaymentMethod"].Width = 140;
+                    if (dgvReports.Columns["TotalCost"] != null) dgvReports.Columns["TotalCost"].Width = 100;
+                    if (dgvReports.Columns["Revenue"] != null) dgvReports.Columns["Revenue"].Width = 100;
+                    if (dgvReports.Columns["Profit"] != null) dgvReports.Columns["Profit"].Width = 80;
 
 
                 }
