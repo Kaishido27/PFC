@@ -14,6 +14,8 @@ namespace PFC.Domain.Models
 
         public DateTime OrderDate { get; set; } = DateTime.Now;
 
+        public PaymentMethod PaymentMethod { get; set; }
+
         public decimal TotalAmount => Details.Sum(d => d.TotalLinePrice);
 
         public decimal TotalCost => Details.Sum(d => d.TotalCost);

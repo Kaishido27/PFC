@@ -44,11 +44,13 @@
             lblGrandProfit = new Label();
             lblGrandRevenue = new Label();
             lblGrandCost = new Label();
+            groupBox1 = new GroupBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReports).BeginInit();
             panel2.SuspendLayout();
+            groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // btnExport
@@ -56,11 +58,12 @@
             btnExport.BackColor = Color.Linen;
             btnExport.FlatAppearance.BorderSize = 0;
             btnExport.FlatStyle = FlatStyle.Flat;
-            btnExport.ForeColor = Color.White;
-            btnExport.Location = new Point(860, 8);
+            btnExport.ForeColor = Color.Black;
+            btnExport.Location = new Point(1115, 7);
             btnExport.Name = "btnExport";
             btnExport.Size = new Size(140, 32);
             btnExport.TabIndex = 4;
+            btnExport.Text = "Export";
             btnExport.UseVisualStyleBackColor = false;
             btnExport.Click += btnExport_Click;
             // 
@@ -72,7 +75,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1105, 66);
+            panel1.Size = new Size(1363, 66);
             panel1.TabIndex = 2;
             // 
             // label1
@@ -107,6 +110,7 @@
             // 
             // gradientPanel1
             // 
+            gradientPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.Beige, Color.Bisque);
             gradientPanel1.BorderColor = Color.Transparent;
             gradientPanel1.Controls.Add(btnExport);
@@ -116,7 +120,7 @@
             gradientPanel1.Controls.Add(dtpStartDate);
             gradientPanel1.Location = new Point(40, 164);
             gradientPanel1.Name = "gradientPanel1";
-            gradientPanel1.Size = new Size(1028, 55);
+            gradientPanel1.Size = new Size(1274, 55);
             gradientPanel1.TabIndex = 5;
             // 
             // cmbDateRange
@@ -162,11 +166,12 @@
             // dgvReports
             // 
             dgvReports.BackgroundColor = SystemColors.ControlLightLight;
+            dgvReports.BorderStyle = BorderStyle.None;
             dgvReports.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvReports.Location = new Point(40, 281);
+            dgvReports.Location = new Point(2, 26);
             dgvReports.Name = "dgvReports";
             dgvReports.RowHeadersWidth = 51;
-            dgvReports.Size = new Size(673, 281);
+            dgvReports.Size = new Size(673, 278);
             dgvReports.TabIndex = 6;
             // 
             // label4
@@ -185,9 +190,10 @@
             panel2.Controls.Add(lblGrandProfit);
             panel2.Controls.Add(lblGrandRevenue);
             panel2.Controls.Add(lblGrandCost);
-            panel2.Location = new Point(40, 559);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(3, 303);
             panel2.Name = "panel2";
-            panel2.Size = new Size(673, 54);
+            panel2.Size = new Size(672, 54);
             panel2.TabIndex = 8;
             // 
             // lblGrandProfit
@@ -220,20 +226,29 @@
             lblGrandCost.TabIndex = 0;
             lblGrandCost.Text = "Total Cost";
             // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(dgvReports);
+            groupBox1.Controls.Add(panel2);
+            groupBox1.Location = new Point(40, 301);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(678, 360);
+            groupBox1.TabIndex = 9;
+            groupBox1.TabStop = false;
+            // 
             // ReportsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            Controls.Add(panel2);
+            Controls.Add(groupBox1);
             Controls.Add(label4);
-            Controls.Add(dgvReports);
             Controls.Add(gradientPanel1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(panel1);
             Name = "ReportsView";
-            Size = new Size(1105, 832);
+            Size = new Size(1363, 832);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
@@ -242,6 +257,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvReports).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            groupBox1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -264,5 +280,6 @@
         private Label lblGrandCost;
         private Label lblGrandProfit;
         private Label lblGrandRevenue;
+        private GroupBox groupBox1;
     }
 }

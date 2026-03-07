@@ -187,7 +187,7 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(243, 24);
+            txtName.BeforeTouchSize = new Size(100, 27);
             txtName.BorderStyle = BorderStyle.None;
             txtName.CornerRadius = 7;
             txtName.Location = new Point(52, 120);

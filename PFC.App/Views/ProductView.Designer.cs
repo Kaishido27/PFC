@@ -33,6 +33,8 @@
             panel2 = new Panel();
             flwCartItems = new FlowLayoutPanel();
             btnConfirmOrder = new Panel();
+            btnOnline = new PFC.App.Controls.SfRoundedButton();
+            btnCash = new PFC.App.Controls.SfRoundedButton();
             btnConfirm = new PFC.App.Controls.SfRoundedButton();
             lblGrandTotal = new Label();
             label4 = new Label();
@@ -87,7 +89,7 @@
             panel2.Dock = DockStyle.Left;
             panel2.Location = new Point(0, 66);
             panel2.Name = "panel2";
-            panel2.Size = new Size(275, 934);
+            panel2.Size = new Size(275, 960);
             panel2.TabIndex = 2;
             // 
             // flwCartItems
@@ -96,28 +98,54 @@
             flwCartItems.Dock = DockStyle.Fill;
             flwCartItems.Location = new Point(0, 67);
             flwCartItems.Name = "flwCartItems";
-            flwCartItems.Size = new Size(273, 684);
+            flwCartItems.Size = new Size(273, 673);
             flwCartItems.TabIndex = 2;
             // 
             // btnConfirmOrder
             // 
             btnConfirmOrder.BorderStyle = BorderStyle.FixedSingle;
+            btnConfirmOrder.Controls.Add(btnOnline);
+            btnConfirmOrder.Controls.Add(btnCash);
             btnConfirmOrder.Controls.Add(btnConfirm);
             btnConfirmOrder.Controls.Add(lblGrandTotal);
             btnConfirmOrder.Controls.Add(label4);
             btnConfirmOrder.Dock = DockStyle.Bottom;
-            btnConfirmOrder.Location = new Point(0, 751);
+            btnConfirmOrder.Location = new Point(0, 740);
             btnConfirmOrder.Margin = new Padding(3, 0, 3, 3);
             btnConfirmOrder.Name = "btnConfirmOrder";
-            btnConfirmOrder.Size = new Size(273, 181);
+            btnConfirmOrder.Size = new Size(273, 218);
             btnConfirmOrder.TabIndex = 1;
+            // 
+            // btnOnline
+            // 
+            btnOnline.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnOnline.Location = new Point(141, 88);
+            btnOnline.Name = "btnOnline";
+            btnOnline.Size = new Size(107, 35);
+            btnOnline.Style.FocusedBorder = null;
+            btnOnline.Style.HoverBackColor = Color.FromArgb(128, 255, 128);
+            btnOnline.TabIndex = 14;
+            btnOnline.Text = "ONLINE";
+            btnOnline.Click += btnOnline_Click;
+            // 
+            // btnCash
+            // 
+            btnCash.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            btnCash.Location = new Point(12, 88);
+            btnCash.Name = "btnCash";
+            btnCash.Size = new Size(107, 35);
+            btnCash.Style.FocusedBorder = null;
+            btnCash.Style.HoverBackColor = Color.FromArgb(128, 255, 128);
+            btnCash.TabIndex = 13;
+            btnCash.Text = "CASH";
+            btnCash.Click += btnCash_Click;
             // 
             // btnConfirm
             // 
             btnConfirm.BackColor = Color.ForestGreen;
             btnConfirm.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnConfirm.ForeColor = Color.White;
-            btnConfirm.Location = new Point(12, 118);
+            btnConfirm.Location = new Point(12, 143);
             btnConfirm.Name = "btnConfirm";
             btnConfirm.Size = new Size(236, 45);
             btnConfirm.Style.BackColor = Color.ForestGreen;
@@ -312,7 +340,7 @@
             panel5.Dock = DockStyle.Right;
             panel5.Location = new Point(946, 168);
             panel5.Name = "panel5";
-            panel5.Size = new Size(387, 832);
+            panel5.Size = new Size(387, 858);
             panel5.TabIndex = 7;
             // 
             // flowLayoutPanel1
@@ -320,7 +348,7 @@
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(275, 168);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(671, 832);
+            flowLayoutPanel1.Size = new Size(671, 858);
             flowLayoutPanel1.TabIndex = 8;
             // 
             // ProductView
@@ -335,7 +363,7 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ProductView";
-            Size = new Size(1333, 1000);
+            Size = new Size(1333, 1026);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -372,5 +400,7 @@
         private Controls.SfRoundedButton btnConfirm;
         private Panel panel5;
         private FlowLayoutPanel flowLayoutPanel1;
+        private Controls.SfRoundedButton btnCash;
+        private Controls.SfRoundedButton btnOnline;
     }
 }
