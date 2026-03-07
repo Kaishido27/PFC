@@ -266,9 +266,9 @@
             label5.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label5.Location = new Point(33, 37);
             label5.Name = "label5";
-            label5.Size = new Size(200, 23);
+            label5.Size = new Size(186, 23);
             label5.TabIndex = 4;
-            label5.Text = "Last 5 orders processed...";
+            label5.Text = "Last orders processed...";
             // 
             // label7
             // 

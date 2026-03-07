@@ -58,7 +58,7 @@ namespace PFC.App.Views
             }
         }
 
-        
+
 
         #endregion
 
@@ -101,7 +101,7 @@ namespace PFC.App.Views
         {
             var items = _allProducts == null
              ? Enumerable.Empty<Product>()
-        :        _allProducts.AsEnumerable();
+        : _allProducts.AsEnumerable();
 
             // Safely grab what the user typed (ignore empty spaces)
             string searchText = txtSearch.Text?.Trim() ?? "";
@@ -148,10 +148,10 @@ namespace PFC.App.Views
             {
                 var item = new ProductItem();
                 item.SetProduct(prod);
-                
+
                 // Wire up the Product Click (for ordering)
                 item.ProductClicked += (s, e) => OpenOrderDialog(e.Product);
-                
+
                 // NEW: Wire up the Edit Click (for editing)
                 item.EditClicked += (s, e) => OpenEditProductDialog(e.Product);
 
@@ -290,6 +290,30 @@ namespace PFC.App.Views
             }
         }
 
+        private void SelectPaymentMethod(PaymentMethod method)
+        {
+            // 1. Update the actual order data
+            _currentOrder.PaymentMethod = method;
+
+            // 2. Change the button colors to show which is active
+            if (method == PaymentMethod.Cash)
+            {
+                btnCash.Style.BackColor = Color.ForestGreen; // Active color
+                btnCash.Style.ForeColor = Color.White;
+
+                btnOnline.Style.BackColor = Color.WhiteSmoke; // Inactive color
+                btnOnline.Style.ForeColor = Color.Black;
+            }
+            else if (method == PaymentMethod.Online)// Online
+            {
+                btnOnline.Style.BackColor = Color.ForestGreen; // Active color
+                btnOnline.Style.ForeColor = Color.White;
+
+                btnCash.Style.BackColor = Color.WhiteSmoke; // Inactive color
+                btnCash.Style.ForeColor = Color.Black;
+            }
+        }
+
         #endregion
 
         // ==========================================
@@ -336,6 +360,18 @@ namespace PFC.App.Views
             ApplyFilterAndDisplay();
         }
 
+        private void btnCash_Click(object sender, EventArgs e)
+        {
+            SelectPaymentMethod(PaymentMethod.Cash);
+        }
+
+        private void btnOnline_Click(object sender, EventArgs e)
+        {
+            SelectPaymentMethod(PaymentMethod.Online);
+        }
+
         #endregion
+
+
     }
 }

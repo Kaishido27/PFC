@@ -14,8 +14,8 @@ namespace PFC.Domain.Models
         public virtual Product? Product { get; set; }
         public ProductSize SelectedSize { get; set; }
 
-        public decimal UnitCost => Product?.SizeOptions?.FirstOrDefault(s => s.Size == SelectedSize)?.Cost ?? 0m;
-        public decimal UnitPrice => Product?.SizeOptions?.FirstOrDefault(s => s.Size == SelectedSize)?.Price ?? 0m;
+        public decimal UnitCost { get ; set; }
+        public decimal UnitPrice { get; set; }
 
         public int Quantity { get; set; }
 

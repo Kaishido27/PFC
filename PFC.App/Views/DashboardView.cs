@@ -52,17 +52,19 @@ namespace PFC.App
                     // 2. RECENT TRANSACTIONS (LAST 5 OVERALL)
                     // ==========================================
 
-                    // Grab the last 5 orders from the database
+                    // Grab the last 20 orders from the database
                     var recentOrders = db.Orders
                                          .Include(o => o.Details)
                                          .OrderByDescending(o => o.OrderDate)
-                                         .Take(5)
+                                         .Take(20)
                                          .ToList();
 
                     // Project the data into a clean, flat format for the DataGridView
                     var gridData = recentOrders.Select(o => new
                     {
+                        
                         OrderID = o.Id,
+                        Date = o.OrderDate.ToString("MM/dd/yyyy"),
                         Time = o.OrderDate.ToString("hh:mm tt"), // e.g., "02:30 PM"
                         Items = o.Details.Sum(d => d.Quantity),  // Total drinks in that specific order
                         Total = $"₱{o.TotalAmount:N2}"

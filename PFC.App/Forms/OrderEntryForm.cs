@@ -126,7 +126,9 @@ namespace PFC.App.Forms
                 ProductId = _product.Id,
                 SelectedSize = selectedOption.Size, // Extract the enum from the option class!
                 Quantity = (int)numQuantity.Value,
-                AddOns = selectedAddOns
+                AddOns = selectedAddOns,
+                UnitPrice = selectedOption.Price,
+                UnitCost = selectedOption.Cost
             };
 
             this.DialogResult = DialogResult.OK;
