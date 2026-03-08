@@ -81,8 +81,14 @@ namespace PFC.App.Views
             try
             {
                 using var db = new AppDbContext();
+
+                //Checks if the show archived checkbox is checked
+                bool viewingArchived = chkShowArchived != null && chkShowArchived.Checked;
+
+                // Fetch products, filtering by the IsArchived state
                 _allProducts = db.Products
                     .Include(p => p.SizeOptions)
+                    .Where(p=>p.IsArchived == viewingArchived)
                     .ToList();
 
                 ApplyFilterAndDisplay();
@@ -354,7 +360,7 @@ namespace PFC.App.Views
             btnCash.Style.FocusedForeColor = Color.White;
             btnCash.Style.HoverForeColor = Color.White;
 
-            
+
             btnOnline.Style.BackColor = Color.WhiteSmoke;
             btnOnline.Style.FocusedBackColor = Color.WhiteSmoke;
             btnOnline.Style.HoverBackColor = Color.WhiteSmoke;
@@ -387,7 +393,13 @@ namespace PFC.App.Views
 
         }
 
+        private void chkShowArchived_CheckStateChanged(object sender, EventArgs e)
+        {
+            LoadProducts();
+        }
+
         #endregion
+
 
 
     }

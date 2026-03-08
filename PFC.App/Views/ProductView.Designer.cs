@@ -51,12 +51,14 @@
             btnIcedCoffee = new PFC.App.Controls.SfRoundedButton();
             panel5 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
+            chkShowArchived = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             btnConfirmOrder.SuspendLayout();
             panel4.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtSearch).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)chkShowArchived).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -222,6 +224,7 @@
             // 
             // panel3
             // 
+            panel3.Controls.Add(chkShowArchived);
             panel3.Controls.Add(txtSearch);
             panel3.Controls.Add(btnAddProduct);
             panel3.Controls.Add(btnSoda);
@@ -239,7 +242,7 @@
             // 
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtSearch.BackColor = SystemColors.Info;
-            txtSearch.BeforeTouchSize = new Size(100, 27);
+            txtSearch.BeforeTouchSize = new Size(249, 27);
             txtSearch.Border3DStyle = Border3DStyle.Flat;
             txtSearch.Location = new Point(588, 43);
             txtSearch.Name = "txtSearch";
@@ -359,6 +362,20 @@
             flowLayoutPanel1.Size = new Size(671, 858);
             flowLayoutPanel1.TabIndex = 8;
             // 
+            // chkShowArchived
+            // 
+            chkShowArchived.AccessibilityEnabled = true;
+            chkShowArchived.BeforeTouchSize = new Size(188, 26);
+            chkShowArchived.ImageCheckBoxSize = new Size(16, 16);
+            chkShowArchived.Location = new Point(588, 73);
+            chkShowArchived.Name = "chkShowArchived";
+            chkShowArchived.Size = new Size(188, 26);
+            chkShowArchived.Style = Syncfusion.Windows.Forms.Tools.CheckBoxAdvStyle.Office2010;
+            chkShowArchived.TabIndex = 9;
+            chkShowArchived.Text = "Show Archived Products";
+            chkShowArchived.ThemeName = "Office2010";
+            chkShowArchived.CheckStateChanged += chkShowArchived_CheckStateChanged;
+            // 
             // ProductView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -382,6 +399,7 @@
             panel3.ResumeLayout(false);
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)txtSearch).EndInit();
+            ((System.ComponentModel.ISupportInitialize)chkShowArchived).EndInit();
             ResumeLayout(false);
         }
 
@@ -410,5 +428,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Controls.SfRoundedButton btnCash;
         private Controls.SfRoundedButton btnOnline;
+        private Syncfusion.Windows.Forms.Tools.CheckBoxAdv chkShowArchived;
     }
 }

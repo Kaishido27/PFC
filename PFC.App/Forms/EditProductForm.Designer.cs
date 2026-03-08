@@ -82,6 +82,7 @@
             btnDeleteProduct.Style.PressedBackColor = Color.FromArgb(255, 128, 128);
             btnDeleteProduct.TabIndex = 15;
             btnDeleteProduct.Text = "Delete Product";
+            btnDeleteProduct.Click += btnDeleteProduct_Click;
             // 
             // label4
             // 
@@ -204,7 +205,7 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(100, 27);
+            txtName.BeforeTouchSize = new Size(243, 27);
             txtName.Location = new Point(32, 117);
             txtName.Name = "txtName";
             txtName.PlaceholderText = "\"e.g Vanilla Latte\"";

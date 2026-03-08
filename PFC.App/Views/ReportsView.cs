@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PFC.App.Forms;
 using PFC.Domain.Models;
 using PFC.Infrastructure;
 using Syncfusion.Windows.Forms.Chart;
@@ -163,6 +164,26 @@ namespace PFC.App.Views
                     if (dgvReports.Columns["Revenue"] != null) dgvReports.Columns["Revenue"].Width = 100;
                     if (dgvReports.Columns["Profit"] != null) dgvReports.Columns["Profit"].Width = 80;
 
+                    if (dgvReports.Columns["DeleteAction"] == null)
+                    {
+                        var deleteCol = new DataGridViewButtonColumn
+                        {
+                            Name = "DeleteAction",
+                            HeaderText = "Action",
+                            Text = "Delete",
+                            UseColumnTextForButtonValue = true,
+                            Width = 80,
+                            FlatStyle = FlatStyle.Flat
+                        };
+                        deleteCol.DefaultCellStyle.ForeColor = Color.IndianRed;
+                        dgvReports.Columns.Add(deleteCol);
+                    }
+
+                    // Force the Delete button to stay at the very end of the grid
+                    if (dgvReports.Columns["DeleteAction"] != null)
+                    {
+                        dgvReports.Columns["DeleteAction"].DisplayIndex = dgvReports.Columns.Count - 1;
+                    }
 
                 }
             }
@@ -341,6 +362,69 @@ namespace PFC.App.Views
             var dateRange = $"{dtpStartDate.Value:MMM dd, yyyy} - {dtpEndDate.Value:MMM dd, yyyy}";
             label3.Text = $"Track your coffee shop's revenue, profit and growth metrics | {dateRange}";
         }
+
+        private bool IsAuthorized()
+        {
+            using (var auth = new AuthForm())
+            {
+                // Pops up your PIN pad. Returns true if they get it right.
+                return auth.ShowDialog() == DialogResult.OK;
+            }
+        }
+
+        private void dgvReports_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Ignore clicks on header rows
+            if (e.RowIndex < 0) return;
+
+            var col = dgvReports.Columns[e.ColumnIndex];
+
+            // Check if they clicked the Delete button column
+            if (col.Name == "DeleteAction")
+            {
+                // 1. SECURITY CHECK: Pop the AuthForm first!
+                if (!IsAuthorized()) return;
+
+                // 2. Grab the OrderID from the clicked row
+                int orderId = (int)dgvReports.Rows[e.RowIndex].Cells["OrderID"].Value;
+
+                // 3. Final Warning
+                var confirm = MessageBox.Show(
+                    $"Are you sure you want to permanently delete Order #{orderId}?\n\nThis will remove it from your revenue charts and cannot be undone.",
+                    "Confirm Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+
+                if (confirm == DialogResult.Yes)
+                {
+                    try
+                    {
+                        using var db = new AppDbContext();
+
+                        // Fetch the order AND its details so EF Core wipes everything clean
+                        var orderToDelete = db.Orders
+                                              .Include(o => o.Details)
+                                              .FirstOrDefault(o => o.Id == orderId);
+
+                        if (orderToDelete != null)
+                        {
+                            db.Orders.Remove(orderToDelete);
+                            db.SaveChanges();
+
+                            MessageBox.Show("Order successfully deleted.", "Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // Reload the table and charts to instantly update the dashboard totals
+                            LoadReportsTable();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Failed to delete order: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
 
         #endregion
 

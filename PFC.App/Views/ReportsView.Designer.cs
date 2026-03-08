@@ -196,8 +196,9 @@
             dgvReports.Location = new Point(3, 14);
             dgvReports.Name = "dgvReports";
             dgvReports.RowHeadersWidth = 51;
-            dgvReports.Size = new Size(673, 278);
+            dgvReports.Size = new Size(752, 278);
             dgvReports.TabIndex = 6;
+            dgvReports.CellContentClick += dgvReports_CellContentClick;
             // 
             // label4
             // 
@@ -218,7 +219,7 @@
             panel2.Dock = DockStyle.Bottom;
             panel2.Location = new Point(3, 293);
             panel2.Name = "panel2";
-            panel2.Size = new Size(672, 64);
+            panel2.Size = new Size(752, 64);
             panel2.TabIndex = 8;
             // 
             // lblGrandProfit
@@ -257,7 +258,7 @@
             groupBox1.Controls.Add(panel2);
             groupBox1.Location = new Point(35, 412);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(678, 360);
+            groupBox1.Size = new Size(758, 360);
             groupBox1.TabIndex = 9;
             groupBox1.TabStop = false;
             // 
@@ -366,6 +367,9 @@
             chartRevenueProfitTrends.ChartArea.CursorLocation = new Point(0, 0);
             chartRevenueProfitTrends.ChartArea.CursorReDraw = false;
             chartRevenueProfitTrends.ChartInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
+            // 
+            // 
+            // 
             chartRevenueProfitTrends.Legend.Location = new Point(86, 81);
             chartRevenueProfitTrends.Legend.Orientation = Syncfusion.Windows.Forms.Chart.ChartOrientation.Horizontal;
             chartRevenueProfitTrends.Legend.Position = Syncfusion.Windows.Forms.Chart.ChartDock.Top;
@@ -421,6 +425,9 @@
             chartRevenueProfitTrends.Size = new Size(1142, 475);
             chartRevenueProfitTrends.TabIndex = 12;
             chartRevenueProfitTrends.Text = "Revenue & Profit Trends";
+            // 
+            // 
+            // 
             chartRevenueProfitTrends.Title.Name = "Default";
             chartRevenueProfitTrends.Titles.Add(chartRevenueProfitTrends.Title);
             // 

@@ -16,5 +16,7 @@ namespace PFC.Domain.Models
 
         public List<ProductSizeOption> SizeOptions { get; set; } = [];
 
+        public bool IsArchived { get; set; } = false;
+
     }
 }

@@ -2,9 +2,10 @@
 using PFC.Infrastructure;
 using System;
 using System.ComponentModel;
+using System.Drawing; // Added for Colors
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore; // Added for .Include()
+using Microsoft.EntityFrameworkCore;
 
 namespace PFC.App.Forms
 {
@@ -25,7 +26,6 @@ namespace PFC.App.Forms
         // ==========================================
         #region Constructor
 
-        // Require the Product ID to know which item we are editing
         public EditProductForm(int productId)
         {
             InitializeComponent();
@@ -105,6 +105,32 @@ namespace PFC.App.Forms
                         Cost = option.Cost
                     });
                 }
+
+                // Archive/Restore Button Styling 
+                if (product.IsArchived)
+                {
+                    btnDeleteProduct.Text = "Restore Product";
+
+                    // Force Syncfusion button to stay Green
+                    btnDeleteProduct.Style.BackColor = Color.ForestGreen;
+                    btnDeleteProduct.Style.FocusedBackColor = Color.ForestGreen;
+                    btnDeleteProduct.Style.HoverBackColor = Color.ForestGreen;
+                    btnDeleteProduct.Style.ForeColor = Color.White;
+                    btnDeleteProduct.Style.FocusedForeColor = Color.White;
+                    btnDeleteProduct.Style.HoverForeColor = Color.White;
+                }
+                else
+                {
+                    btnDeleteProduct.Text = "Delete Product";
+
+                    // Force Syncfusion button to stay Red
+                    btnDeleteProduct.Style.BackColor = Color.IndianRed;
+                    btnDeleteProduct.Style.FocusedBackColor = Color.IndianRed;
+                    btnDeleteProduct.Style.HoverBackColor = Color.IndianRed;
+                    btnDeleteProduct.Style.ForeColor = Color.White;
+                    btnDeleteProduct.Style.FocusedForeColor = Color.White;
+                    btnDeleteProduct.Style.HoverForeColor = Color.White;
+                }
             }
             catch (Exception ex)
             {
@@ -123,10 +149,8 @@ namespace PFC.App.Forms
 
         private void SfRoundedButtonAddSize_Click(object? sender, EventArgs e)
         {
-            // Add an empty size option row 
             _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.EightOz, Price = 0m, Cost = 0m });
 
-            // Focus the new row in the grid for convenience
             var idx = _sizeOptions.Count - 1;
             dataGridView1.CurrentCell = dataGridView1.Rows[idx].Cells["Sizeoption"];
             dataGridView1.BeginEdit(true);
@@ -138,7 +162,6 @@ namespace PFC.App.Forms
 
             var col = dataGridView1.Columns[e.ColumnIndex];
 
-            // Handle the "Actions" delete button inside the grid
             if (string.Equals(col.Name, "Actions", StringComparison.OrdinalIgnoreCase))
             {
                 var item = dataGridView1.Rows[e.RowIndex].DataBoundItem as ProductSizeOption;
@@ -153,7 +176,7 @@ namespace PFC.App.Forms
             }
         }
 
-        // --- Save & Cancel Actions ---
+        // --- Save, Cancel, & Delete Actions ---
 
         private void btnSave_Click(object? sender, EventArgs e)
         {
@@ -245,6 +268,47 @@ namespace PFC.App.Forms
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        // --- NEW: Soft Delete / Restore Logic ---
+        private void btnDeleteProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using var db = new AppDbContext();
+                var product = db.Products.FirstOrDefault(p => p.Id == _productId);
+
+                if (product == null) return;
+
+                if (product.IsArchived) // RESTORE LOGIC
+                {
+                    var confirm = MessageBox.Show("Put this product back on the active menu?", "Restore", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        product.IsArchived = false;
+                        db.SaveChanges();
+                        MessageBox.Show("Product restored successfully!", "Restored", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
+                }
+                else // ARCHIVE LOGIC
+                {
+                    var confirm = MessageBox.Show("Remove this product from the menu? It will be safely hidden from cashiers.", "Archive", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        product.IsArchived = true;
+                        db.SaveChanges();
+                        MessageBox.Show("Product archived successfully.", "Archived", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DialogResult = DialogResult.OK;
+                        Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #endregion
