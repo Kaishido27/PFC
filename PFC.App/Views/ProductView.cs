@@ -22,6 +22,8 @@ namespace PFC.App.Views
         private Order _currentOrder = new Order();
         private System.Windows.Forms.Timer _searchTimer = new System.Windows.Forms.Timer();
 
+        private bool _isAddProductUnlocked = false;
+
         #endregion
 
         // ==========================================
@@ -318,10 +320,18 @@ namespace PFC.App.Views
         // Add Product Menu
         private void btnAddProduct_Click(object? sender, EventArgs e)
         {
-            // 1. Security Check
-            if (!IsAuthorized()) return;
+            // Only ask for authorization if it hasn't been unlocked yet
+            if (!_isAddProductUnlocked)
+            {
+                if (!IsAuthorized())
+                {
+                    return; // They failed or clicked cancel, stop here.
+                }
+                // It will now stay unlocked until the application is closed.
+                _isAddProductUnlocked = true;
+            }
 
-            // 2. If authorized, proceed with original logic
+            // 2. If authorized (or previously unlocked), proceed to the Add Form
             using (var addForm = new AddProductForm())
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
