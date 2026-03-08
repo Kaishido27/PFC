@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries1 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
+            Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo1 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
+            Syncfusion.Windows.Forms.Chart.ChartLineInfo chartLineInfo1 = new Syncfusion.Windows.Forms.Chart.ChartLineInfo();
+            Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries2 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
+            Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo2 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
             btnExport = new Button();
             panel1 = new Panel();
             label1 = new Label();
@@ -53,6 +58,8 @@
             label7 = new Label();
             gradientPanel5 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
             label8 = new Label();
+            label9 = new Label();
+            chartRevenueProfitTrends = new Syncfusion.Windows.Forms.Chart.ChartControl();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
@@ -76,7 +83,7 @@
             btnExport.FlatAppearance.BorderSize = 0;
             btnExport.FlatStyle = FlatStyle.Flat;
             btnExport.ForeColor = Color.Black;
-            btnExport.Location = new Point(1133, 9);
+            btnExport.Location = new Point(1263, 9);
             btnExport.Name = "btnExport";
             btnExport.Size = new Size(140, 32);
             btnExport.TabIndex = 4;
@@ -92,7 +99,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1345, 66);
+            panel1.Size = new Size(1475, 66);
             panel1.TabIndex = 2;
             // 
             // label1
@@ -111,9 +118,9 @@
             label2.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
             label2.Location = new Point(35, 84);
             label2.Name = "label2";
-            label2.Size = new Size(281, 37);
+            label2.Size = new Size(297, 37);
             label2.TabIndex = 3;
-            label2.Text = "Business Preformace";
+            label2.Text = "Business Performance";
             // 
             // label3
             // 
@@ -138,7 +145,7 @@
             gradientPanel1.Controls.Add(dtpStartDate);
             gradientPanel1.Location = new Point(40, 164);
             gradientPanel1.Name = "gradientPanel1";
-            gradientPanel1.Size = new Size(1295, 55);
+            gradientPanel1.Size = new Size(1425, 55);
             gradientPanel1.TabIndex = 5;
             // 
             // cmbDateRange
@@ -196,7 +203,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label4.Location = new Point(25, 413);
+            label4.Location = new Point(35, 372);
             label4.Name = "label4";
             label4.Size = new Size(268, 37);
             label4.TabIndex = 7;
@@ -248,7 +255,7 @@
             // 
             groupBox1.Controls.Add(dgvReports);
             groupBox1.Controls.Add(panel2);
-            groupBox1.Location = new Point(35, 457);
+            groupBox1.Location = new Point(35, 412);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(678, 360);
             groupBox1.TabIndex = 9;
@@ -284,7 +291,7 @@
             gradientPanel3.Controls.Add(label6);
             gradientPanel3.Location = new Point(338, 244);
             gradientPanel3.Name = "gradientPanel3";
-            gradientPanel3.Size = new Size(280, 100);
+            gradientPanel3.Size = new Size(410, 100);
             gradientPanel3.TabIndex = 10;
             // 
             // label6
@@ -304,7 +311,7 @@
             gradientPanel4.Border3DStyle = Border3DStyle.Flat;
             gradientPanel4.BorderColor = Color.Transparent;
             gradientPanel4.Controls.Add(label7);
-            gradientPanel4.Location = new Point(636, 244);
+            gradientPanel4.Location = new Point(766, 244);
             gradientPanel4.Name = "gradientPanel4";
             gradientPanel4.Size = new Size(280, 100);
             gradientPanel4.TabIndex = 10;
@@ -326,7 +333,7 @@
             gradientPanel5.Border3DStyle = Border3DStyle.Flat;
             gradientPanel5.BorderColor = Color.Transparent;
             gradientPanel5.Controls.Add(label8);
-            gradientPanel5.Location = new Point(936, 244);
+            gradientPanel5.Location = new Point(1066, 244);
             gradientPanel5.Name = "gradientPanel5";
             gradientPanel5.Size = new Size(280, 100);
             gradientPanel5.TabIndex = 10;
@@ -341,12 +348,90 @@
             label8.TabIndex = 13;
             label8.Text = " Avg. Order Value";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label9.Location = new Point(35, 797);
+            label9.Name = "label9";
+            label9.Size = new Size(244, 28);
+            label9.TabIndex = 11;
+            label9.Text = "Revenue && Profit Trends";
+            // 
+            // chartRevenueProfitTrends
+            // 
+            chartRevenueProfitTrends.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.White, Color.White);
+            chartRevenueProfitTrends.ChartArea.AutoScale = true;
+            chartRevenueProfitTrends.ChartArea.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
+            chartRevenueProfitTrends.ChartArea.CursorLocation = new Point(0, 0);
+            chartRevenueProfitTrends.ChartArea.CursorReDraw = false;
+            chartRevenueProfitTrends.ChartInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
+            chartRevenueProfitTrends.Legend.Location = new Point(86, 81);
+            chartRevenueProfitTrends.Legend.Orientation = Syncfusion.Windows.Forms.Chart.ChartOrientation.Horizontal;
+            chartRevenueProfitTrends.Legend.Position = Syncfusion.Windows.Forms.Chart.ChartDock.Top;
+            chartRevenueProfitTrends.LegendPosition = Syncfusion.Windows.Forms.Chart.ChartDock.Top;
+            chartRevenueProfitTrends.Location = new Point(35, 842);
+            chartRevenueProfitTrends.Name = "chartRevenueProfitTrends";
+            chartRevenueProfitTrends.PrimaryXAxis.GridLineType.ForeColor = Color.LightGray;
+            chartRevenueProfitTrends.PrimaryXAxis.LogLabelsDisplayMode = Syncfusion.Windows.Forms.Chart.LogLabelsDisplayMode.Default;
+            chartRevenueProfitTrends.PrimaryXAxis.Margin = true;
+            chartRevenueProfitTrends.PrimaryXAxis.Title = "Date";
+            chartRevenueProfitTrends.PrimaryXAxis.ValueType = Syncfusion.Windows.Forms.Chart.ChartValueType.Category;
+            chartRevenueProfitTrends.PrimaryYAxis.GridLineType.ForeColor = Color.LightGray;
+            chartRevenueProfitTrends.PrimaryYAxis.LogLabelsDisplayMode = Syncfusion.Windows.Forms.Chart.LogLabelsDisplayMode.Default;
+            chartRevenueProfitTrends.PrimaryYAxis.Margin = true;
+            chartRevenueProfitTrends.PrimaryYAxis.Title = "Amount (₱)";
+            chartSeries1.FancyToolTip.ResizeInsideSymbol = true;
+            chartSeries1.Name = "Revenue";
+            chartSeries1.Resolution = 0D;
+            chartSeries1.StackingGroup = "Default Group";
+            chartSeries1.Style.AltTagFormat = "";
+            chartSeries1.Style.Border.Color = Color.FromArgb(255, 183, 77);
+            chartSeries1.Style.Border.Width = 3F;
+            chartSeries1.Style.DisplayText = true;
+            chartSeries1.Style.DrawTextShape = false;
+            chartSeries1.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(120, 255, 183, 77));
+            chartLineInfo1.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
+            chartLineInfo1.Color = SystemColors.ControlText;
+            chartLineInfo1.DashPattern = null;
+            chartLineInfo1.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            chartLineInfo1.Width = 1F;
+            chartCustomShapeInfo1.Border = chartLineInfo1;
+            chartCustomShapeInfo1.Color = SystemColors.HighlightText;
+            chartCustomShapeInfo1.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
+            chartSeries1.Style.TextShape = chartCustomShapeInfo1;
+            chartSeries1.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
+            chartSeries2.FancyToolTip.ResizeInsideSymbol = true;
+            chartSeries2.Name = "Profit";
+            chartSeries2.Resolution = 0D;
+            chartSeries2.StackingGroup = "Default Group";
+            chartSeries2.Style.AltTagFormat = "";
+            chartSeries2.Style.Border.Color = Color.FromArgb(129, 199, 132);
+            chartSeries2.Style.Border.Width = 3F;
+            chartSeries2.Style.DisplayText = true;
+            chartSeries2.Style.DrawTextShape = false;
+            chartSeries2.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(120, 129, 199, 132));
+            chartCustomShapeInfo2.Border = chartLineInfo1;
+            chartCustomShapeInfo2.Color = SystemColors.HighlightText;
+            chartCustomShapeInfo2.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
+            chartSeries2.Style.TextShape = chartCustomShapeInfo2;
+            chartSeries2.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
+            chartRevenueProfitTrends.Series.Add(chartSeries1);
+            chartRevenueProfitTrends.Series.Add(chartSeries2);
+            chartRevenueProfitTrends.Size = new Size(1142, 475);
+            chartRevenueProfitTrends.TabIndex = 12;
+            chartRevenueProfitTrends.Text = "Revenue & Profit Trends";
+            chartRevenueProfitTrends.Title.Name = "Default";
+            chartRevenueProfitTrends.Titles.Add(chartRevenueProfitTrends.Title);
+            // 
             // ReportsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;
+            Controls.Add(chartRevenueProfitTrends);
+            Controls.Add(label9);
             Controls.Add(groupBox1);
             Controls.Add(gradientPanel5);
             Controls.Add(gradientPanel4);
@@ -358,7 +443,7 @@
             Controls.Add(label2);
             Controls.Add(panel1);
             Name = "ReportsView";
-            Size = new Size(1345, 924);
+            Size = new Size(1475, 1424);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
@@ -411,5 +496,7 @@
         private Label label6;
         private Label label7;
         private Label label8;
+        private Label label9;
+        private Syncfusion.Windows.Forms.Chart.ChartControl chartRevenueProfitTrends;
     }
 }

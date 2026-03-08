@@ -1,8 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PFC.Infrastructure;
+using Syncfusion.Windows.Forms.Chart;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Text;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,6 +35,7 @@ namespace PFC.App.Views
         {
             InitializeComponent();
             InitializeSummaryCards();
+            InitializeChartSettings();
             InitializeDateRange();
         }
 
@@ -60,20 +65,34 @@ namespace PFC.App.Views
             return valueLabel;
         }
 
+        private void InitializeChartSettings()
+        {
+            // Smooth rendering
+            chartRevenueProfitTrends.SmoothingMode = SmoothingMode.AntiAlias;
+            chartRevenueProfitTrends.TextRenderingHint = TextRenderingHint.AntiAlias;
+
+            // Visual enhancements
+            chartRevenueProfitTrends.ChartArea.PrimaryXAxis.Font = new Font("Segoe UI", 9F);
+            chartRevenueProfitTrends.ChartArea.PrimaryYAxis.Font = new Font("Segoe UI", 9F);
+            chartRevenueProfitTrends.Legend.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+
+            // Enable tooltips
+            chartRevenueProfitTrends.ShowToolTips = true;
+        }
+
         private void InitializeDateRange()
         {
             // Default: Last 7 days
             dtpStartDate.Value = DateTime.Today.AddDays(-7);
             dtpEndDate.Value = DateTime.Today;
 
-            cmbDateRange.SelectedIndex = 0; // "Last 7 Days
+            cmbDateRange.SelectedIndex = 0; // "Last 7 Days"
 
             // Initial load
             LoadReportsTable();
         }
 
         #endregion
-
         // ==========================================
         // DATA LOADING LOGIC
         // ==========================================
@@ -114,6 +133,9 @@ namespace PFC.App.Views
                     //Update Summary Cards (Top panel)
                     UpdateSummaryCards(grandRevenue, grandProfit, grandCost, avgorderValue);
 
+                    // Update Chart
+                    UpdateRevenueProfitChart(orders);
+
                     // 3. Project into a readable format for the Grid
                     var reportData = orders.Select(o => new
                     {
@@ -136,16 +158,14 @@ namespace PFC.App.Views
                     if (dgvReports.Columns["TotalCost"] != null) dgvReports.Columns["TotalCost"].Width = 120;
                     if (dgvReports.Columns["Revenue"] != null) dgvReports.Columns["Revenue"].Width = 120;
                     if (dgvReports.Columns["Profit"] != null) dgvReports.Columns["Profit"].Width = 120;
-
-
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error loading report: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
         private void UpdateSummaryCards(decimal revenue, decimal profit, decimal cost, decimal avgOrder)
         {
             if (lblRevenueValue != null)
@@ -159,6 +179,97 @@ namespace PFC.App.Views
 
             if (lblAvgOrderValue != null)
                 lblAvgOrderValue.Text = $"₱{avgOrder:N2}";
+        }
+
+        #endregion
+
+        // ==========================================
+        // CHART UPDATE LOGIC
+        // ==========================================
+        #region Chart Updates
+
+        private void UpdateRevenueProfitChart(List<PFC.Domain.Models.Order> orders)
+        {
+            try
+            {
+                // Check if series exist
+                if (chartRevenueProfitTrends.Series.Count < 2)
+                    return;
+
+                // Clear existing data points
+                chartRevenueProfitTrends.Series[0].Points.Clear(); // Revenue
+                chartRevenueProfitTrends.Series[1].Points.Clear(); // Profit
+
+                if (!orders.Any())
+                {
+                    // Show empty state
+                    chartRevenueProfitTrends.Text = "No data available for the selected date range";
+                    chartRevenueProfitTrends.Refresh();
+                    return;
+                }
+
+                // Clear empty state message
+                chartRevenueProfitTrends.Text = "Revenue & Profit Trends";
+
+                // Group by date and sum revenue/profit
+                var dailyData = orders
+                    .GroupBy(o => o.OrderDate.Date)
+                    .OrderBy(g => g.Key)
+                    .Select(g => new
+                    {
+                        Date = g.Key,
+                        Revenue = g.Sum(o => o.TotalAmount),
+                        Profit = g.Sum(o => o.TotalProfit)
+                    })
+                    .ToList();
+
+                // Add data points to chart
+                foreach (var day in dailyData)
+                {
+                    string dateLabel = day.Date.ToString("MMM dd");
+
+                    // Add Revenue point
+                    chartRevenueProfitTrends.Series[0].Points.Add(dateLabel, (double)day.Revenue);
+
+                    // Add Profit point
+                    chartRevenueProfitTrends.Series[1].Points.Add(dateLabel, (double)day.Profit);
+                }
+
+                // Configure display
+                chartRevenueProfitTrends.Series[0].Style.DisplayText = false;
+                chartRevenueProfitTrends.Series[1].Style.DisplayText = false;
+
+                // Enable point markers
+                chartRevenueProfitTrends.Series[0].Style.Symbol.Shape = ChartSymbolShape.Circle;
+                chartRevenueProfitTrends.Series[0].Style.Symbol.Size = new Size(8, 8);
+                chartRevenueProfitTrends.Series[0].Style.Symbol.Color = Color.FromArgb(255, 183, 77);
+
+                chartRevenueProfitTrends.Series[1].Style.Symbol.Shape = ChartSymbolShape.Circle;
+                chartRevenueProfitTrends.Series[1].Style.Symbol.Size = new Size(8, 8);
+                chartRevenueProfitTrends.Series[1].Style.Symbol.Color = Color.FromArgb(129, 199, 132);
+
+                // Auto-scale Y-axis with proper range
+                if (dailyData.Any())
+                {
+                    var maxValue = Math.Max(
+                        dailyData.Max(d => d.Revenue),
+                        dailyData.Max(d => d.Profit)
+                    );
+
+                    double maxRange = (double)(maxValue * 1.1m); // 10% padding
+                    double interval = maxRange / 10; // 10 divisions
+
+                    chartRevenueProfitTrends.PrimaryYAxis.RangeType = ChartAxisRangeType.Set;
+                    chartRevenueProfitTrends.PrimaryYAxis.Range = new MinMaxInfo(0, maxRange, interval);
+                }
+
+                // Refresh the chart
+                chartRevenueProfitTrends.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating chart: {ex.Message}", "Chart Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         #endregion
@@ -229,6 +340,7 @@ namespace PFC.App.Views
 
         // ==========================================
         // EXPORT LOGIC
+        // ==========================================
         #region Export
 
         private void btnExport_Click(object? sender, EventArgs e)

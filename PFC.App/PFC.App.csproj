@@ -20,8 +20,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Syncfusion.Chart.Windows" Version="32.2.7" />
     <PackageReference Include="Syncfusion.Core.WinForms" Version="32.2.7" />
-    <PackageReference Include="Syncfusion.SfSmithChart.WinForms" Version="32.2.7" />
     <PackageReference Include="Syncfusion.Shared.Base" Version="32.2.7" />
     <PackageReference Include="Syncfusion.Tools.Windows" Version="32.2.7" />
  
