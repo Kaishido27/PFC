@@ -30,6 +30,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PFC.Domain\PFC.Domain.csproj" />
     <ProjectReference Include="..\PFC.Infrastructure\PFC.Infrastructure.csproj" />
+    <ProjectReference Include="..\PFC.Services\PFC.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

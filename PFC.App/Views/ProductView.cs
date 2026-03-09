@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PFC.App.Controls;
+﻿using PFC.App.Controls;
 using PFC.App.Forms;
+using PFC.App.Helper;
+using PFC.App.Helpers; // <-- Make sure you include your Helpers!
 using PFC.Domain.Models;
 using PFC.Infrastructure;
+using PFC.Services;    // <-- Make sure you include your Services!
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,66 +15,33 @@ namespace PFC.App.Views
 {
     public partial class ProductView : UserControl
     {
-        // ==========================================
-        // FIELDS & PROPERTIES
-        // ==========================================
         #region Fields
-
         private List<Product> _allProducts = new List<Product>();
         private Category _currentFilter = Category.IcedCoffee;
         private Order _currentOrder = new Order();
         private System.Windows.Forms.Timer _searchTimer = new System.Windows.Forms.Timer();
-
         private bool _isAddProductUnlocked = false;
-
         #endregion
 
-        // ==========================================
-        // CONSTRUCTOR & SETUP
-        // ==========================================
         #region Constructor
-
         public ProductView()
         {
             InitializeComponent();
-            SetupDoubleBuffering();
+
+            // 1 LINE HELPER CALL! (Sets up the form to not flicker)
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+            DoubleBuffered = true;
+            UIHelper.EnableDoubleBuffering(flowLayoutPanel1);
 
             _searchTimer.Interval = 500;
             _searchTimer.Tick += SearchTimer_Tick;
 
             LoadProducts();
-
             btnCash_Click(this, EventArgs.Empty);
         }
-
-        private void SetupDoubleBuffering()
-        {
-            SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                     ControlStyles.AllPaintingInWmPaint |
-                     ControlStyles.UserPaint, true);
-            DoubleBuffered = true;
-
-            try
-            {
-                var prop = typeof(FlowLayoutPanel).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-                prop?.SetValue(flowLayoutPanel1, true, null);
-            }
-            catch
-            {
-                // Ignore if reflection fails
-            }
-        }
-
-
-
         #endregion
 
-        // ==========================================
-        // PRODUCT LOADING & DISPLAY LOGIC
-        // ==========================================
         #region Product Logic
-
-        // Re-query DB and fetch all products
         public void LoadProducts()
         {
             if (InvokeRequired)
@@ -82,22 +52,18 @@ namespace PFC.App.Views
 
             try
             {
-                using var db = new AppDbContext();
+                // Checks if the application is currently running inside the Visual Studio Designer
+                if (UIHelper.IsDesignMode()) return;
 
-                //Checks if the show archived checkbox is checked
+                var productService = new ProductService();
                 bool viewingArchived = chkShowArchived != null && chkShowArchived.Checked;
 
-                // Fetch products, filtering by the IsArchived state
-                _allProducts = db.Products
-                    .Include(p => p.SizeOptions)
-                    .Where(p=>p.IsArchived == viewingArchived)
-                    .ToList();
-
+                _allProducts = productService.GetProducts(viewingArchived);
                 ApplyFilterAndDisplay();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Failed to load products: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UIHelper.ShowError($"Failed to load products: {ex.Message}");
             }
         }
 
@@ -109,23 +75,16 @@ namespace PFC.App.Views
 
         private void ApplyFilterAndDisplay()
         {
-            var items = _allProducts == null
-             ? Enumerable.Empty<Product>()
-        : _allProducts.AsEnumerable();
-
-            // Safely grab what the user typed (ignore empty spaces)
+            var items = _allProducts == null ? Enumerable.Empty<Product>() : _allProducts.AsEnumerable();
             string searchText = txtSearch.Text?.Trim() ?? "";
 
-            // If the search box is empty (or says your placeholder text), use the Category tabs
             if (string.IsNullOrEmpty(searchText) || searchText == "Search Products")
             {
                 items = items.Where(p => p.Category == _currentFilter);
             }
             else
             {
-                // GLOBAL SEARCH
-                items = items.Where(p => p.Name != null &&
-                                         p.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase));
+                items = items.Where(p => p.Name != null && p.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase));
             }
             DisplayProducts(items);
         }
@@ -138,7 +97,6 @@ namespace PFC.App.Views
                 return;
             }
 
-            // 1. Clean up old memory (Dispose UI controls)
             var existingProductItems = flowLayoutPanel1.Controls.OfType<ProductItem>().ToList();
             foreach (var ctl in existingProductItems)
             {
@@ -148,47 +106,27 @@ namespace PFC.App.Views
 
             if (products == null) return;
 
-            // 2. Hide while building to reduce flicker, and suspend layout for performance
             flowLayoutPanel1.SuspendLayout();
             var prevVisible = flowLayoutPanel1.Visible;
             flowLayoutPanel1.Visible = false;
 
-            // 3. Draw new product cards
             foreach (var prod in products)
             {
                 var item = new ProductItem();
                 item.SetProduct(prod);
 
-                // Wire up the Product Click (for ordering)
                 item.ProductClicked += (s, e) => OpenOrderDialog(e.Product);
-
-                // NEW: Wire up the Edit Click (for editing)
                 item.EditClicked += (s, e) => OpenEditProductDialog(e.Product);
 
                 flowLayoutPanel1.Controls.Add(item);
             }
 
-            // 4. Restore UI state
             flowLayoutPanel1.ResumeLayout();
             flowLayoutPanel1.Visible = prevVisible;
         }
-
-        private bool IsAuthorized()
-        {
-            using (var auth = new AuthForm())
-            {
-                // ShowDialog pauses execution and waits for the user to finish the AuthForm
-                return auth.ShowDialog() == DialogResult.OK;
-            }
-        }
-
         #endregion
 
-        // ==========================================
-        // CART & CHECKOUT LOGIC
-        // ==========================================
         #region Cart Logic
-
         private void OpenOrderDialog(Product product)
         {
             using (var orderForm = new OrderEntryForm(product))
@@ -206,21 +144,20 @@ namespace PFC.App.Views
             }
         }
 
-        // Method to open the Edit Product dialog
         private void OpenEditProductDialog(Product product)
         {
-            if (!IsAuthorized()) return;
+            // SECURITY HELPER CALL!
+            if (!SecurityHelper.IsAuthorized()) return;
+
             using var editForm = new EditProductForm(product.Id);
             if (editForm.ShowDialog(this) == DialogResult.OK)
             {
-                // Reload products to reflect changes
                 LoadProducts();
             }
         }
 
         private void RefreshOrderSidebar()
         {
-            // 1. Properly dispose of old CartItemControls to prevent memory leaks!
             var existingCartItems = flwCartItems.Controls.OfType<CartItemControl>().ToList();
             foreach (var ctl in existingCartItems)
             {
@@ -228,16 +165,13 @@ namespace PFC.App.Views
                 ctl.Dispose();
             }
 
-            // 2. Loop through every item currently in the cart
             foreach (var item in _currentOrder.Details.ToList())
             {
                 var cartControl = new CartItemControl();
                 cartControl.SetData(item);
 
-                // Adjust width dynamically (subtracting margins prevents horizontal scrollbars)
                 cartControl.Width = flwCartItems.ClientSize.Width - (cartControl.Margin.Left + cartControl.Margin.Right);
 
-                // Wire up the Remove event
                 cartControl.RemoveClicked += (sender, e) =>
                 {
                     _currentOrder.Details.Remove(item);
@@ -247,7 +181,6 @@ namespace PFC.App.Views
                 flwCartItems.Controls.Add(cartControl);
             }
 
-            // 3. Update the Grand Total
             if (lblGrandTotal != null)
             {
                 lblGrandTotal.Text = $"Total: ₱{_currentOrder.TotalAmount:N2}";
@@ -255,10 +188,7 @@ namespace PFC.App.Views
 
             if (lblItemCount != null)
             {
-                // Sums up the 'Quantity' of every row in the cart!
                 int totalItems = _currentOrder.Details.Sum(d => d.Quantity);
-
-                // Update the text (handles plural "Items" vs singular "Item")
                 lblItemCount.Text = totalItems == 1 ? "1 Item" : $"{totalItems} Items";
             }
         }
@@ -277,7 +207,6 @@ namespace PFC.App.Views
                 {
                     _currentOrder.OrderDate = DateTime.Now;
 
-                    // EF Core Safety Trick: Unlink the Product reference so it doesn't create duplicate products
                     foreach (var detail in _currentOrder.Details)
                     {
                         detail.Product = null;
@@ -289,128 +218,67 @@ namespace PFC.App.Views
 
                 MessageBox.Show("Order successfully saved!", "Transaction Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Clear the cart for the next customer
                 _currentOrder = new Order();
                 RefreshOrderSidebar();
 
                 btnCash_Click(this, EventArgs.Empty);
-
             }
             catch (Exception ex)
             {
-                string errorMsg = ex.InnerException != null ? ex.InnerException.Message : ex.Message;
-                MessageBox.Show($"Failed to save order to database:\n\n{errorMsg}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UIHelper.ShowError($"Failed to save order to database:\n\n{ex.InnerException?.Message ?? ex.Message}");
             }
         }
-
         #endregion
 
-        // ==========================================
-        // UI EVENT HANDLERS
-        // ==========================================
         #region UI Events
-
-        // Category Filters
         private void BtnIcedCoffee_Click(object? sender, EventArgs e) => SetFilter(Category.IcedCoffee);
         private void BtnHotCoffee_Click(object? sender, EventArgs e) => SetFilter(Category.HotCoffee);
         private void BtnFlavMilk_Click(object? sender, EventArgs e) => SetFilter(Category.FlavoredMilk);
         private void BtnMatcha_Click(object? sender, EventArgs e) => SetFilter(Category.Matcha);
         private void BtnSoda_Click(object? sender, EventArgs e) => SetFilter(Category.Soda);
 
-        // Add Product Menu
         private void btnAddProduct_Click(object? sender, EventArgs e)
         {
-            // Only ask for authorization if it hasn't been unlocked yet
-            if (!_isAddProductUnlocked)
-            {
-                if (!IsAuthorized())
-                {
-                    return; // They failed or clicked cancel, stop here.
-                }
-                // It will now stay unlocked until the application is closed.
-                _isAddProductUnlocked = true;
-            }
-
-            // 2. If authorized (or previously unlocked), proceed to the Add Form
+    
             using (var addForm = new AddProductForm())
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
                 {
-                    // Refresh the product list to show the new item
                     LoadProducts();
                 }
             }
         }
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            // Every time the user types a letter, refresh the screen!
             _searchTimer.Stop();
             _searchTimer.Start();
         }
 
         private void SearchTimer_Tick(object? sender, EventArgs e)
         {
-            // 1. Stop the timer so it doesn't keep firing
             _searchTimer.Stop();
-
-            // 2. Now run the heavy filtering and drawing logic!
             ApplyFilterAndDisplay();
         }
 
         private void btnCash_Click(object sender, EventArgs e)
         {
-
             _currentOrder.PaymentMethod = PaymentMethod.Cash;
-
-            btnCash.Style.BackColor = Color.DarkGreen;
-            btnCash.Style.FocusedBackColor = Color.DarkGreen;
-            btnCash.Style.HoverBackColor = Color.DarkGreen;
-
-            btnCash.Style.ForeColor = Color.White;
-            btnCash.Style.FocusedForeColor = Color.White;
-            btnCash.Style.HoverForeColor = Color.White;
-
-
-            btnOnline.Style.BackColor = Color.WhiteSmoke;
-            btnOnline.Style.FocusedBackColor = Color.WhiteSmoke;
-            btnOnline.Style.HoverBackColor = Color.WhiteSmoke;
-
-            btnOnline.Style.ForeColor = Color.Black;
-            btnOnline.Style.FocusedForeColor = Color.Black;
-            btnOnline.Style.HoverForeColor = Color.Black;
+            // (Swaps the colors automatically)
+            UIHelper.SetPaymentButtonActive(btnCash, btnOnline);
         }
 
         private void btnOnline_Click(object sender, EventArgs e)
         {
             _currentOrder.PaymentMethod = PaymentMethod.Online;
-
-            btnOnline.Style.BackColor = Color.DarkGreen;
-            btnOnline.Style.FocusedBackColor = Color.DarkGreen;
-            btnOnline.Style.HoverBackColor = Color.DarkGreen;
-
-            btnOnline.Style.ForeColor = Color.White;
-            btnOnline.Style.FocusedForeColor = Color.White;
-            btnOnline.Style.HoverForeColor = Color.White;
-
-            // 2. Force CASH to be WhiteSmoke in ALL states
-            btnCash.Style.BackColor = Color.WhiteSmoke;
-            btnCash.Style.FocusedBackColor = Color.WhiteSmoke;
-            btnCash.Style.HoverBackColor = Color.WhiteSmoke;
-
-            btnCash.Style.ForeColor = Color.Black;
-            btnCash.Style.FocusedForeColor = Color.Black;
-            btnCash.Style.HoverForeColor = Color.Black;
-
+            // (Swaps the colors automatically)
+            UIHelper.SetPaymentButtonActive(btnOnline, btnCash);
         }
 
         private void chkShowArchived_CheckStateChanged(object sender, EventArgs e)
         {
             LoadProducts();
         }
-
         #endregion
-
-
-
     }
 }

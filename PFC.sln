@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36930.0 d17.14
+VisualStudioVersion = 17.14.36930.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFC.App", "PFC.App\PFC.App.csproj", "{2956E2B3-7209-49D5-98CD-787A922FB796}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFC.Domain", "PFC.Domain\PFC.Domain.csproj", "{860EF93E-5BA5-4B57-970C-A36EA22035AE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFC.Infrastructure", "PFC.Infrastructure\PFC.Infrastructure.csproj", "{3030448F-D25F-4D7C-BCF6-5625FFAA0AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFC.Services", "PFC.Services\PFC.Services.csproj", "{6A81B55A-176E-4AD2-BEF3-4CAA68A9C03F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{3030448F-D25F-4D7C-BCF6-5625FFAA0AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3030448F-D25F-4D7C-BCF6-5625FFAA0AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3030448F-D25F-4D7C-BCF6-5625FFAA0AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A81B55A-176E-4AD2-BEF3-4CAA68A9C03F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A81B55A-176E-4AD2-BEF3-4CAA68A9C03F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A81B55A-176E-4AD2-BEF3-4CAA68A9C03F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A81B55A-176E-4AD2-BEF3-4CAA68A9C03F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
