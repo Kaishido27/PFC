@@ -60,6 +60,9 @@
             label8 = new Label();
             label9 = new Label();
             chartRevenueProfitTrends = new Syncfusion.Windows.Forms.Chart.ChartControl();
+            dgvTopProducts = new DataGridView();
+            groupBox2 = new GroupBox();
+            label10 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
@@ -74,6 +77,8 @@
             gradientPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel5).BeginInit();
             gradientPanel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvTopProducts).BeginInit();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // btnExport
@@ -83,7 +88,7 @@
             btnExport.FlatAppearance.BorderSize = 0;
             btnExport.FlatStyle = FlatStyle.Flat;
             btnExport.ForeColor = Color.Black;
-            btnExport.Location = new Point(1263, 9);
+            btnExport.Location = new Point(1170, 9);
             btnExport.Name = "btnExport";
             btnExport.Size = new Size(140, 32);
             btnExport.TabIndex = 4;
@@ -99,7 +104,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1475, 66);
+            panel1.Size = new Size(1382, 66);
             panel1.TabIndex = 2;
             // 
             // label1
@@ -145,7 +150,7 @@
             gradientPanel1.Controls.Add(dtpStartDate);
             gradientPanel1.Location = new Point(40, 164);
             gradientPanel1.Name = "gradientPanel1";
-            gradientPanel1.Size = new Size(1425, 55);
+            gradientPanel1.Size = new Size(1332, 55);
             gradientPanel1.TabIndex = 5;
             // 
             // cmbDateRange
@@ -292,7 +297,7 @@
             gradientPanel3.Controls.Add(label6);
             gradientPanel3.Location = new Point(338, 244);
             gradientPanel3.Name = "gradientPanel3";
-            gradientPanel3.Size = new Size(410, 100);
+            gradientPanel3.Size = new Size(317, 100);
             gradientPanel3.TabIndex = 10;
             // 
             // label6
@@ -312,7 +317,7 @@
             gradientPanel4.Border3DStyle = Border3DStyle.Flat;
             gradientPanel4.BorderColor = Color.Transparent;
             gradientPanel4.Controls.Add(label7);
-            gradientPanel4.Location = new Point(766, 244);
+            gradientPanel4.Location = new Point(673, 244);
             gradientPanel4.Name = "gradientPanel4";
             gradientPanel4.Size = new Size(280, 100);
             gradientPanel4.TabIndex = 10;
@@ -334,7 +339,7 @@
             gradientPanel5.Border3DStyle = Border3DStyle.Flat;
             gradientPanel5.BorderColor = Color.Transparent;
             gradientPanel5.Controls.Add(label8);
-            gradientPanel5.Location = new Point(1066, 244);
+            gradientPanel5.Location = new Point(973, 244);
             gradientPanel5.Name = "gradientPanel5";
             gradientPanel5.Size = new Size(280, 100);
             gradientPanel5.TabIndex = 10;
@@ -352,8 +357,9 @@
             // label9
             // 
             label9.AutoSize = true;
+            label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            label9.Location = new Point(35, 797);
+            label9.Location = new Point(35, 837);
             label9.Name = "label9";
             label9.Size = new Size(244, 28);
             label9.TabIndex = 11;
@@ -374,7 +380,7 @@
             chartRevenueProfitTrends.Legend.Orientation = Syncfusion.Windows.Forms.Chart.ChartOrientation.Horizontal;
             chartRevenueProfitTrends.Legend.Position = Syncfusion.Windows.Forms.Chart.ChartDock.Top;
             chartRevenueProfitTrends.LegendPosition = Syncfusion.Windows.Forms.Chart.ChartDock.Top;
-            chartRevenueProfitTrends.Location = new Point(35, 842);
+            chartRevenueProfitTrends.Location = new Point(35, 868);
             chartRevenueProfitTrends.Name = "chartRevenueProfitTrends";
             chartRevenueProfitTrends.PrimaryXAxis.GridLineType.ForeColor = Color.LightGray;
             chartRevenueProfitTrends.PrimaryXAxis.LogLabelsDisplayMode = Syncfusion.Windows.Forms.Chart.LogLabelsDisplayMode.Default;
@@ -431,12 +437,53 @@
             chartRevenueProfitTrends.Title.Name = "Default";
             chartRevenueProfitTrends.Titles.Add(chartRevenueProfitTrends.Title);
             // 
+            // dgvTopProducts
+            // 
+            dgvTopProducts.AllowUserToAddRows = false;
+            dgvTopProducts.AllowUserToResizeRows = false;
+            dgvTopProducts.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            dgvTopProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTopProducts.BackgroundColor = SystemColors.Control;
+            dgvTopProducts.BorderStyle = BorderStyle.None;
+            dgvTopProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTopProducts.EnableHeadersVisualStyles = false;
+            dgvTopProducts.Location = new Point(3, 23);
+            dgvTopProducts.Name = "dgvTopProducts";
+            dgvTopProducts.ReadOnly = true;
+            dgvTopProducts.RowHeadersVisible = false;
+            dgvTopProducts.RowHeadersWidth = 51;
+            dgvTopProducts.Size = new Size(534, 334);
+            dgvTopProducts.TabIndex = 13;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            groupBox2.Controls.Add(dgvTopProducts);
+            groupBox2.Location = new Point(812, 412);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(540, 360);
+            groupBox2.TabIndex = 14;
+            groupBox2.TabStop = false;
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            label10.Location = new Point(812, 372);
+            label10.Name = "label10";
+            label10.Size = new Size(211, 28);
+            label10.TabIndex = 15;
+            label10.Text = "Top Selling Products ";
+            // 
             // ReportsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;
+            Controls.Add(label10);
+            Controls.Add(groupBox2);
             Controls.Add(chartRevenueProfitTrends);
             Controls.Add(label9);
             Controls.Add(groupBox1);
@@ -450,7 +497,7 @@
             Controls.Add(label2);
             Controls.Add(panel1);
             Name = "ReportsView";
-            Size = new Size(1475, 1424);
+            Size = new Size(1382, 1424);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
@@ -472,6 +519,8 @@
             ((System.ComponentModel.ISupportInitialize)gradientPanel5).EndInit();
             gradientPanel5.ResumeLayout(false);
             gradientPanel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvTopProducts).EndInit();
+            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -505,5 +554,8 @@
         private Label label8;
         private Label label9;
         private Syncfusion.Windows.Forms.Chart.ChartControl chartRevenueProfitTrends;
+        private DataGridView dgvTopProducts;
+        private GroupBox groupBox2;
+        private Label label10;
     }
 }

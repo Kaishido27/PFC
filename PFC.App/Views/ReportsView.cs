@@ -38,6 +38,7 @@ namespace PFC.App.Views
             InitializeSummaryCards();
             InitializeChartSettings();
             InitializeDateRange();
+            InitializeTopProductsGrid();
         }
 
         private void InitializeSummaryCards()
@@ -81,6 +82,67 @@ namespace PFC.App.Views
             dtpEndDate.Value = DateTime.Today;
             cmbDateRange.SelectedIndex = 0;
             LoadReportsTable();
+        }
+
+        private void InitializeTopProductsGrid()
+        {
+            // Configure the grid
+            dgvTopProducts.AutoGenerateColumns = false;
+            dgvTopProducts.AllowUserToAddRows = false;
+            dgvTopProducts.AllowUserToDeleteRows = false;
+            dgvTopProducts.ReadOnly = true;
+            dgvTopProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvTopProducts.RowHeadersVisible = false;
+            dgvTopProducts.BackgroundColor = Color.White;
+            dgvTopProducts.BorderStyle = BorderStyle.None;
+            dgvTopProducts.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 230, 250);
+            dgvTopProducts.DefaultCellStyle.SelectionForeColor = Color.Black;
+            dgvTopProducts.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            dgvTopProducts.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(245, 245, 245);
+            dgvTopProducts.EnableHeadersVisualStyles = false;
+
+            // Clear any existing columns first
+            dgvTopProducts.Columns.Clear();
+
+            // Define columns manually
+            dgvTopProducts.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Product",
+                HeaderText = "Product",
+                DataPropertyName = "Product",
+                Width = 200,
+                DefaultCellStyle = new DataGridViewCellStyle { Padding = new Padding(10, 5, 5, 5) }
+            });
+
+            dgvTopProducts.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "Category",
+                HeaderText = "Category",
+                DataPropertyName = "Category",
+                Width = 120,
+                DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
+            });
+
+            dgvTopProducts.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "UnitsSold",
+                HeaderText = "Units Sold",
+                DataPropertyName = "UnitsSold",
+                Width = 100,
+                DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleCenter }
+            });
+
+            dgvTopProducts.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                Name = "TotalRevenue",
+                HeaderText = "Total Revenue",
+                DataPropertyName = "TotalRevenue",
+                Width = 150,
+                DefaultCellStyle = new DataGridViewCellStyle { Alignment = DataGridViewContentAlignment.MiddleRight }
+            });
+
+            // Add row styling event
+            dgvTopProducts.CellFormatting += DgvTopProducts_CellFormatting;
         }
         #endregion
 
@@ -156,10 +218,49 @@ namespace PFC.App.Views
                 {
                     dgvReports.Columns["DeleteAction"].DisplayIndex = dgvReports.Columns.Count - 1;
                 }
+
+                // Load top selling products data
+                LoadTopSellingProducts(orders);
             }
             catch (Exception ex)
             {
                 UIHelper.ShowError($"Error loading report: {ex.Message}");
+            }
+        }
+
+        private void LoadTopSellingProducts(List<Order> orders)
+        {
+            try
+            {
+                // Flatten all order details from the orders
+                var productStats = orders
+                    .SelectMany(o => o.Details)
+                    .Where(d => d.Product != null)
+                    .GroupBy(d => new
+                    {
+                        ProductId = d.ProductId,
+                        ProductName = d.Product!.Name,
+                        Category = d.Product.Category.ToString()
+                    })
+                    .Select(g => new
+                    {
+                        Product = g.Key.ProductName,
+                        Category = g.Key.Category,
+                        UnitsSold = g.Sum(d => d.Quantity),
+                        TotalRevenue = $"₱{g.Sum(d => d.TotalLinePrice):N2}"
+                    })
+                    .OrderByDescending(p => p.UnitsSold)
+                    .Take(10) // Top 10 products
+                    .ToList();
+
+                dgvTopProducts.DataSource = productStats;
+
+                // Refresh to apply formatting
+                dgvTopProducts.Refresh();
+            }
+            catch (Exception ex)
+            {
+                UIHelper.ShowError($"Error loading top products: {ex.Message}");
             }
         }
 
@@ -242,6 +343,37 @@ namespace PFC.App.Views
             catch (Exception ex)
             {
                 UIHelper.ShowError($"Error updating chart: {ex.Message}");
+            }
+        }
+        #endregion
+
+        // ==========================================
+        // GRID FORMATTING
+        // ==========================================
+        #region Grid Formatting
+        private void DgvTopProducts_CellFormatting(object? sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvTopProducts.Columns[e.ColumnIndex].Name == "Category" && e.Value != null)
+            {
+                // Add styled category badges with colors matching your ProductView categories
+                var category = e.Value.ToString();
+                e.CellStyle.Font = new Font("Segoe UI", 8F);
+                e.CellStyle.BackColor = category switch
+                {
+                    "IcedCoffee" => Color.FromArgb(227, 242, 253),      // Light Blue
+                    "HotCoffee" => Color.FromArgb(255, 243, 224),       // Light Orange
+                    "FlavoredMilk" => Color.FromArgb(255, 235, 238),    // Light Pink
+                    "Matcha" => Color.FromArgb(232, 245, 233),          // Light Green
+                    "Soda" => Color.FromArgb(255, 249, 196),            // Light Yellow
+                    _ => Color.FromArgb(245, 245, 245)
+                };
+            }
+
+            // Highlight the #1 top product row with a gold background
+            if (e.RowIndex == 0)
+            {
+                e.CellStyle.BackColor = Color.FromArgb(255, 249, 196); // Gold
+                e.CellStyle.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             }
         }
         #endregion
@@ -383,6 +515,22 @@ namespace PFC.App.Views
                         }
                     }
 
+                    // Add Top Selling Products section
+                    sb.AppendLine();
+                    sb.AppendLine("=== TOP SELLING PRODUCTS ===");
+
+                    var topHeaders = dgvTopProducts.Columns.Cast<DataGridViewColumn>();
+                    sb.AppendLine(string.Join(",", topHeaders.Select(c => $"\"{c.HeaderText}\"")));
+
+                    foreach (DataGridViewRow row in dgvTopProducts.Rows)
+                    {
+                        if (!row.IsNewRow)
+                        {
+                            var cells = row.Cells.Cast<DataGridViewCell>();
+                            sb.AppendLine(string.Join(",", cells.Select(c => $"\"{c.FormattedValue?.ToString()}\"")));
+                        }
+                    }
+
                     File.WriteAllText(saveDialog.FileName, sb.ToString(), Encoding.UTF8);
                     MessageBox.Show("Export Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -392,6 +540,7 @@ namespace PFC.App.Views
                 }
             }
         }
+
         #endregion
     }
 }
