@@ -43,6 +43,7 @@
             label2 = new Label();
             panel3 = new Panel();
             txtSearch = new Syncfusion.Windows.Forms.Tools.TextBoxExt();
+            chkShowArchived = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
             btnAddProduct = new PFC.App.Controls.SfRoundedButton();
             btnSoda = new PFC.App.Controls.SfRoundedButton();
             btnMatcha = new PFC.App.Controls.SfRoundedButton();
@@ -51,7 +52,6 @@
             btnIcedCoffee = new PFC.App.Controls.SfRoundedButton();
             panel5 = new Panel();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            chkShowArchived = new Syncfusion.Windows.Forms.Tools.CheckBoxAdv();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             btnConfirmOrder.SuspendLayout();
@@ -73,7 +73,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Beige;
+            panel1.BackColor = Color.DeepSkyBlue;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -224,8 +224,8 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(chkShowArchived);
             panel3.Controls.Add(txtSearch);
+            panel3.Controls.Add(chkShowArchived);
             panel3.Controls.Add(btnAddProduct);
             panel3.Controls.Add(btnSoda);
             panel3.Controls.Add(btnMatcha);
@@ -241,10 +241,10 @@
             // txtSearch
             // 
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            txtSearch.BackColor = SystemColors.Info;
+            txtSearch.BackColor = Color.AliceBlue;
             txtSearch.BeforeTouchSize = new Size(249, 27);
             txtSearch.Border3DStyle = Border3DStyle.Flat;
-            txtSearch.Location = new Point(588, 43);
+            txtSearch.Location = new Point(588, 40);
             txtSearch.Name = "txtSearch";
             txtSearch.Office2010ColorScheme = Syncfusion.Windows.Forms.Office2010Theme.Silver;
             txtSearch.PlaceholderText = "Search Products";
@@ -252,16 +252,30 @@
             txtSearch.TabIndex = 8;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
+            // chkShowArchived
+            // 
+            chkShowArchived.AccessibilityEnabled = true;
+            chkShowArchived.BeforeTouchSize = new Size(188, 26);
+            chkShowArchived.ImageCheckBoxSize = new Size(16, 16);
+            chkShowArchived.Location = new Point(588, 73);
+            chkShowArchived.Name = "chkShowArchived";
+            chkShowArchived.Size = new Size(188, 26);
+            chkShowArchived.Style = Syncfusion.Windows.Forms.Tools.CheckBoxAdvStyle.Office2010;
+            chkShowArchived.TabIndex = 9;
+            chkShowArchived.Text = "Show Archived Products";
+            chkShowArchived.ThemeName = "Office2010";
+            chkShowArchived.CheckStateChanged += chkShowArchived_CheckStateChanged;
+            // 
             // btnAddProduct
             // 
             btnAddProduct.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAddProduct.BackColor = Color.Tan;
+            btnAddProduct.BackColor = Color.Aqua;
             btnAddProduct.FlatStyle = FlatStyle.Flat;
-            btnAddProduct.Font = new Font("Segoe UI Semibold", 9F);
+            btnAddProduct.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddProduct.Location = new Point(859, 27);
             btnAddProduct.Name = "btnAddProduct";
             btnAddProduct.Size = new Size(148, 51);
-            btnAddProduct.Style.BackColor = Color.Tan;
+            btnAddProduct.Style.BackColor = Color.Aqua;
             btnAddProduct.Style.FocusedBackColor = Color.LemonChiffon;
             btnAddProduct.Style.FocusedBorder = null;
             btnAddProduct.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
@@ -361,20 +375,6 @@
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(671, 858);
             flowLayoutPanel1.TabIndex = 8;
-            // 
-            // chkShowArchived
-            // 
-            chkShowArchived.AccessibilityEnabled = true;
-            chkShowArchived.BeforeTouchSize = new Size(188, 26);
-            chkShowArchived.ImageCheckBoxSize = new Size(16, 16);
-            chkShowArchived.Location = new Point(588, 73);
-            chkShowArchived.Name = "chkShowArchived";
-            chkShowArchived.Size = new Size(188, 26);
-            chkShowArchived.Style = Syncfusion.Windows.Forms.Tools.CheckBoxAdvStyle.Office2010;
-            chkShowArchived.TabIndex = 9;
-            chkShowArchived.Text = "Show Archived Products";
-            chkShowArchived.ThemeName = "Office2010";
-            chkShowArchived.CheckStateChanged += chkShowArchived_CheckStateChanged;
             // 
             // ProductView
             // 

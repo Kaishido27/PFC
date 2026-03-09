@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries1 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
-            Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo1 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
-            Syncfusion.Windows.Forms.Chart.ChartLineInfo chartLineInfo1 = new Syncfusion.Windows.Forms.Chart.ChartLineInfo();
-            Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries2 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
-            Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo2 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
+            Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries3 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
+            Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo3 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
+            Syncfusion.Windows.Forms.Chart.ChartLineInfo chartLineInfo2 = new Syncfusion.Windows.Forms.Chart.ChartLineInfo();
+            Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries4 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
+            Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo4 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
             btnExport = new Button();
             panel1 = new Panel();
             label1 = new Label();
@@ -60,9 +60,8 @@
             label8 = new Label();
             label9 = new Label();
             chartRevenueProfitTrends = new Syncfusion.Windows.Forms.Chart.ChartControl();
-            dgvTopProducts = new DataGridView();
-            groupBox2 = new GroupBox();
             label10 = new Label();
+            dgvTopProducts = new DataGridView();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
@@ -78,13 +77,12 @@
             ((System.ComponentModel.ISupportInitialize)gradientPanel5).BeginInit();
             gradientPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTopProducts).BeginInit();
-            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // btnExport
             // 
             btnExport.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnExport.BackColor = Color.Linen;
+            btnExport.BackColor = Color.PaleTurquoise;
             btnExport.FlatAppearance.BorderSize = 0;
             btnExport.FlatStyle = FlatStyle.Flat;
             btnExport.ForeColor = Color.Black;
@@ -98,7 +96,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Beige;
+            panel1.BackColor = Color.DeepSkyBlue;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -140,7 +138,7 @@
             // gradientPanel1
             // 
             gradientPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.Beige, Color.Bisque);
+            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, Color.MidnightBlue, Color.LightSkyBlue);
             gradientPanel1.Border3DStyle = Border3DStyle.Flat;
             gradientPanel1.BorderColor = Color.Transparent;
             gradientPanel1.Controls.Add(btnExport);
@@ -391,43 +389,43 @@
             chartRevenueProfitTrends.PrimaryYAxis.LogLabelsDisplayMode = Syncfusion.Windows.Forms.Chart.LogLabelsDisplayMode.Default;
             chartRevenueProfitTrends.PrimaryYAxis.Margin = true;
             chartRevenueProfitTrends.PrimaryYAxis.Title = "Amount (₱)";
-            chartSeries1.FancyToolTip.ResizeInsideSymbol = true;
-            chartSeries1.Name = "Revenue";
-            chartSeries1.Resolution = 0D;
-            chartSeries1.StackingGroup = "Default Group";
-            chartSeries1.Style.AltTagFormat = "";
-            chartSeries1.Style.Border.Color = Color.FromArgb(255, 183, 77);
-            chartSeries1.Style.Border.Width = 3F;
-            chartSeries1.Style.DisplayText = true;
-            chartSeries1.Style.DrawTextShape = false;
-            chartSeries1.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(120, 255, 183, 77));
-            chartLineInfo1.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
-            chartLineInfo1.Color = SystemColors.ControlText;
-            chartLineInfo1.DashPattern = null;
-            chartLineInfo1.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
-            chartLineInfo1.Width = 1F;
-            chartCustomShapeInfo1.Border = chartLineInfo1;
-            chartCustomShapeInfo1.Color = SystemColors.HighlightText;
-            chartCustomShapeInfo1.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
-            chartSeries1.Style.TextShape = chartCustomShapeInfo1;
-            chartSeries1.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
-            chartSeries2.FancyToolTip.ResizeInsideSymbol = true;
-            chartSeries2.Name = "Profit";
-            chartSeries2.Resolution = 0D;
-            chartSeries2.StackingGroup = "Default Group";
-            chartSeries2.Style.AltTagFormat = "";
-            chartSeries2.Style.Border.Color = Color.FromArgb(129, 199, 132);
-            chartSeries2.Style.Border.Width = 3F;
-            chartSeries2.Style.DisplayText = true;
-            chartSeries2.Style.DrawTextShape = false;
-            chartSeries2.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(120, 129, 199, 132));
-            chartCustomShapeInfo2.Border = chartLineInfo1;
-            chartCustomShapeInfo2.Color = SystemColors.HighlightText;
-            chartCustomShapeInfo2.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
-            chartSeries2.Style.TextShape = chartCustomShapeInfo2;
-            chartSeries2.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
-            chartRevenueProfitTrends.Series.Add(chartSeries1);
-            chartRevenueProfitTrends.Series.Add(chartSeries2);
+            chartSeries3.FancyToolTip.ResizeInsideSymbol = true;
+            chartSeries3.Name = "Revenue";
+            chartSeries3.Resolution = 0D;
+            chartSeries3.StackingGroup = "Default Group";
+            chartSeries3.Style.AltTagFormat = "";
+            chartSeries3.Style.Border.Color = Color.FromArgb(255, 183, 77);
+            chartSeries3.Style.Border.Width = 3F;
+            chartSeries3.Style.DisplayText = true;
+            chartSeries3.Style.DrawTextShape = false;
+            chartSeries3.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(120, 255, 183, 77));
+            chartLineInfo2.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
+            chartLineInfo2.Color = SystemColors.ControlText;
+            chartLineInfo2.DashPattern = null;
+            chartLineInfo2.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+            chartLineInfo2.Width = 1F;
+            chartCustomShapeInfo3.Border = chartLineInfo2;
+            chartCustomShapeInfo3.Color = SystemColors.HighlightText;
+            chartCustomShapeInfo3.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
+            chartSeries3.Style.TextShape = chartCustomShapeInfo3;
+            chartSeries3.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
+            chartSeries4.FancyToolTip.ResizeInsideSymbol = true;
+            chartSeries4.Name = "Profit";
+            chartSeries4.Resolution = 0D;
+            chartSeries4.StackingGroup = "Default Group";
+            chartSeries4.Style.AltTagFormat = "";
+            chartSeries4.Style.Border.Color = Color.FromArgb(129, 199, 132);
+            chartSeries4.Style.Border.Width = 3F;
+            chartSeries4.Style.DisplayText = true;
+            chartSeries4.Style.DrawTextShape = false;
+            chartSeries4.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(120, 129, 199, 132));
+            chartCustomShapeInfo4.Border = chartLineInfo2;
+            chartCustomShapeInfo4.Color = SystemColors.HighlightText;
+            chartCustomShapeInfo4.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
+            chartSeries4.Style.TextShape = chartCustomShapeInfo4;
+            chartSeries4.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
+            chartRevenueProfitTrends.Series.Add(chartSeries3);
+            chartRevenueProfitTrends.Series.Add(chartSeries4);
             chartRevenueProfitTrends.Size = new Size(1142, 475);
             chartRevenueProfitTrends.TabIndex = 12;
             chartRevenueProfitTrends.Text = "Revenue & Profit Trends";
@@ -436,34 +434,6 @@
             // 
             chartRevenueProfitTrends.Title.Name = "Default";
             chartRevenueProfitTrends.Titles.Add(chartRevenueProfitTrends.Title);
-            // 
-            // dgvTopProducts
-            // 
-            dgvTopProducts.AllowUserToAddRows = false;
-            dgvTopProducts.AllowUserToResizeRows = false;
-            dgvTopProducts.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            dgvTopProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvTopProducts.BackgroundColor = SystemColors.Control;
-            dgvTopProducts.BorderStyle = BorderStyle.None;
-            dgvTopProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTopProducts.EnableHeadersVisualStyles = false;
-            dgvTopProducts.Location = new Point(3, 23);
-            dgvTopProducts.Name = "dgvTopProducts";
-            dgvTopProducts.ReadOnly = true;
-            dgvTopProducts.RowHeadersVisible = false;
-            dgvTopProducts.RowHeadersWidth = 51;
-            dgvTopProducts.Size = new Size(534, 334);
-            dgvTopProducts.TabIndex = 13;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            groupBox2.Controls.Add(dgvTopProducts);
-            groupBox2.Location = new Point(812, 412);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(540, 360);
-            groupBox2.TabIndex = 14;
-            groupBox2.TabStop = false;
             // 
             // label10
             // 
@@ -476,14 +446,32 @@
             label10.TabIndex = 15;
             label10.Text = "Top Selling Products ";
             // 
+            // dgvTopProducts
+            // 
+            dgvTopProducts.AllowUserToAddRows = false;
+            dgvTopProducts.AllowUserToResizeRows = false;
+            dgvTopProducts.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            dgvTopProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvTopProducts.BackgroundColor = SystemColors.Control;
+            dgvTopProducts.BorderStyle = BorderStyle.None;
+            dgvTopProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvTopProducts.EnableHeadersVisualStyles = false;
+            dgvTopProducts.Location = new Point(818, 426);
+            dgvTopProducts.Name = "dgvTopProducts";
+            dgvTopProducts.ReadOnly = true;
+            dgvTopProducts.RowHeadersVisible = false;
+            dgvTopProducts.RowHeadersWidth = 51;
+            dgvTopProducts.Size = new Size(534, 334);
+            dgvTopProducts.TabIndex = 13;
+            // 
             // ReportsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;
+            Controls.Add(dgvTopProducts);
             Controls.Add(label10);
-            Controls.Add(groupBox2);
             Controls.Add(chartRevenueProfitTrends);
             Controls.Add(label9);
             Controls.Add(groupBox1);
@@ -520,7 +508,6 @@
             gradientPanel5.ResumeLayout(false);
             gradientPanel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvTopProducts).EndInit();
-            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -554,8 +541,7 @@
         private Label label8;
         private Label label9;
         private Syncfusion.Windows.Forms.Chart.ChartControl chartRevenueProfitTrends;
-        private DataGridView dgvTopProducts;
-        private GroupBox groupBox2;
         private Label label10;
+        private DataGridView dgvTopProducts;
     }
 }

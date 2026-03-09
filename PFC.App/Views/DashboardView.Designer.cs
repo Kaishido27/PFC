@@ -47,6 +47,7 @@
             dgvRecentTransactions = new DataGridView();
             label5 = new Label();
             label7 = new Label();
+            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -59,11 +60,12 @@
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = Color.Beige;
+            panel1.BackColor = Color.DeepSkyBlue;
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -86,7 +88,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(52, 58);
+            label3.Location = new Point(212, 64);
             label3.Name = "label3";
             label3.Size = new Size(283, 25);
             label3.TabIndex = 2;
@@ -95,10 +97,10 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(24, 20);
+            label2.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.Location = new Point(140, 18);
             label2.Name = "label2";
-            label2.Size = new Size(311, 38);
+            label2.Size = new Size(376, 46);
             label2.TabIndex = 1;
             label2.Text = "Welcome to Cat Brews";
             // 
@@ -127,6 +129,7 @@
             // panel2
             // 
             tableLayoutPanel1.SetColumnSpan(panel2, 3);
+            panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(label2);
             panel2.Dock = DockStyle.Fill;
@@ -137,7 +140,7 @@
             // 
             // pnlDailySales
             // 
-            pnlDailySales.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Color.Snow);
+            pnlDailySales.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.BackwardDiagonal, Color.PaleTurquoise, Color.Snow);
             pnlDailySales.BorderColor = Color.White;
             pnlDailySales.Controls.Add(lblDailySales);
             pnlDailySales.Controls.Add(label4);
@@ -169,7 +172,7 @@
             // 
             // gradientPanel2
             // 
-            gradientPanel2.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.WhiteSmoke, Color.Beige);
+            gradientPanel2.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.White, Color.LightBlue);
             gradientPanel2.BorderColor = Color.White;
             gradientPanel2.Controls.Add(lblTotalRevenue);
             gradientPanel2.Controls.Add(pnlTotalRevenue);
@@ -203,7 +206,7 @@
             // 
             // pnlTotalProfit
             // 
-            pnlTotalProfit.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.Bisque, Color.FromArgb(75, 54, 33));
+            pnlTotalProfit.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.WhiteSmoke, Color.DeepSkyBlue);
             pnlTotalProfit.BorderColor = Color.White;
             pnlTotalProfit.Controls.Add(lblTotalProfit);
             pnlTotalProfit.Controls.Add(label6);
@@ -237,7 +240,7 @@
             // 
             // gradientPanel1
             // 
-            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.WhiteSmoke, Color.Beige);
+            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, Color.LightSkyBlue, Color.SkyBlue);
             tableLayoutPanel1.SetColumnSpan(gradientPanel1, 2);
             gradientPanel1.Controls.Add(dgvRecentTransactions);
             gradientPanel1.Controls.Add(label5);
@@ -281,6 +284,16 @@
             label7.TabIndex = 3;
             label7.Text = "Recent Transactions";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.logo_goldIcon;
+            pictureBox1.Location = new Point(35, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(103, 108);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            // 
             // DashboardView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -309,6 +322,7 @@
             gradientPanel1.ResumeLayout(false);
             gradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -333,5 +347,6 @@
         private Label label5;
         private Label label7;
         private DataGridView dgvRecentTransactions;
+        private PictureBox pictureBox1;
     }
 }
