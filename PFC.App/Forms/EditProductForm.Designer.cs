@@ -53,7 +53,7 @@
             // 
             // gradientPanel1
             // 
-            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.FromArgb(227, 199, 166), Color.FromArgb(245, 230, 211));
+            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.BackwardDiagonal, Color.FromArgb(224, 242, 241), Color.FromArgb(77, 182, 172));
             gradientPanel1.Controls.Add(btnDeleteProduct);
             gradientPanel1.Controls.Add(label4);
             gradientPanel1.Controls.Add(label3);

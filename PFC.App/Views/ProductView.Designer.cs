@@ -73,7 +73,7 @@
             // 
             // panel1
             // 
-            panel1.BackColor = Color.DeepSkyBlue;
+            panel1.BackColor = Color.FromArgb(2, 132, 199);
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -269,16 +269,19 @@
             // btnAddProduct
             // 
             btnAddProduct.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnAddProduct.BackColor = Color.Aqua;
+            btnAddProduct.BackColor = Color.FromArgb(2, 132, 199);
             btnAddProduct.FlatStyle = FlatStyle.Flat;
             btnAddProduct.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnAddProduct.ForeColor = Color.WhiteSmoke;
             btnAddProduct.Location = new Point(859, 27);
             btnAddProduct.Name = "btnAddProduct";
             btnAddProduct.Size = new Size(148, 51);
-            btnAddProduct.Style.BackColor = Color.Aqua;
-            btnAddProduct.Style.FocusedBackColor = Color.LemonChiffon;
+            btnAddProduct.Style.BackColor = Color.FromArgb(2, 132, 199);
+            btnAddProduct.Style.FocusedBackColor = Color.FromArgb(2, 132, 199);
             btnAddProduct.Style.FocusedBorder = null;
-            btnAddProduct.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
+            btnAddProduct.Style.FocusedForeColor = Color.WhiteSmoke;
+            btnAddProduct.Style.ForeColor = Color.WhiteSmoke;
+            btnAddProduct.Style.HoverBackColor = Color.PaleTurquoise;
             btnAddProduct.Style.HoverForeColor = Color.Black;
             btnAddProduct.TabIndex = 7;
             btnAddProduct.Text = "Add New Product";
@@ -292,9 +295,9 @@
             btnSoda.Location = new Point(418, 43);
             btnSoda.Name = "btnSoda";
             btnSoda.Size = new Size(54, 35);
-            btnSoda.Style.FocusedBackColor = Color.LemonChiffon;
+            btnSoda.Style.FocusedBackColor = Color.FromArgb(2, 132, 199);
             btnSoda.Style.FocusedBorder = null;
-            btnSoda.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
+            btnSoda.Style.HoverBackColor = Color.FromArgb(226, 232, 240);
             btnSoda.Style.HoverForeColor = Color.Black;
             btnSoda.TabIndex = 6;
             btnSoda.Text = "Soda";
@@ -307,9 +310,9 @@
             btnMatcha.Location = new Point(341, 43);
             btnMatcha.Name = "btnMatcha";
             btnMatcha.Size = new Size(71, 35);
-            btnMatcha.Style.FocusedBackColor = Color.LemonChiffon;
+            btnMatcha.Style.FocusedBackColor = Color.FromArgb(2, 132, 199);
             btnMatcha.Style.FocusedBorder = null;
-            btnMatcha.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
+            btnMatcha.Style.HoverBackColor = Color.FromArgb(226, 232, 240);
             btnMatcha.Style.HoverForeColor = Color.Black;
             btnMatcha.TabIndex = 5;
             btnMatcha.Text = "Matcha";
@@ -322,9 +325,9 @@
             btnFlavMilk.Location = new Point(227, 43);
             btnFlavMilk.Name = "btnFlavMilk";
             btnFlavMilk.Size = new Size(108, 35);
-            btnFlavMilk.Style.FocusedBackColor = Color.LemonChiffon;
+            btnFlavMilk.Style.FocusedBackColor = Color.FromArgb(2, 132, 199);
             btnFlavMilk.Style.FocusedBorder = null;
-            btnFlavMilk.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
+            btnFlavMilk.Style.HoverBackColor = Color.FromArgb(226, 232, 240);
             btnFlavMilk.Style.HoverForeColor = Color.Black;
             btnFlavMilk.TabIndex = 4;
             btnFlavMilk.Text = "Flavored Milk";
@@ -337,9 +340,9 @@
             btnHotCoffee.Location = new Point(128, 43);
             btnHotCoffee.Name = "btnHotCoffee";
             btnHotCoffee.Size = new Size(93, 35);
-            btnHotCoffee.Style.FocusedBackColor = Color.LemonChiffon;
+            btnHotCoffee.Style.FocusedBackColor = Color.FromArgb(2, 132, 199);
             btnHotCoffee.Style.FocusedBorder = null;
-            btnHotCoffee.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
+            btnHotCoffee.Style.HoverBackColor = Color.FromArgb(226, 232, 240);
             btnHotCoffee.Style.HoverForeColor = Color.Black;
             btnHotCoffee.TabIndex = 3;
             btnHotCoffee.Text = "Hot Coffee";
@@ -352,9 +355,9 @@
             btnIcedCoffee.Location = new Point(29, 43);
             btnIcedCoffee.Name = "btnIcedCoffee";
             btnIcedCoffee.Size = new Size(93, 35);
-            btnIcedCoffee.Style.FocusedBackColor = Color.LemonChiffon;
+            btnIcedCoffee.Style.FocusedBackColor = Color.FromArgb(2, 132, 199);
             btnIcedCoffee.Style.FocusedBorder = null;
-            btnIcedCoffee.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
+            btnIcedCoffee.Style.HoverBackColor = Color.FromArgb(226, 232, 240);
             btnIcedCoffee.Style.HoverForeColor = Color.Black;
             btnIcedCoffee.TabIndex = 2;
             btnIcedCoffee.Text = "Iced Coffee";

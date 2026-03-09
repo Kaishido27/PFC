@@ -48,6 +48,23 @@ namespace PFC.Services
                 db.SaveChanges();
             }
         }
+
+        // Saves a new order and its details to the database
+        public void SaveOrder(Order newOrder)
+        {
+            using var db = new AppDbContext();
+
+            newOrder.OrderDate = DateTime.Now;
+
+            // EF Core Safety Trick: Unlink the Product reference so it doesn't create duplicate products
+            foreach (var detail in newOrder.Details)
+            {
+                detail.Product = null;
+            }
+
+            db.Orders.Add(newOrder);
+            db.SaveChanges();
+        }
     }
 }
 

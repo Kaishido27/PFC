@@ -60,24 +60,24 @@
             // 
             lblDetails.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             lblDetails.AutoSize = true;
-            lblDetails.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblDetails.ForeColor = Color.DimGray;
+            lblDetails.Font = new Font("Segoe UI Semibold", 7.8F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblDetails.ForeColor = Color.Black;
             lblDetails.Location = new Point(20, 55);
             lblDetails.Name = "lblDetails";
-            lblDetails.Size = new Size(47, 17);
+            lblDetails.Size = new Size(50, 17);
             lblDetails.TabIndex = 2;
             lblDetails.Text = "Details";
             // 
             // btnRemove
             // 
             btnRemove.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnRemove.BackColor = Color.Beige;
+            btnRemove.BackColor = Color.SkyBlue;
             btnRemove.Font = new Font("Segoe UI Semibold", 9F);
             btnRemove.ImageSize = new Size(30, 30);
             btnRemove.Location = new Point(195, 111);
             btnRemove.Name = "btnRemove";
             btnRemove.Size = new Size(40, 39);
-            btnRemove.Style.BackColor = Color.Beige;
+            btnRemove.Style.BackColor = Color.SkyBlue;
             btnRemove.Style.FocusedBorder = null;
             btnRemove.Style.Image = Properties.Resources.bin;
             btnRemove.TabIndex = 3;
@@ -100,7 +100,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Beige;
+            BackColor = Color.SkyBlue;
             Controls.Add(lblLineTotal);
             Controls.Add(btnRemove);
             Controls.Add(lblDetails);

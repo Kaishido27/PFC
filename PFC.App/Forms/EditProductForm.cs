@@ -1,11 +1,11 @@
-﻿using PFC.Domain.Models;
-using PFC.Infrastructure;
+﻿using PFC.App.Helper; 
+using PFC.Domain.Models;
+using PFC.Services;   
 using System;
 using System.ComponentModel;
-using System.Drawing; // Added for Colors
+using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
 
 namespace PFC.App.Forms
 {
@@ -41,10 +41,21 @@ namespace PFC.App.Forms
 
         private void EditProductForm_Load(object sender, EventArgs e)
         {
-            // 1. Configure combo column and bind its values to the enum
+            // DESIGNER FIX
+            if (UIHelper.IsDesignMode()) return;
+
+            // 1. Configure SIZE combo column with Translator!
             if (dataGridView1.Columns["Sizeoption"] is DataGridViewComboBoxColumn sizeCol)
             {
-                sizeCol.DataSource = Enum.GetValues(typeof(ProductSize));
+                var sizeDisplayList = Enum.GetValues(typeof(ProductSize))
+                                          .Cast<ProductSize>()
+                                          .Select(s => new { Value = s, Text = s.ToFriendlyString() })
+                                          .ToList();
+
+                sizeCol.DataSource = sizeDisplayList;
+                sizeCol.DisplayMember = "Text";
+                sizeCol.ValueMember = "Value";
+
                 sizeCol.DataPropertyName = nameof(ProductSizeOption.Size);
                 sizeCol.ValueType = typeof(ProductSize);
             }
@@ -64,13 +75,18 @@ namespace PFC.App.Forms
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.AllowUserToDeleteRows = false;
 
-            // 3. Bind category combobox
-            cmbCategory.DataSource = Enum.GetValues(typeof(Category));
+            // 3. Bind CATEGORY combobox with Regex Formatter!
+            var categoryList = Enum.GetValues(typeof(Category))
+                                   .Cast<Category>()
+                                   .Select(c => new { Value = c, Text = UIHelper.FormatEnumName(c.ToString()) })
+                                   .ToList();
+
+            cmbCategory.DataSource = categoryList;
+            cmbCategory.DisplayMember = "Text";
+            cmbCategory.ValueMember = "Value";
 
             // 4. Load Existing Product Data
             LoadProductData();
-
-            // Bind the grid to our loaded options
             dataGridView1.DataSource = _sizeOptions;
         }
 
@@ -78,23 +94,21 @@ namespace PFC.App.Forms
         {
             try
             {
-                using var db = new AppDbContext();
-                var product = db.Products
-                    .Include(p => p.SizeOptions)
-                    .FirstOrDefault(p => p.Id == _productId);
+                // USES PRODUCT SERVICE INSTEAD OF DB CONTEXT
+                var productService = new ProductService();
+                var product = productService.GetProductById(_productId);
 
                 if (product == null)
                 {
-                    MessageBox.Show("Product not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    UIHelper.ShowError("Product not found.");
                     Close();
                     return;
                 }
 
                 // Populate UI
                 txtName.Text = product.Name;
-                cmbCategory.SelectedItem = product.Category;
+                cmbCategory.SelectedValue = product.Category;
 
-                // Populate the BindingList with existing size options
                 _sizeOptions.Clear();
                 foreach (var option in product.SizeOptions)
                 {
@@ -110,31 +124,26 @@ namespace PFC.App.Forms
                 if (product.IsArchived)
                 {
                     btnDeleteProduct.Text = "Restore Product";
-
-                    // Force Syncfusion button to stay Green
                     btnDeleteProduct.Style.BackColor = Color.ForestGreen;
                     btnDeleteProduct.Style.FocusedBackColor = Color.ForestGreen;
                     btnDeleteProduct.Style.HoverBackColor = Color.ForestGreen;
-                    btnDeleteProduct.Style.ForeColor = Color.White;
-                    btnDeleteProduct.Style.FocusedForeColor = Color.White;
-                    btnDeleteProduct.Style.HoverForeColor = Color.White;
                 }
                 else
                 {
                     btnDeleteProduct.Text = "Delete Product";
-
-                    // Force Syncfusion button to stay Red
                     btnDeleteProduct.Style.BackColor = Color.IndianRed;
                     btnDeleteProduct.Style.FocusedBackColor = Color.IndianRed;
                     btnDeleteProduct.Style.HoverBackColor = Color.IndianRed;
-                    btnDeleteProduct.Style.ForeColor = Color.White;
-                    btnDeleteProduct.Style.FocusedForeColor = Color.White;
-                    btnDeleteProduct.Style.HoverForeColor = Color.White;
                 }
+
+                // Both states use white text
+                btnDeleteProduct.Style.ForeColor = Color.White;
+                btnDeleteProduct.Style.FocusedForeColor = Color.White;
+                btnDeleteProduct.Style.HoverForeColor = Color.White;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UIHelper.ShowError($"Error loading product: {ex.Message}");
             }
         }
 
@@ -144,8 +153,6 @@ namespace PFC.App.Forms
         // EVENT HANDLERS
         // ==========================================
         #region Event Handlers
-
-        // --- Grid Actions ---
 
         private void SfRoundedButtonAddSize_Click(object? sender, EventArgs e)
         {
@@ -167,8 +174,7 @@ namespace PFC.App.Forms
                 var item = dataGridView1.Rows[e.RowIndex].DataBoundItem as ProductSizeOption;
                 if (item != null)
                 {
-                    var confirm = MessageBox.Show("Remove this size option?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (confirm == DialogResult.Yes)
+                    if (UIHelper.Confirm("Remove this size option?"))
                     {
                         _sizeOptions.Remove(item);
                     }
@@ -176,87 +182,72 @@ namespace PFC.App.Forms
             }
         }
 
-        // --- Save, Cancel, & Delete Actions ---
-
         private void btnSave_Click(object? sender, EventArgs e)
         {
-            // 1. Basic Validation
+            // 1. Basic Validation (Uses new UIHelper)
             var name = txtName.Text?.Trim();
             if (string.IsNullOrWhiteSpace(name))
             {
-                MessageBox.Show("Please enter a product name.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UIHelper.ShowWarning("Please enter a product name.");
                 return;
             }
 
             if (_sizeOptions == null || _sizeOptions.Count == 0)
             {
-                MessageBox.Show("Please add at least one size option with price and cost.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UIHelper.ShowWarning("Please add at least one size option with price and cost.");
                 return;
             }
 
-            // 2. Check for Duplicate Sizes
             var duplicateSizes = _sizeOptions.GroupBy(s => s.Size).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
             if (duplicateSizes.Any())
             {
-                MessageBox.Show($"Duplicate sizes found: {string.Join(", ", duplicateSizes)}. Remove duplicates.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var duplicateNames = string.Join(", ", duplicateSizes.Select(s => s.ToFriendlyString()));
+                UIHelper.ShowWarning($"Duplicate sizes found: {duplicateNames}. Remove duplicates.");
                 return;
             }
 
-            // 3. Validate Prices and Costs
             foreach (var so in _sizeOptions)
             {
                 if (so.Price <= 0m)
                 {
-                    MessageBox.Show("Each size option must have a price greater than 0.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UIHelper.ShowWarning("Each size option must have a price greater than 0.");
                     return;
                 }
                 if (so.Cost < 0m)
                 {
-                    MessageBox.Show("Cost cannot be negative.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UIHelper.ShowWarning("Cost cannot be negative.");
                     return;
                 }
             }
 
-            if (!(cmbCategory.SelectedItem is Category category))
+            if (cmbCategory.SelectedValue is not Category category)
             {
-                MessageBox.Show("Please select a category.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UIHelper.ShowWarning("Please select a category.");
                 return;
             }
 
-            // 4. Update Database
+            // 2. Map & Save Using Service
             try
             {
-                using var db = new AppDbContext();
-                var product = db.Products
-                    .Include(p => p.SizeOptions)
-                    .FirstOrDefault(p => p.Id == _productId);
-
-                if (product == null)
+                var product = new Product
                 {
-                    MessageBox.Show("Product no longer exists in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Update scalar properties
-                product.Name = name;
-                product.Category = category;
-
-                // Safely update collection: Remove old options and insert new ones
-                db.RemoveRange(product.SizeOptions);
-                product.SizeOptions = _sizeOptions
-                    .Select(so => new ProductSizeOption
+                    Id = _productId,
+                    Name = name,
+                    Category = category,
+                    SizeOptions = _sizeOptions.Select(so => new ProductSizeOption
                     {
                         Size = so.Size,
                         Price = so.Price,
                         Cost = so.Cost
-                    })
-                    .ToList();
+                    }).ToList()
+                };
 
-                db.SaveChanges();
+                var productService = new ProductService();
+                productService.UpdateProduct(product);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UIHelper.ShowError($"Error updating product: {ex.Message}");
                 return;
             }
 
@@ -270,23 +261,21 @@ namespace PFC.App.Forms
             Close();
         }
 
-        // --- NEW: Soft Delete / Restore Logic ---
+        // --- Soft Delete / Restore Logic ---
         private void btnDeleteProduct_Click(object sender, EventArgs e)
         {
             try
             {
-                using var db = new AppDbContext();
-                var product = db.Products.FirstOrDefault(p => p.Id == _productId);
+                var productService = new ProductService();
+                var product = productService.GetProductById(_productId);
 
                 if (product == null) return;
 
                 if (product.IsArchived) // RESTORE LOGIC
                 {
-                    var confirm = MessageBox.Show("Put this product back on the active menu?", "Restore", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (confirm == DialogResult.Yes)
+                    if (UIHelper.Confirm("Put this product back on the active menu?", "Restore"))
                     {
-                        product.IsArchived = false;
-                        db.SaveChanges();
+                        productService.ToggleArchiveStatus(_productId, false);
                         MessageBox.Show("Product restored successfully!", "Restored", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         DialogResult = DialogResult.OK;
                         Close();
@@ -294,11 +283,9 @@ namespace PFC.App.Forms
                 }
                 else // ARCHIVE LOGIC
                 {
-                    var confirm = MessageBox.Show("Remove this product from the menu? It will be safely hidden from cashiers.", "Archive", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (confirm == DialogResult.Yes)
+                    if (UIHelper.Confirm("Remove this product from the menu? It will be safely hidden from cashiers.", "Archive"))
                     {
-                        product.IsArchived = true;
-                        db.SaveChanges();
+                        productService.ToggleArchiveStatus(_productId, true);
                         MessageBox.Show("Product archived successfully.", "Archived", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         DialogResult = DialogResult.OK;
                         Close();
@@ -307,7 +294,7 @@ namespace PFC.App.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error updating status: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UIHelper.ShowError($"Error updating status: {ex.Message}");
             }
         }
 

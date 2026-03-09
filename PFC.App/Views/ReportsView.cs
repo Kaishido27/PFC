@@ -232,7 +232,6 @@ namespace PFC.App.Views
         {
             try
             {
-                // Flatten all order details from the orders
                 var productStats = orders
                     .SelectMany(o => o.Details)
                     .Where(d => d.Product != null)
@@ -245,17 +244,16 @@ namespace PFC.App.Views
                     .Select(g => new
                     {
                         Product = g.Key.ProductName,
-                        Category = g.Key.Category,
+                        // USE HELPER: Turns "IcedCoffee" into "Iced Coffee"
+                        Category = UIHelper.FormatEnumName(g.Key.Category),
                         UnitsSold = g.Sum(d => d.Quantity),
                         TotalRevenue = $"₱{g.Sum(d => d.TotalLinePrice):N2}"
                     })
                     .OrderByDescending(p => p.UnitsSold)
-                    .Take(10) // Top 10 products
+                    .Take(10)
                     .ToList();
 
                 dgvTopProducts.DataSource = productStats;
-
-                // Refresh to apply formatting
                 dgvTopProducts.Refresh();
             }
             catch (Exception ex)
@@ -355,16 +353,16 @@ namespace PFC.App.Views
         {
             if (dgvTopProducts.Columns[e.ColumnIndex].Name == "Category" && e.Value != null)
             {
-                // Add styled category badges with colors matching your ProductView categories
                 var category = e.Value.ToString();
                 e.CellStyle.Font = new Font("Segoe UI", 8F);
                 e.CellStyle.BackColor = category switch
                 {
-                    "IcedCoffee" => Color.FromArgb(227, 242, 253),      // Light Blue
-                    "HotCoffee" => Color.FromArgb(255, 243, 224),       // Light Orange
-                    "FlavoredMilk" => Color.FromArgb(255, 235, 238),    // Light Pink
-                    "Matcha" => Color.FromArgb(232, 245, 233),          // Light Green
-                    "Soda" => Color.FromArgb(255, 249, 196),            // Light Yellow
+                    // Added spaces to match the newly formatted names!
+                    "Iced Coffee" => Color.FromArgb(227, 242, 253),
+                    "Hot Coffee" => Color.FromArgb(255, 243, 224),
+                    "Flavored Milk" => Color.FromArgb(255, 235, 238),
+                    "Matcha" => Color.FromArgb(232, 245, 233),
+                    "Soda" => Color.FromArgb(255, 249, 196),
                     _ => Color.FromArgb(245, 245, 245)
                 };
             }
@@ -476,7 +474,8 @@ namespace PFC.App.Views
         {
             if (dgvReports.Rows.Count == 0)
             {
-                MessageBox.Show("No data available to export.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // USE HELPER: Much cleaner warning!
+                UIHelper.ShowWarning("No data available to export.");
                 return;
             }
 

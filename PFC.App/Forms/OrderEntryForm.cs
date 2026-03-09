@@ -1,4 +1,5 @@
-﻿using PFC.Domain.Models;
+﻿using PFC.App.Helper; // Make sure your helper namespace is included!
+using PFC.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,7 +32,9 @@ namespace PFC.App.Forms
 
             // 1. Initial UI Setup
             lblProductName.Text = _product.Name ?? "Unknown Product";
-            lblProductCategory.Text = FormatEnumName(_product.Category.ToString());
+
+            // USE HELPER: Turns "IcedCoffee" into "Iced Coffee"
+            lblProductCategory.Text = UIHelper.FormatEnumName(_product.Category.ToString());
             numQuantity.Value = 1;
 
             // 2. Load Data into Controls
@@ -73,7 +76,7 @@ namespace PFC.App.Forms
         // ==========================================
         // CORE LOGIC & HELPERS
         // ==========================================
-        #region Core Logic & Helpers
+        #region Core Logic
 
         private void UpdateLiveTotal()
         {
@@ -81,7 +84,7 @@ namespace PFC.App.Forms
             decimal unitPrice = 0m;
             if (cboSizes.SelectedItem is ProductSizeOption selectedOption)
             {
-                unitPrice = selectedOption.Price; // Now we can safely access .Price!
+                unitPrice = selectedOption.Price;
             }
 
             // 2. Add-on price (₱10 per selected item)
@@ -99,10 +102,7 @@ namespace PFC.App.Forms
             }
         }
 
-        private string FormatEnumName(string name)
-        {
-            return System.Text.RegularExpressions.Regex.Replace(name, "([a-z])([A-Z])", "$1 $2");
-        }
+        // DELETED: Local FormatEnumName method!
 
         #endregion
 
@@ -124,7 +124,7 @@ namespace PFC.App.Forms
             {
                 Product = _product,
                 ProductId = _product.Id,
-                SelectedSize = selectedOption.Size, // Extract the enum from the option class!
+                SelectedSize = selectedOption.Size,
                 Quantity = (int)numQuantity.Value,
                 AddOns = selectedAddOns,
                 UnitPrice = selectedOption.Price,
@@ -155,7 +155,8 @@ namespace PFC.App.Forms
         {
             if (e.ListItem is AddOns addon)
             {
-                e.Value = FormatEnumName(addon.ToString());
+                // USE HELPER: Formats add-ons like "ExtraShot" -> "Extra Shot"
+                e.Value = UIHelper.FormatEnumName(addon.ToString());
             }
         }
 
@@ -163,8 +164,10 @@ namespace PFC.App.Forms
         {
             if (e.ListItem is ProductSizeOption option)
             {
-                // Add spaces to the enum and append the price
-                string prettyName = FormatEnumName(option.Size.ToString());
+                // USE TRANSLATOR: Automatically turns ProductSize.EightOz into "8 Ounces"
+                string prettyName = option.Size.ToFriendlyString();
+
+                // Final format: "8 Ounces (₱120.00)"
                 e.Value = $"{prettyName} (₱{option.Price:N2})";
             }
         }

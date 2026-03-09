@@ -1,5 +1,6 @@
-﻿using PFC.Domain.Models;
-using PFC.Infrastructure;
+﻿using PFC.App.Helper; 
+using PFC.Domain.Models;
+using PFC.Services;   
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -37,10 +38,22 @@ namespace PFC.App.Forms
 
         private void AddProductForm_Load(object sender, EventArgs e)
         {
-            // 1. Configure combo column and bind its values to the enum
+            // DESIGNER FIX
+            if (UIHelper.IsDesignMode()) return;
+
+            // 1. Configure SIZE combo column with your Translator!
             if (dataGridView1.Columns["Sizeoption"] is DataGridViewComboBoxColumn sizeCol)
             {
-                sizeCol.DataSource = Enum.GetValues(typeof(ProductSize));
+                // Generates a list mapping Enum (EightOz) -> Text ("8 Ounces")
+                var sizeDisplayList = Enum.GetValues(typeof(ProductSize))
+                                          .Cast<ProductSize>()
+                                          .Select(s => new { Value = s, Text = s.ToFriendlyString() })
+                                          .ToList();
+
+                sizeCol.DataSource = sizeDisplayList;
+                sizeCol.DisplayMember = "Text";
+                sizeCol.ValueMember = "Value";
+
                 sizeCol.DataPropertyName = nameof(ProductSizeOption.Size);
                 sizeCol.ValueType = typeof(ProductSize);
             }
@@ -55,16 +68,24 @@ namespace PFC.App.Forms
                 costCol.DataPropertyName = nameof(ProductSizeOption.Cost);
             }
 
-            // 2. Grid Settings: Disable automatic new-row; we'll add rows explicitly via the Add Size button
+            // 2. Grid Settings
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.AllowUserToAddRows = false;
-            dataGridView1.AllowUserToDeleteRows = false; // removal handled via Actions button
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.DataSource = _sizeOptions;
 
-            // 3. Bind category combobox
-            cmbCategory.DataSource = Enum.GetValues(typeof(Category));
+            // 3. Bind CATEGORY combobox with your Regex Formatter!
+            // Generates a list mapping Enum (IcedCoffee) -> Text ("Iced Coffee")
+            var categoryList = Enum.GetValues(typeof(Category))
+                                   .Cast<Category>()
+                                   .Select(c => new { Value = c, Text = UIHelper.FormatEnumName(c.ToString()) })
+                                   .ToList();
 
-            // 4. Start with one row so the user has a place to begin
+            cmbCategory.DataSource = categoryList;
+            cmbCategory.DisplayMember = "Text";
+            cmbCategory.ValueMember = "Value";
+
+            // 4. Start with one row
             if (_sizeOptions.Count == 0)
             {
                 _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.EightOz, Price = 0m, Cost = 0m });
@@ -82,10 +103,8 @@ namespace PFC.App.Forms
 
         private void SfRoundedButtonAddSize_Click(object? sender, EventArgs e)
         {
-            // Add an empty size option row (user will edit Size/Price/Cost)
             _sizeOptions.Add(new ProductSizeOption { Size = ProductSize.EightOz, Price = 0m, Cost = 0m });
 
-            // Focus the new row in the grid for convenience
             var idx = _sizeOptions.Count - 1;
             dataGridView1.CurrentCell = dataGridView1.Rows[idx].Cells["Sizeoption"];
             dataGridView1.BeginEdit(true);
@@ -97,14 +116,13 @@ namespace PFC.App.Forms
 
             var col = dataGridView1.Columns[e.ColumnIndex];
 
-            // Handle the "Actions" delete button inside the grid
             if (string.Equals(col.Name, "Actions", StringComparison.OrdinalIgnoreCase))
             {
                 var item = dataGridView1.Rows[e.RowIndex].DataBoundItem as ProductSizeOption;
                 if (item != null)
                 {
-                    var confirm = MessageBox.Show("Remove this size option?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (confirm == DialogResult.Yes)
+                    // HELPER: Replaced raw MessageBox with UIHelper
+                    if (UIHelper.Confirm("Remove this size option?"))
                     {
                         _sizeOptions.Remove(item);
                     }
@@ -116,17 +134,17 @@ namespace PFC.App.Forms
 
         private void btnSave_Click(object? sender, EventArgs e)
         {
-            // 1. Basic Validation
+            // 1. Basic Validation (Uses the new ShowWarning helper!)
             var name = txtName.Text?.Trim();
             if (string.IsNullOrWhiteSpace(name))
             {
-                MessageBox.Show("Please enter a product name.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UIHelper.ShowWarning("Please enter a product name.");
                 return;
             }
 
             if (_sizeOptions == null || _sizeOptions.Count == 0)
             {
-                MessageBox.Show("Please add at least one size option with price and cost.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UIHelper.ShowWarning("Please add at least one size option with price and cost.");
                 return;
             }
 
@@ -134,7 +152,8 @@ namespace PFC.App.Forms
             var duplicateSizes = _sizeOptions.GroupBy(s => s.Size).Where(g => g.Count() > 1).Select(g => g.Key).ToList();
             if (duplicateSizes.Any())
             {
-                MessageBox.Show($"Duplicate sizes found: {string.Join(", ", duplicateSizes)}. Remove duplicates.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var duplicateNames = string.Join(", ", duplicateSizes.Select(s => s.ToFriendlyString()));
+                UIHelper.ShowWarning($"Duplicate sizes found: {duplicateNames}. Remove duplicates.");
                 return;
             }
 
@@ -143,19 +162,20 @@ namespace PFC.App.Forms
             {
                 if (so.Price <= 0m)
                 {
-                    MessageBox.Show("Each size option must have a price greater than 0.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UIHelper.ShowWarning("Each size option must have a price greater than 0.");
                     return;
                 }
                 if (so.Cost < 0m)
                 {
-                    MessageBox.Show("Cost cannot be negative.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    UIHelper.ShowWarning("Cost cannot be negative.");
                     return;
                 }
             }
 
-            if (!(cmbCategory.SelectedItem is Category category))
+            // Since we bound an anonymous object to the combobox, we have to grab the 'Value' property
+            if (cmbCategory.SelectedValue is not Category category)
             {
-                MessageBox.Show("Please select a category.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UIHelper.ShowWarning("Please select a category.");
                 return;
             }
 
@@ -175,16 +195,15 @@ namespace PFC.App.Forms
                 })
                 .ToList();
 
-            // 5. Save to Database
+            // 5. Save using your new ProductService!
             try
             {
-                using var db = new AppDbContext();
-                db.Products.Add(product);
-                db.SaveChanges();
+                var productService = new ProductService();
+                productService.AddProduct(product);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saving product: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                UIHelper.ShowError($"Error saving product: {ex.Message}");
                 return;
             }
 
@@ -194,7 +213,6 @@ namespace PFC.App.Forms
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            // Ensure a single well-defined cancel behavior.
             DialogResult = DialogResult.Cancel;
             Close();
         }

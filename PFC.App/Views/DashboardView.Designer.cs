@@ -34,6 +34,7 @@
             label2 = new Label();
             tableLayoutPanel1 = new TableLayoutPanel();
             panel2 = new Panel();
+            pictureBox1 = new PictureBox();
             pnlDailySales = new Syncfusion.Windows.Forms.Tools.GradientPanel();
             lblDailySales = new Label();
             label4 = new Label();
@@ -47,10 +48,10 @@
             dgvRecentTransactions = new DataGridView();
             label5 = new Label();
             label7 = new Label();
-            pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pnlDailySales).BeginInit();
             pnlDailySales.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gradientPanel2).BeginInit();
@@ -60,12 +61,11 @@
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = Color.DeepSkyBlue;
+            panel1.BackColor = Color.FromArgb(2, 132, 199);
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
@@ -138,9 +138,19 @@
             panel2.Size = new Size(1079, 114);
             panel2.TabIndex = 0;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.logo_goldIcon;
+            pictureBox1.Location = new Point(35, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(103, 108);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            // 
             // pnlDailySales
             // 
-            pnlDailySales.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.BackwardDiagonal, Color.PaleTurquoise, Color.Snow);
+            pnlDailySales.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, Color.FromArgb(219, 234, 254), Color.FromArgb(191, 219, 254));
             pnlDailySales.BorderColor = Color.White;
             pnlDailySales.Controls.Add(lblDailySales);
             pnlDailySales.Controls.Add(label4);
@@ -153,6 +163,7 @@
             // lblDailySales
             // 
             lblDailySales.AutoSize = true;
+            lblDailySales.BackColor = Color.Transparent;
             lblDailySales.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblDailySales.Location = new Point(50, 48);
             lblDailySales.Name = "lblDailySales";
@@ -163,6 +174,7 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label4.Location = new Point(22, 13);
             label4.Name = "label4";
@@ -172,7 +184,7 @@
             // 
             // gradientPanel2
             // 
-            gradientPanel2.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.White, Color.LightBlue);
+            gradientPanel2.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, Color.FromArgb(147, 197, 253), Color.FromArgb(96, 165, 250));
             gradientPanel2.BorderColor = Color.White;
             gradientPanel2.Controls.Add(lblTotalRevenue);
             gradientPanel2.Controls.Add(pnlTotalRevenue);
@@ -206,7 +218,7 @@
             // 
             // pnlTotalProfit
             // 
-            pnlTotalProfit.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, Color.WhiteSmoke, Color.DeepSkyBlue);
+            pnlTotalProfit.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, Color.FromArgb(59, 130, 246), Color.FromArgb(37, 99, 235));
             pnlTotalProfit.BorderColor = Color.White;
             pnlTotalProfit.Controls.Add(lblTotalProfit);
             pnlTotalProfit.Controls.Add(label6);
@@ -240,7 +252,7 @@
             // 
             // gradientPanel1
             // 
-            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, Color.LightSkyBlue, Color.SkyBlue);
+            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, Color.FromArgb(224, 242, 254), Color.FromArgb(248, 250, 252));
             tableLayoutPanel1.SetColumnSpan(gradientPanel1, 2);
             gradientPanel1.Controls.Add(dgvRecentTransactions);
             gradientPanel1.Controls.Add(label5);
@@ -284,16 +296,6 @@
             label7.TabIndex = 3;
             label7.Text = "Recent Transactions";
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.logo_goldIcon;
-            pictureBox1.Location = new Point(35, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(103, 108);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 3;
-            pictureBox1.TabStop = false;
-            // 
             // DashboardView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -309,6 +311,7 @@
             tableLayoutPanel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pnlDailySales).EndInit();
             pnlDailySales.ResumeLayout(false);
             pnlDailySales.PerformLayout();
@@ -322,7 +325,6 @@
             gradientPanel1.ResumeLayout(false);
             gradientPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 

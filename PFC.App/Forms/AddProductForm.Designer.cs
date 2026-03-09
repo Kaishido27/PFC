@@ -53,7 +53,7 @@
             // 
             // gradientPanel1
             // 
-            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Vertical, Color.FromArgb(227, 199, 166), Color.FromArgb(245, 230, 211));
+            gradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.BackwardDiagonal, Color.AliceBlue, Color.FromArgb(186, 220, 250));
             gradientPanel1.Controls.Add(sfRoundedButtonAddSize);
             gradientPanel1.Controls.Add(dataGridView1);
             gradientPanel1.Controls.Add(label5);
@@ -187,7 +187,7 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(100, 27);
+            txtName.BeforeTouchSize = new Size(243, 24);
             txtName.BorderStyle = BorderStyle.None;
             txtName.CornerRadius = 7;
             txtName.Location = new Point(52, 120);

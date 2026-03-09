@@ -1,10 +1,10 @@
 ﻿using PFC.App.Controls;
 using PFC.App.Forms;
-using PFC.App.Helper;
-using PFC.App.Helpers; // <-- Make sure you include your Helpers!
+using PFC.App.Helper;  // Using your UIHelper
+using PFC.App.Helpers; // Using your SecurityHelper & SizeHelper
 using PFC.Domain.Models;
 using PFC.Infrastructure;
-using PFC.Services;    // <-- Make sure you include your Services!
+using PFC.Services;    // Using your OrderService & ProductService
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -20,7 +20,6 @@ namespace PFC.App.Views
         private Category _currentFilter = Category.IcedCoffee;
         private Order _currentOrder = new Order();
         private System.Windows.Forms.Timer _searchTimer = new System.Windows.Forms.Timer();
-        private bool _isAddProductUnlocked = false;
         #endregion
 
         #region Constructor
@@ -146,7 +145,7 @@ namespace PFC.App.Views
 
         private void OpenEditProductDialog(Product product)
         {
-            // SECURITY HELPER CALL!
+            // Edit still requires authorization (you can remove this too if you want it completely open)
             if (!SecurityHelper.IsAuthorized()) return;
 
             using var editForm = new EditProductForm(product.Id);
@@ -197,24 +196,15 @@ namespace PFC.App.Views
         {
             if (_currentOrder.Details == null || !_currentOrder.Details.Any())
             {
-                MessageBox.Show("The cart is empty! Please add some items first.", "Empty Cart", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                UIHelper.ShowWarning("The cart is empty! Please add some items first.", "Empty Cart");
                 return;
             }
 
             try
             {
-                using (var db = new AppDbContext())
-                {
-                    _currentOrder.OrderDate = DateTime.Now;
-
-                    foreach (var detail in _currentOrder.Details)
-                    {
-                        detail.Product = null;
-                    }
-
-                    db.Orders.Add(_currentOrder);
-                    db.SaveChanges();
-                }
+                // USES YOUR NEW ORDER SERVICE
+                var orderService = new OrderService();
+                orderService.SaveOrder(_currentOrder);
 
                 MessageBox.Show("Order successfully saved!", "Transaction Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -239,7 +229,7 @@ namespace PFC.App.Views
 
         private void btnAddProduct_Click(object? sender, EventArgs e)
         {
-    
+            // Security explicitly removed here per your instructions
             using (var addForm = new AddProductForm())
             {
                 if (addForm.ShowDialog() == DialogResult.OK)
@@ -264,14 +254,14 @@ namespace PFC.App.Views
         private void btnCash_Click(object sender, EventArgs e)
         {
             _currentOrder.PaymentMethod = PaymentMethod.Cash;
-            // (Swaps the colors automatically)
+            // Uses UIHelper to swap colors automatically
             UIHelper.SetPaymentButtonActive(btnCash, btnOnline);
         }
 
         private void btnOnline_Click(object sender, EventArgs e)
         {
             _currentOrder.PaymentMethod = PaymentMethod.Online;
-            // (Swaps the colors automatically)
+            // Uses UIHelper to swap colors automatically
             UIHelper.SetPaymentButtonActive(btnOnline, btnCash);
         }
 

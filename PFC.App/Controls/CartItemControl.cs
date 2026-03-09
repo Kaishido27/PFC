@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using PFC.App.Helper;
 
 namespace PFC.App.Controls
 {
@@ -50,7 +51,7 @@ namespace PFC.App.Controls
             lblLineTotal.Text = $"₱{item.TotalLinePrice:N2}";
 
             // Format the Size
-            string prettySize = FormatEnumName(item.SelectedSize.ToString());
+            string prettySize = item.SelectedSize.ToFriendlyString();
 
             // Format the Add-ons
             List<string> prettyAddOns = new List<string>();
@@ -58,7 +59,8 @@ namespace PFC.App.Controls
             {
                 foreach (var addon in item.AddOns)
                 {
-                    prettyAddOns.Add($"+ {FormatEnumName(addon.ToString())}");
+                    
+                    prettyAddOns.Add($"+ {UIHelper.FormatEnumName(addon.ToString())}");
                 }
             }
 

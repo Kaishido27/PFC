@@ -50,7 +50,8 @@
             // 
             // pfcRoundedGradientPanel1
             // 
-            pfcRoundedGradientPanel1.BackColor = Color.Bisque;
+            pfcRoundedGradientPanel1.BackColor = Color.FromArgb(0, 131, 143);
+            pfcRoundedGradientPanel1.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.ForwardDiagonal, SystemColors.ControlLightLight, Color.DodgerBlue);
             pfcRoundedGradientPanel1.Border3DStyle = Border3DStyle.Bump;
             pfcRoundedGradientPanel1.BorderColor = Color.White;
             pfcRoundedGradientPanel1.BorderStyle = BorderStyle.None;
@@ -69,7 +70,7 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.logo_goldIcon;
-            pictureBox1.Location = new Point(24, 3);
+            pictureBox1.Location = new Point(25, 9);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(77, 81);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -79,6 +80,7 @@
             // lblProductCategory
             // 
             lblProductCategory.AutoSize = true;
+            lblProductCategory.BackColor = Color.Transparent;
             lblProductCategory.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
             lblProductCategory.Location = new Point(157, 47);
             lblProductCategory.Name = "lblProductCategory";
@@ -89,6 +91,7 @@
             // lblProductName
             // 
             lblProductName.AutoSize = true;
+            lblProductName.BackColor = Color.Transparent;
             lblProductName.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblProductName.Location = new Point(128, 9);
             lblProductName.Name = "lblProductName";
@@ -217,7 +220,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Beige;
+            BackColor = Color.PowderBlue;
             ClientSize = new Size(632, 730);
             Controls.Add(cboSizes);
             Controls.Add(btnCancel);

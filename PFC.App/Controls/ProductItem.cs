@@ -3,8 +3,8 @@ using Syncfusion.Drawing;
 using System;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using PFC.App.Helper; // Ensure this matches your actual folder name!
 
 namespace PFC.App.Controls
 {
@@ -16,10 +16,7 @@ namespace PFC.App.Controls
         #region Properties & Events
 
         public Product? ProductData { get; private set; }
-
         public event EventHandler<ProductEventArgs>? ProductClicked;
-
-        // NEW: Event for when the Edit icon is clicked
         public event EventHandler<ProductEventArgs>? EditClicked;
 
         #endregion
@@ -49,16 +46,21 @@ namespace PFC.App.Controls
             this.ProductData = product;
 
             lblName.Text = product.Name ?? "Unknown Product";
-            lblCategory.Text = FormatEnumName(product.Category.ToString());
+
+            // Uses your centralized Regex formatter
+            lblCategory.Text = UIHelper.FormatEnumName(product.Category.ToString());
 
             if (product.SizeOptions != null && product.SizeOptions.Any())
             {
                 decimal minPrice = product.SizeOptions.Min(s => s.Price);
                 lblPrice.Text = $"Starts at {minPrice:C}";
 
+                // 1. USE YOUR NEW SIZE TRANSLATOR HERE!
+                // This will print "8 oz" instead of "Eight Oz"
                 var sizeList = product.SizeOptions
-                      .Select(s => FormatEnumName(s.Size.ToString()))
+                      .Select(s => s.Size.ToFriendlyString())
                       .ToList();
+
                 lblAvailableSizes.Text = string.Join("\n", sizeList);
             }
             else
@@ -109,7 +111,9 @@ namespace PFC.App.Controls
 
                 pfcRoundedGradientPanel1.BackgroundColor = new BrushInfo(style, primary, secondary);
 
-                var textColor = GetContrastingTextColor(primary);
+                // 2. USE YOUR UI HELPER FOR COLOR MATH!
+                var textColor = UIHelper.GetContrastingTextColor(primary);
+
                 lblName.ForeColor = textColor;
                 lblPrice.ForeColor = textColor;
                 lblCategory.ForeColor = textColor;
@@ -119,24 +123,6 @@ namespace PFC.App.Controls
             {
                 // If designer control missing or anything fails, don't crash the UI
             }
-        }
-
-        #endregion
-
-        // ==========================================
-        // HELPER METHODS
-        // ==========================================
-        #region Helper Methods
-
-        private string FormatEnumName(string name)
-        {
-            return Regex.Replace(name, "([a-z])([A-Z])", "$1 $2");
-        }
-
-        private Color GetContrastingTextColor(Color bg)
-        {
-            double luminance = (0.299 * bg.R + 0.587 * bg.G + 0.114 * bg.B) / 255;
-            return luminance > 0.6 ? Color.Black : Color.White;
         }
 
         #endregion
@@ -156,7 +142,6 @@ namespace PFC.App.Controls
 
         private void ClickEdit_Click(object sender, EventArgs e)
         {
-            // Stop the click from bubbling to the parent (prevents opening OrderDialog)
             if (ProductData is not null)
             {
                 EditClicked?.Invoke(this, new ProductEventArgs(ProductData));
