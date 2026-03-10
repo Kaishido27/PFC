@@ -72,8 +72,20 @@ namespace PFC.App.Views
             chartRevenueProfitTrends.TextRenderingHint = TextRenderingHint.AntiAlias;
             chartRevenueProfitTrends.ChartArea.PrimaryXAxis.Font = new Font("Segoe UI", 9F);
             chartRevenueProfitTrends.ChartArea.PrimaryYAxis.Font = new Font("Segoe UI", 9F);
+            
+            // Format Y-axis to show 2 decimal places
+            chartRevenueProfitTrends.PrimaryYAxis.ValueType = ChartValueType.Double;
+            chartRevenueProfitTrends.PrimaryYAxis.LabelIntersectAction = ChartLabelIntersectAction.None;
+            chartRevenueProfitTrends.PrimaryYAxis.Format = "₱#,##0.00";
+            
             chartRevenueProfitTrends.Legend.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             chartRevenueProfitTrends.ShowToolTips = true;
+
+            if (chartRevenueProfitTrends.Series.Count >= 2) 
+            {
+                chartRevenueProfitTrends.Series[0].Text = "Revenue (Blue)";
+                chartRevenueProfitTrends.Series[1].Text = "Profit (Green)";
+            }
         }
 
         private void InitializeDateRange()
@@ -293,6 +305,12 @@ namespace PFC.App.Views
 
                 chartRevenueProfitTrends.Text = "Revenue & Profit Trends";
 
+                // Move legend to top-right, outside the chart area
+                chartRevenueProfitTrends.Legend.Position = ChartDock.Right;
+                chartRevenueProfitTrends.LegendPosition = ChartDock.Right;
+                chartRevenueProfitTrends.Legend.Alignment = ChartAlignment.Near; // Near = Top
+                chartRevenueProfitTrends.Legend.Orientation = Syncfusion.Windows.Forms.Chart.ChartOrientation.Vertical;
+
                 var dailyData = orders
                     .GroupBy(o => o.OrderDate.Date)
                     .OrderBy(g => g.Key)
@@ -311,16 +329,43 @@ namespace PFC.App.Views
                     chartRevenueProfitTrends.Series[1].Points.Add(dateLabel, (double)day.Profit);
                 }
 
+                // Configure Revenue series (Blue) - Lower opacity, renders FIRST (behind)
+                chartRevenueProfitTrends.Series[0].Type = ChartSeriesType.SplineArea;
                 chartRevenueProfitTrends.Series[0].Style.DisplayText = false;
-                chartRevenueProfitTrends.Series[1].Style.DisplayText = false;
-
+                
+                // More transparent blue fill (50% opacity) - so green shows on top
+                chartRevenueProfitTrends.Series[0].Style.Interior = new Syncfusion.Drawing.BrushInfo(
+                    Color.FromArgb(130, 174, 217, 224)); // 130 = 50% opacity
+                
+                // Solid blue border
+                chartRevenueProfitTrends.Series[0].Style.Border.Color = Color.FromArgb(174, 217, 224);
+                chartRevenueProfitTrends.Series[0].Style.Border.Width = 3F;
+                
                 chartRevenueProfitTrends.Series[0].Style.Symbol.Shape = ChartSymbolShape.Circle;
                 chartRevenueProfitTrends.Series[0].Style.Symbol.Size = new Size(8, 8);
-                chartRevenueProfitTrends.Series[0].Style.Symbol.Color = Color.FromArgb(255, 183, 77);
+                chartRevenueProfitTrends.Series[0].Style.Symbol.Color = Color.FromArgb(174, 217, 224);
 
+                // Set Z-Order: Revenue behind (lower)
+                chartRevenueProfitTrends.Series[0].ZOrder = 0;
+
+                // Configure Profit series (Green) - Renders SECOND (in front)
+                chartRevenueProfitTrends.Series[1].Type = ChartSeriesType.SplineArea;
+                chartRevenueProfitTrends.Series[1].Style.DisplayText = false;
+                
+                // Semi-transparent green fill (60% opacity) - shows on top
+                chartRevenueProfitTrends.Series[1].Style.Interior = new Syncfusion.Drawing.BrushInfo(
+                    Color.FromArgb(150, 76, 175, 80)); // 150 = 60% opacity
+                
+                // Solid green border
+                chartRevenueProfitTrends.Series[1].Style.Border.Color = Color.FromArgb(76, 175, 80);
+                chartRevenueProfitTrends.Series[1].Style.Border.Width = 3F;
+                
                 chartRevenueProfitTrends.Series[1].Style.Symbol.Shape = ChartSymbolShape.Circle;
                 chartRevenueProfitTrends.Series[1].Style.Symbol.Size = new Size(8, 8);
-                chartRevenueProfitTrends.Series[1].Style.Symbol.Color = Color.FromArgb(129, 199, 132);
+                chartRevenueProfitTrends.Series[1].Style.Symbol.Color = Color.FromArgb(76, 175, 80);
+
+                // Set Z-Order: Profit in front (higher)
+                chartRevenueProfitTrends.Series[1].ZOrder = 1;
 
                 if (dailyData.Any())
                 {

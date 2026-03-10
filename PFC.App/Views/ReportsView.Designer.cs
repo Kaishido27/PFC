@@ -372,13 +372,11 @@
             chartRevenueProfitTrends.ChartArea.CursorLocation = new Point(0, 0);
             chartRevenueProfitTrends.ChartArea.CursorReDraw = false;
             chartRevenueProfitTrends.ChartInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
-            // 
-            // 
-            // 
-            chartRevenueProfitTrends.Legend.Location = new Point(86, 81);
-            chartRevenueProfitTrends.Legend.Orientation = Syncfusion.Windows.Forms.Chart.ChartOrientation.Horizontal;
-            chartRevenueProfitTrends.Legend.Position = Syncfusion.Windows.Forms.Chart.ChartDock.Top;
-            chartRevenueProfitTrends.LegendPosition = Syncfusion.Windows.Forms.Chart.ChartDock.Top;
+            chartRevenueProfitTrends.Legend.Location = new Point(1050, 81);
+            chartRevenueProfitTrends.Legend.Orientation = Syncfusion.Windows.Forms.Chart.ChartOrientation.Vertical;
+            chartRevenueProfitTrends.Legend.Position = Syncfusion.Windows.Forms.Chart.ChartDock.Right;
+            chartRevenueProfitTrends.Legend.Alignment = Syncfusion.Windows.Forms.Chart.ChartAlignment.Near;
+            chartRevenueProfitTrends.LegendPosition = Syncfusion.Windows.Forms.Chart.ChartDock.Right;
             chartRevenueProfitTrends.Location = new Point(35, 868);
             chartRevenueProfitTrends.Name = "chartRevenueProfitTrends";
             chartRevenueProfitTrends.PrimaryXAxis.GridLineType.ForeColor = Color.LightGray;
@@ -392,14 +390,15 @@
             chartRevenueProfitTrends.PrimaryYAxis.Title = "Amount (₱)";
             chartSeries1.FancyToolTip.ResizeInsideSymbol = true;
             chartSeries1.Name = "Revenue";
+            chartSeries1.Text = "Revenue (Blue)";
             chartSeries1.Resolution = 0D;
             chartSeries1.StackingGroup = "Default Group";
             chartSeries1.Style.AltTagFormat = "";
-            chartSeries1.Style.Border.Color = Color.FromArgb(255, 183, 77);
+            chartSeries1.Style.Border.Color = Color.FromArgb(65, 105, 225);
             chartSeries1.Style.Border.Width = 3F;
-            chartSeries1.Style.DisplayText = true;
+            chartSeries1.Style.DisplayText = false;
             chartSeries1.Style.DrawTextShape = false;
-            chartSeries1.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(120, 255, 183, 77));
+            chartSeries1.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(130, 65, 105, 225));
             chartLineInfo1.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
             chartLineInfo1.Color = SystemColors.ControlText;
             chartLineInfo1.DashPattern = null;
@@ -410,31 +409,29 @@
             chartCustomShapeInfo1.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
             chartSeries1.Style.TextShape = chartCustomShapeInfo1;
             chartSeries1.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
+            chartSeries1.ZOrder = 0;
             chartSeries2.FancyToolTip.ResizeInsideSymbol = true;
             chartSeries2.Name = "Profit";
+            chartSeries2.Text = "Profit (Green)";
             chartSeries2.Resolution = 0D;
             chartSeries2.StackingGroup = "Default Group";
             chartSeries2.Style.AltTagFormat = "";
-            chartSeries2.Style.Border.Color = Color.FromArgb(129, 199, 132);
+            chartSeries2.Style.Border.Color = Color.FromArgb(76, 175, 80);
             chartSeries2.Style.Border.Width = 3F;
-            chartSeries2.Style.DisplayText = true;
+            chartSeries2.Style.DisplayText = false;
             chartSeries2.Style.DrawTextShape = false;
-            chartSeries2.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(120, 129, 199, 132));
+            chartSeries2.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(150, 76, 175, 80));
             chartCustomShapeInfo2.Border = chartLineInfo1;
             chartCustomShapeInfo2.Color = SystemColors.HighlightText;
             chartCustomShapeInfo2.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
             chartSeries2.Style.TextShape = chartCustomShapeInfo2;
             chartSeries2.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
+            chartSeries2.ZOrder = 1;
             chartRevenueProfitTrends.Series.Add(chartSeries1);
             chartRevenueProfitTrends.Series.Add(chartSeries2);
             chartRevenueProfitTrends.Size = new Size(1142, 475);
             chartRevenueProfitTrends.TabIndex = 12;
             chartRevenueProfitTrends.Text = "Revenue & Profit Trends";
-            // 
-            // 
-            // 
-            chartRevenueProfitTrends.Title.Name = "Default";
-            chartRevenueProfitTrends.Titles.Add(chartRevenueProfitTrends.Title);
             // 
             // label10
             // 
