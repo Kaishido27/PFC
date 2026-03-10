@@ -28,6 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries1 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
+            Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo1 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
+            Syncfusion.Windows.Forms.Chart.ChartLineInfo chartLineInfo1 = new Syncfusion.Windows.Forms.Chart.ChartLineInfo();
+            
             panel1 = new Panel();
             label1 = new Label();
             label3 = new Label();
@@ -48,6 +52,8 @@
             dgvRecentTransactions = new DataGridView();
             label5 = new Label();
             label7 = new Label();
+            chartHourlyPulse = new Syncfusion.Windows.Forms.Chart.ChartControl();
+            
             panel1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -115,6 +121,7 @@
             tableLayoutPanel1.Controls.Add(gradientPanel2, 1, 1);
             tableLayoutPanel1.Controls.Add(pnlTotalProfit, 2, 1);
             tableLayoutPanel1.Controls.Add(gradientPanel1, 0, 2);
+            tableLayoutPanel1.Controls.Add(chartHourlyPulse, 2, 2);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 66);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -296,36 +303,95 @@
             label7.TabIndex = 3;
             label7.Text = "Recent Transactions";
             // 
-            // DashboardView
+            // chartHourlyPulse
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
-            BackColor = Color.White;
-            Controls.Add(tableLayoutPanel1);
-            Controls.Add(panel1);
-            Name = "DashboardView";
-            Size = new Size(1105, 753);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            tableLayoutPanel1.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pnlDailySales).EndInit();
-            pnlDailySales.ResumeLayout(false);
-            pnlDailySales.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gradientPanel2).EndInit();
-            gradientPanel2.ResumeLayout(false);
-            gradientPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pnlTotalProfit).EndInit();
-            pnlTotalProfit.ResumeLayout(false);
-            pnlTotalProfit.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
-            gradientPanel1.ResumeLayout(false);
-            gradientPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).EndInit();
-            ResumeLayout(false);
+            chartHourlyPulse.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
+            chartHourlyPulse.ChartArea.AutoScale = true;
+            chartHourlyPulse.ChartArea.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
+            chartHourlyPulse.ChartArea.CursorLocation = new Point(0, 0);
+            chartHourlyPulse.ChartArea.CursorReDraw = false;
+            chartHourlyPulse.ChartInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
+            chartHourlyPulse.Dock = DockStyle.Fill;
+            chartHourlyPulse.Legend.Visible = false;
+            chartHourlyPulse.Location = new Point(735, 243);
+            chartHourlyPulse.Name = "chartHourlyPulse";
+            chartHourlyPulse.PrimaryXAxis.Font = new Font("Segoe UI", 8F);
+            chartHourlyPulse.PrimaryXAxis.GridLineType.ForeColor = Color.FromArgb(147, 197, 253);
+            chartHourlyPulse.PrimaryXAxis.GridLineType.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartHourlyPulse.PrimaryXAxis.LogLabelsDisplayMode = Syncfusion.Windows.Forms.Chart.LogLabelsDisplayMode.Default;
+            chartHourlyPulse.PrimaryXAxis.Margin = true;
+            chartHourlyPulse.PrimaryXAxis.Title = "Time (Hour)";
+            chartHourlyPulse.PrimaryXAxis.TitleFont = new Font("Segoe UI", 9F, FontStyle.Bold);
+            chartHourlyPulse.PrimaryXAxis.ValueType = Syncfusion.Windows.Forms.Chart.ChartValueType.Category;
+            chartHourlyPulse.PrimaryYAxis.Font = new Font("Segoe UI", 8F);
+            chartHourlyPulse.PrimaryYAxis.Format = "₱#,##0.00";
+            chartHourlyPulse.PrimaryYAxis.GridLineType.ForeColor = Color.FromArgb(147, 197, 253);
+            chartHourlyPulse.PrimaryYAxis.GridLineType.DashStyle = System.Drawing.Drawing2D.DashStyle.Dot;
+            chartHourlyPulse.PrimaryYAxis.LogLabelsDisplayMode = Syncfusion.Windows.Forms.Chart.LogLabelsDisplayMode.Default;
+            chartHourlyPulse.PrimaryYAxis.Margin = true;
+            chartHourlyPulse.PrimaryYAxis.Title = "Sales (₱)";
+            chartHourlyPulse.PrimaryYAxis.TitleFont = new Font("Segoe UI", 9F, FontStyle.Bold);
+            chartHourlyPulse.PrimaryYAxis.ValueType = Syncfusion.Windows.Forms.Chart.ChartValueType.Double;
+            chartSeries1.FancyToolTip.ResizeInsideSymbol = true;
+            chartSeries1.Name = "HourlySales";
+            chartSeries1.Text = "Hourly Sales";
+            chartSeries1.Resolution = 0D;
+            chartSeries1.StackingGroup = "Default Group";
+            chartSeries1.Style.AltTagFormat = "";
+            chartSeries1.Style.Border.Color = Color.FromArgb(59, 130, 246);
+            chartSeries1.Style.Border.Width = 3F;
+            chartSeries1.Style.DisplayText = false;
+            chartSeries1.Style.DrawTextShape = false;
+            chartSeries1.Style.Interior = new Syncfusion.Drawing.BrushInfo(Color.FromArgb(150, 96, 165, 250));
+    chartLineInfo1.Alignment = System.Drawing.Drawing2D.PenAlignment.Center;
+    chartLineInfo1.Color = SystemColors.ControlText;
+    chartLineInfo1.DashPattern = null;
+    chartLineInfo1.DashStyle = System.Drawing.Drawing2D.DashStyle.Solid;
+    chartLineInfo1.Width = 1F;
+    chartCustomShapeInfo1.Border = chartLineInfo1;
+    chartCustomShapeInfo1.Color = SystemColors.HighlightText;
+    chartCustomShapeInfo1.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
+    chartSeries1.Style.TextShape = chartCustomShapeInfo1;
+    chartSeries1.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
+    chartHourlyPulse.Series.Add(chartSeries1);
+    chartHourlyPulse.Size = new Size(357, 436);
+    chartHourlyPulse.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+    chartHourlyPulse.TabIndex = 5;
+    chartHourlyPulse.Text = "Hourly Sales Pulse";
+    chartHourlyPulse.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+    chartHourlyPulse.Title.Name = "Default";
+    chartHourlyPulse.Titles.Add(chartHourlyPulse.Title);
+    // 
+    // DashboardView
+    // 
+    AutoScaleDimensions = new SizeF(8F, 20F);
+    AutoScaleMode = AutoScaleMode.Font;
+    AutoScroll = true;
+    BackColor = Color.White;
+    Controls.Add(tableLayoutPanel1);
+    Controls.Add(panel1);
+    Name = "DashboardView";
+    Size = new Size(1105, 753);
+    panel1.ResumeLayout(false);
+    panel1.PerformLayout();
+    tableLayoutPanel1.ResumeLayout(false);
+    panel2.ResumeLayout(false);
+    panel2.PerformLayout();
+    ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+    ((System.ComponentModel.ISupportInitialize)pnlDailySales).EndInit();
+    pnlDailySales.ResumeLayout(false);
+    pnlDailySales.PerformLayout();
+    ((System.ComponentModel.ISupportInitialize)gradientPanel2).EndInit();
+    gradientPanel2.ResumeLayout(false);
+    gradientPanel2.PerformLayout();
+    ((System.ComponentModel.ISupportInitialize)pnlTotalProfit).EndInit();
+    pnlTotalProfit.ResumeLayout(false);
+    pnlTotalProfit.PerformLayout();
+    ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
+    gradientPanel1.ResumeLayout(false);
+    gradientPanel1.PerformLayout();
+    ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).EndInit();
+    ResumeLayout(false);
         }
 
         #endregion
@@ -350,5 +416,6 @@
         private Label label7;
         private DataGridView dgvRecentTransactions;
         private PictureBox pictureBox1;
+        private Syncfusion.Windows.Forms.Chart.ChartControl chartHourlyPulse;
     }
 }
