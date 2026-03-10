@@ -33,8 +33,8 @@
             ProductTab = new Syncfusion.WinForms.Controls.SfButton();
             DashboardTab = new Syncfusion.WinForms.Controls.SfButton();
             Report = new Syncfusion.WinForms.Controls.SfButton();
-            pnlMainContent = new Panel();
             pictureBox1 = new PictureBox();
+            pnlMainContent = new Panel();
             pnlSideBar.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -77,59 +77,62 @@
             // 
             ProductTab.Dock = DockStyle.Fill;
             ProductTab.FlatStyle = FlatStyle.Flat;
-            ProductTab.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ProductTab.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             ProductTab.ForeColor = Color.Black;
+            ProductTab.ImageAlign = ContentAlignment.MiddleLeft;
+            ProductTab.ImageSize = new Size(50, 50);
             ProductTab.Location = new Point(3, 225);
             ProductTab.Name = "ProductTab";
-            ProductTab.Padding = new Padding(60, 0, 0, 0);
+            ProductTab.Padding = new Padding(10, 0, 0, 0);
             ProductTab.Size = new Size(340, 69);
             ProductTab.Style.ForeColor = Color.Black;
+            ProductTab.Style.Image = Properties.Resources.edc;
             ProductTab.TabIndex = 2;
             ProductTab.Text = "Products";
             ProductTab.TextAlign = ContentAlignment.MiddleLeft;
-            ProductTab.Click += this.ProductTab_Click;
+            ProductTab.Click += ProductTab_Click;
             // 
             // DashboardTab
             // 
             DashboardTab.Dock = DockStyle.Fill;
             DashboardTab.FlatStyle = FlatStyle.Flat;
-            DashboardTab.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            DashboardTab.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             DashboardTab.ForeColor = Color.Black;
+            DashboardTab.ImageAlign = ContentAlignment.MiddleLeft;
+            DashboardTab.ImageSize = new Size(35, 35);
             DashboardTab.Location = new Point(3, 150);
             DashboardTab.Name = "DashboardTab";
-            DashboardTab.Padding = new Padding(60, 0, 0, 0);
+            DashboardTab.Padding = new Padding(10, 0, 0, 0);
             DashboardTab.Size = new Size(340, 69);
             DashboardTab.Style.ForeColor = Color.Black;
+            DashboardTab.Style.Image = Properties.Resources.layout;
             DashboardTab.TabIndex = 1;
             DashboardTab.Text = "Dashboard";
             DashboardTab.TextAlign = ContentAlignment.MiddleLeft;
-            DashboardTab.Click += this.DashboardTab_Click;
+            DashboardTab.TextMargin = new Padding(10, 3, 3, 3);
+            DashboardTab.Click += DashboardTab_Click;
             // 
             // Report
             // 
             Report.Dock = DockStyle.Fill;
             Report.FlatStyle = FlatStyle.Flat;
-            Report.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Report.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             Report.ForeColor = Color.Black;
+            Report.ImageAlign = ContentAlignment.MiddleLeft;
+            Report.ImageSize = new Size(40, 40);
             Report.Location = new Point(3, 300);
             Report.Name = "Report";
-            Report.Padding = new Padding(60, 0, 0, 0);
+            Report.Padding = new Padding(10, 0, 0, 0);
             Report.Size = new Size(340, 69);
             Report.Style.FocusedForeColor = Color.Black;
             Report.Style.ForeColor = Color.Black;
+            Report.Style.Image = Properties.Resources.Reports;
             Report.Style.PressedForeColor = Color.Black;
             Report.TabIndex = 3;
             Report.Text = "Reports";
             Report.TextAlign = ContentAlignment.MiddleLeft;
-            Report.Click += this.Report_Click;
-            // 
-            // pnlMainContent
-            // 
-            pnlMainContent.Dock = DockStyle.Fill;
-            pnlMainContent.Location = new Point(0, 0);
-            pnlMainContent.Name = "pnlMainContent";
-            pnlMainContent.Size = new Size(1363, 753);
-            pnlMainContent.TabIndex = 3;
+            Report.TextMargin = new Padding(10, 3, 3, 3);
+            Report.Click += Report_Click;
             // 
             // pictureBox1
             // 
@@ -140,6 +143,14 @@
             pictureBox1.Size = new Size(340, 121);
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
+            // 
+            // pnlMainContent
+            // 
+            pnlMainContent.Dock = DockStyle.Fill;
+            pnlMainContent.Location = new Point(0, 0);
+            pnlMainContent.Name = "pnlMainContent";
+            pnlMainContent.Size = new Size(1363, 753);
+            pnlMainContent.TabIndex = 3;
             // 
             // Main
             // 

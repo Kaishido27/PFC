@@ -122,7 +122,7 @@
             // btnSave
             // 
             btnSave.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold);
-            btnSave.Location = new Point(346, 421);
+            btnSave.Location = new Point(357, 421);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(116, 35);
             btnSave.Style.FocusedBorder = null;
@@ -205,7 +205,7 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(243, 27);
+            txtName.BeforeTouchSize = new Size(100, 27);
             txtName.Location = new Point(32, 117);
             txtName.Name = "txtName";
             txtName.PlaceholderText = "\"e.g Vanilla Latte\"";

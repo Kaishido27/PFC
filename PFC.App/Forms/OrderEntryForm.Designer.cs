@@ -82,7 +82,7 @@
             lblProductCategory.AutoSize = true;
             lblProductCategory.BackColor = Color.Transparent;
             lblProductCategory.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblProductCategory.Location = new Point(157, 47);
+            lblProductCategory.Location = new Point(130, 47);
             lblProductCategory.Name = "lblProductCategory";
             lblProductCategory.Size = new Size(93, 28);
             lblProductCategory.TabIndex = 2;

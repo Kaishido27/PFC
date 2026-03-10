@@ -50,7 +50,7 @@
             btnFlavMilk = new PFC.App.Controls.SfRoundedButton();
             btnHotCoffee = new PFC.App.Controls.SfRoundedButton();
             btnIcedCoffee = new PFC.App.Controls.SfRoundedButton();
-            panel5 = new Panel();
+            pictureBox1 = new PictureBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -59,6 +59,7 @@
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)txtSearch).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chkShowArchived).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -79,7 +80,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1333, 66);
+            panel1.Size = new Size(1363, 66);
             panel1.TabIndex = 1;
             // 
             // panel2
@@ -97,6 +98,7 @@
             // flwCartItems
             // 
             flwCartItems.AutoScroll = true;
+            flwCartItems.BackColor = Color.GhostWhite;
             flwCartItems.Dock = DockStyle.Fill;
             flwCartItems.Location = new Point(0, 67);
             flwCartItems.Name = "flwCartItems";
@@ -105,6 +107,7 @@
             // 
             // btnConfirmOrder
             // 
+            btnConfirmOrder.BackColor = Color.GhostWhite;
             btnConfirmOrder.BorderStyle = BorderStyle.FixedSingle;
             btnConfirmOrder.Controls.Add(btnOnline);
             btnConfirmOrder.Controls.Add(btnCash);
@@ -191,6 +194,7 @@
             // 
             // panel4
             // 
+            panel4.BackColor = Color.GhostWhite;
             panel4.BorderStyle = BorderStyle.FixedSingle;
             panel4.Controls.Add(lblItemCount);
             panel4.Controls.Add(label2);
@@ -224,6 +228,7 @@
             // 
             // panel3
             // 
+            panel3.BackColor = Color.LightCyan;
             panel3.Controls.Add(txtSearch);
             panel3.Controls.Add(chkShowArchived);
             panel3.Controls.Add(btnAddProduct);
@@ -235,16 +240,16 @@
             panel3.Dock = DockStyle.Top;
             panel3.Location = new Point(275, 66);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1058, 102);
+            panel3.Size = new Size(1088, 102);
             panel3.TabIndex = 3;
             // 
             // txtSearch
             // 
             txtSearch.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             txtSearch.BackColor = Color.AliceBlue;
-            txtSearch.BeforeTouchSize = new Size(249, 27);
+            txtSearch.BeforeTouchSize = new Size(100, 27);
             txtSearch.Border3DStyle = Border3DStyle.Flat;
-            txtSearch.Location = new Point(588, 40);
+            txtSearch.Location = new Point(618, 40);
             txtSearch.Name = "txtSearch";
             txtSearch.Office2010ColorScheme = Syncfusion.Windows.Forms.Office2010Theme.Silver;
             txtSearch.PlaceholderText = "Search Products";
@@ -255,9 +260,10 @@
             // chkShowArchived
             // 
             chkShowArchived.AccessibilityEnabled = true;
+            chkShowArchived.Anchor = AnchorStyles.Right;
             chkShowArchived.BeforeTouchSize = new Size(188, 26);
             chkShowArchived.ImageCheckBoxSize = new Size(16, 16);
-            chkShowArchived.Location = new Point(588, 73);
+            chkShowArchived.Location = new Point(647, 70);
             chkShowArchived.Name = "chkShowArchived";
             chkShowArchived.Size = new Size(188, 26);
             chkShowArchived.Style = Syncfusion.Windows.Forms.Tools.CheckBoxAdvStyle.Office2010;
@@ -273,7 +279,7 @@
             btnAddProduct.FlatStyle = FlatStyle.Flat;
             btnAddProduct.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddProduct.ForeColor = Color.WhiteSmoke;
-            btnAddProduct.Location = new Point(859, 27);
+            btnAddProduct.Location = new Point(889, 27);
             btnAddProduct.Name = "btnAddProduct";
             btnAddProduct.Size = new Size(148, 51);
             btnAddProduct.Style.BackColor = Color.FromArgb(2, 132, 199);
@@ -363,21 +369,28 @@
             btnIcedCoffee.Text = "Iced Coffee";
             btnIcedCoffee.Click += BtnIcedCoffee_Click;
             // 
-            // panel5
+            // pictureBox1
             // 
-            panel5.Dock = DockStyle.Right;
-            panel5.Location = new Point(946, 168);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(387, 858);
-            panel5.TabIndex = 7;
+            pictureBox1.BackColor = Color.Azure;
+            pictureBox1.Dock = DockStyle.Right;
+            pictureBox1.Image = Properties.Resources.Productview_SidePicture;
+            pictureBox1.Location = new Point(1021, 168);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(342, 858);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
             // 
             // flowLayoutPanel1
             // 
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.BackColor = Color.Azure;
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(275, 168);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(671, 858);
-            flowLayoutPanel1.TabIndex = 8;
+            flowLayoutPanel1.Padding = new Padding(15, 10, 0, 0);
+            flowLayoutPanel1.Size = new Size(746, 858);
+            flowLayoutPanel1.TabIndex = 5;
             // 
             // ProductView
             // 
@@ -386,12 +399,13 @@
             AutoScroll = true;
             BackColor = Color.White;
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(panel5);
+            Controls.Add(pictureBox1);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "ProductView";
-            Size = new Size(1333, 1026);
+            RightToLeft = RightToLeft.No;
+            Size = new Size(1363, 1026);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel2.ResumeLayout(false);
@@ -403,6 +417,7 @@
             panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)txtSearch).EndInit();
             ((System.ComponentModel.ISupportInitialize)chkShowArchived).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -427,10 +442,10 @@
         private Label label4;
         private Label lblGrandTotal;
         private Controls.SfRoundedButton btnConfirm;
-        private Panel panel5;
-        private FlowLayoutPanel flowLayoutPanel1;
         private Controls.SfRoundedButton btnCash;
         private Controls.SfRoundedButton btnOnline;
         private Syncfusion.Windows.Forms.Tools.CheckBoxAdv chkShowArchived;
+        private PictureBox pictureBox1;
+        private FlowLayoutPanel flowLayoutPanel1;
     }
 }

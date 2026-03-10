@@ -33,17 +33,20 @@
             btnCancel = new PFC.App.Controls.SfRoundedButton();
             label1 = new Label();
             lnkChangePassword = new LinkLabel();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)txtPassword).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtPassword
             // 
-            txtPassword.BeforeTouchSize = new Size(280, 27);
-            txtPassword.Location = new Point(12, 55);
+            txtPassword.BeforeTouchSize = new Size(354, 31);
+            txtPassword.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtPassword.Location = new Point(24, 90);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '●';
             txtPassword.PlaceholderText = "Enter Password";
-            txtPassword.Size = new Size(280, 27);
+            txtPassword.Size = new Size(354, 31);
             txtPassword.TabIndex = 0;
             txtPassword.UseSystemPasswordChar = true;
             // 
@@ -51,7 +54,7 @@
             // 
             btnConfirm.BackColor = Color.FromArgb(128, 255, 128);
             btnConfirm.Font = new Font("Segoe UI Semibold", 9F);
-            btnConfirm.Location = new Point(135, 129);
+            btnConfirm.Location = new Point(220, 167);
             btnConfirm.Name = "btnConfirm";
             btnConfirm.Size = new Size(88, 35);
             btnConfirm.Style.BackColor = Color.FromArgb(128, 255, 128);
@@ -65,7 +68,7 @@
             // 
             btnCancel.BackColor = Color.FromArgb(255, 128, 128);
             btnCancel.Font = new Font("Segoe UI Semibold", 9F);
-            btnCancel.Location = new Point(232, 129);
+            btnCancel.Location = new Point(317, 167);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(88, 35);
             btnCancel.Style.BackColor = Color.FromArgb(255, 128, 128);
@@ -78,17 +81,17 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.Location = new Point(12, 20);
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.Location = new Point(90, 30);
             label1.Name = "label1";
-            label1.Size = new Size(189, 23);
+            label1.Size = new Size(226, 28);
             label1.TabIndex = 3;
             label1.Text = "Enter Admin Password";
             // 
             // lnkChangePassword
             // 
             lnkChangePassword.AutoSize = true;
-            lnkChangePassword.Location = new Point(168, 85);
+            lnkChangePassword.Location = new Point(254, 124);
             lnkChangePassword.Name = "lnkChangePassword";
             lnkChangePassword.Size = new Size(124, 20);
             lnkChangePassword.TabIndex = 4;
@@ -96,13 +99,24 @@
             lnkChangePassword.Text = "Change Password";
             lnkChangePassword.LinkClicked += lnkChangePassword_LinkClicked;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.authenticity;
+            pictureBox1.Location = new Point(12, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(63, 60);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            // 
             // AuthForm
             // 
             AcceptButton = btnConfirm;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnCancel;
-            ClientSize = new Size(332, 176);
+            ClientSize = new Size(417, 214);
+            Controls.Add(pictureBox1);
             Controls.Add(lnkChangePassword);
             Controls.Add(label1);
             Controls.Add(btnCancel);
@@ -114,6 +128,7 @@
             StartPosition = FormStartPosition.CenterParent;
             Text = "Verification";
             ((System.ComponentModel.ISupportInitialize)txtPassword).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -125,5 +140,6 @@
         private Controls.SfRoundedButton btnCancel;
         private Label label1;
         private LinkLabel lnkChangePassword;
+        private PictureBox pictureBox1;
     }
 }

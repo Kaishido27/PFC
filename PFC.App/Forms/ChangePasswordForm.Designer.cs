@@ -33,8 +33,10 @@
             cmbTarget = new ComboBox();
             btnCancel = new PFC.App.Controls.SfRoundedButton();
             btnSave = new PFC.App.Controls.SfRoundedButton();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)txtNewValue).BeginInit();
             ((System.ComponentModel.ISupportInitialize)txtConfirmValue).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtNewValue
@@ -64,7 +66,7 @@
             cmbTarget.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTarget.FormattingEnabled = true;
             cmbTarget.Items.AddRange(new object[] { "Admin Password", "Master Key" });
-            cmbTarget.Location = new Point(12, 43);
+            cmbTarget.Location = new Point(115, 38);
             cmbTarget.Name = "cmbTarget";
             cmbTarget.Size = new Size(151, 28);
             cmbTarget.TabIndex = 8;
@@ -97,6 +99,16 @@
             btnSave.UseVisualStyleBackColor = false;
             btnSave.Click += btnSave_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.authenticity;
+            pictureBox1.Location = new Point(28, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(71, 73);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 11;
+            pictureBox1.TabStop = false;
+            // 
             // ChangePasswordForm
             // 
             AcceptButton = btnSave;
@@ -104,6 +116,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             CancelButton = btnCancel;
             ClientSize = new Size(384, 243);
+            Controls.Add(pictureBox1);
             Controls.Add(btnCancel);
             Controls.Add(btnSave);
             Controls.Add(cmbTarget);
@@ -116,6 +129,7 @@
             Text = "Chnage Password";
             ((System.ComponentModel.ISupportInitialize)txtNewValue).EndInit();
             ((System.ComponentModel.ISupportInitialize)txtConfirmValue).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -127,5 +141,6 @@
         private ComboBox cmbTarget;
         private Controls.SfRoundedButton btnCancel;
         private Controls.SfRoundedButton btnSave;
+        private PictureBox pictureBox1;
     }
 }
