@@ -80,9 +80,9 @@
             sfRoundedButtonAddSize.Name = "sfRoundedButtonAddSize";
             sfRoundedButtonAddSize.Size = new Size(120, 27);
             sfRoundedButtonAddSize.Style.BackColor = Color.White;
-            sfRoundedButtonAddSize.Style.FocusedBackColor = Color.LemonChiffon;
+            sfRoundedButtonAddSize.Style.FocusedBackColor = Color.WhiteSmoke;
             sfRoundedButtonAddSize.Style.FocusedBorder = null;
-            sfRoundedButtonAddSize.Style.HoverBackColor = Color.FromArgb(221, 184, 146);
+            sfRoundedButtonAddSize.Style.HoverBackColor = Color.LimeGreen;
             sfRoundedButtonAddSize.Style.HoverForeColor = Color.Black;
             sfRoundedButtonAddSize.TabIndex = 11;
             sfRoundedButtonAddSize.Text = "Add Size";
@@ -187,7 +187,7 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(243, 24);
+            txtName.BeforeTouchSize = new Size(243, 27);
             txtName.BorderStyle = BorderStyle.None;
             txtName.CornerRadius = 7;
             txtName.Location = new Point(52, 120);

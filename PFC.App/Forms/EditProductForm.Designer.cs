@@ -184,6 +184,7 @@
             sfRoundedButtonAddSize.Size = new Size(120, 27);
             sfRoundedButtonAddSize.Style.BackColor = Color.Snow;
             sfRoundedButtonAddSize.Style.FocusedBorder = null;
+            sfRoundedButtonAddSize.Style.HoverBackColor = Color.LimeGreen;
             sfRoundedButtonAddSize.TabIndex = 8;
             sfRoundedButtonAddSize.Text = "Add Size";
             sfRoundedButtonAddSize.UseVisualStyleBackColor = false;
@@ -205,7 +206,7 @@
             // 
             // txtName
             // 
-            txtName.BeforeTouchSize = new Size(100, 27);
+            txtName.BeforeTouchSize = new Size(243, 27);
             txtName.Location = new Point(32, 117);
             txtName.Name = "txtName";
             txtName.PlaceholderText = "\"e.g Vanilla Latte\"";

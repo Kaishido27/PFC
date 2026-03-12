@@ -65,6 +65,17 @@ namespace PFC.Services
             db.Orders.Add(newOrder);
             db.SaveChanges();
         }
+
+        public List<Order> GetFullOrderData(DateTime start, DateTime end)
+        {
+            using var db = new AppDbContext();
+            return db.Orders
+                     .Include(o => o.Details)
+                        .ThenInclude(d => d.Product)
+                     .Where(o => o.OrderDate >= start && o.OrderDate <= end)
+                     .OrderByDescending(o => o.OrderDate)
+                     .ToList();
+        }
     }
 }
 

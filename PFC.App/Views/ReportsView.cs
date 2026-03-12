@@ -1,4 +1,5 @@
-﻿using PFC.App.Helper;
+﻿using ClosedXML.Excel;
+using PFC.App.Helper;
 using PFC.App.Helpers;
 using PFC.Domain.Models;
 using PFC.Services;
@@ -13,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ClosedXML;
 
 namespace PFC.App.Views
 {
@@ -517,66 +519,168 @@ namespace PFC.App.Views
         #region Export
         private void btnExport_Click(object? sender, EventArgs e)
         {
-            if (dgvReports.Rows.Count == 0)
+            // 1. Capture Date Range from UI
+            var start = dtpStartDate.Value.Date;
+            var end = dtpEndDate.Value.Date.AddDays(1).AddTicks(-1);
+
+            // 2. Fetch Data via Service Layer
+            var orderService = new OrderService();
+            var orders = orderService.GetFullOrderData(start, end);
+
+            if (!orders.Any())
             {
-                // USE HELPER: Much cleaner warning!
-                UIHelper.ShowWarning("No data available to export.");
+                UIHelper.ShowWarning("No data found for the selected range.");
                 return;
             }
 
+            // 3. Setup Save Dialog
             using var saveDialog = new SaveFileDialog
             {
-                Filter = "CSV File (*.csv)|*.csv",
-                Title = "Export Report",
-                FileName = $"CatBrews_Report_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
+                Filter = "Excel Workbook (*.xlsx)|*.xlsx",
+                FileName = $"CatBrews_BusinessReport_{DateTime.Now:yyyyMMdd}.xlsx",
+                Title = "Export Business Report"
             };
 
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    StringBuilder sb = new StringBuilder();
-
-                    sb.AppendLine("=== SUMMARY REPORT ===");
-                    sb.AppendLine($"\"Date Range\",\"{dtpStartDate.Value:MMM dd, yyyy} - {dtpEndDate.Value:MMM dd, yyyy}\"");
-                    sb.AppendLine($"\"Total Revenue\",\"{lblRevenueValue?.Text}\"");
-                    sb.AppendLine($"\"Total Profit\",\"{lblProfitValue?.Text}\"");
-                    sb.AppendLine($"\"Total Cost\",\"{lblCostValue?.Text}\"");
-                    sb.AppendLine($"\"Average Order Value\",\"{lblAvgOrderValue?.Text}\"");
-                    sb.AppendLine();
-                    sb.AppendLine("=== TRANSACTION DETAILS ===");
-
-                    var headers = dgvReports.Columns.Cast<DataGridViewColumn>();
-                    sb.AppendLine(string.Join(",", headers.Select(c => $"\"{c.HeaderText}\"")));
-
-                    foreach (DataGridViewRow row in dgvReports.Rows)
+                    using (var workbook = new XLWorkbook())
                     {
-                        if (!row.IsNewRow)
+                        var sheet = workbook.Worksheets.Add("Business Report");
+                        var orderRows = new List<int>(); // To track rows for formulas
+
+                        // ==========================================
+                        // SECTION 1: SUMMARY REPORT "CARD"
+                        // ==========================================
+                        sheet.Cell("A1").Value = "=== SUMMARY REPORT ===";
+                        sheet.Range("A1:B1").Merge().Style.Font.SetBold().Fill.SetBackgroundColor(XLColor.FromHtml("#F2F2F2"));
+
+                        sheet.Cell("A2").Value = "Date Range:";
+                        sheet.Cell("B2").Value = $"{start:MMM dd, yyyy} - {end:MMM dd, yyyy}";
+
+                        sheet.Cell("A3").Value = "Total Revenue:";
+                        sheet.Cell("A4").Value = "Total Profit:";
+                        sheet.Cell("A5").Value = "Total Cost:";
+                        sheet.Cell("A6").Value = "Average Order:";
+
+                        // Style the Summary Card
+                        sheet.Range("A2:A6").Style.Font.SetBold();
+                        sheet.Range("A1:B6").Style.Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+                        // ==========================================
+                        // SECTION 2: TRANSACTION HISTORY & DETAILS
+                        // ==========================================
+                        int currentRow = 9;
+                        sheet.Cell(currentRow, 1).Value = "=== TRANSACTION HISTORY & DETAILS ===";
+                        sheet.Range(currentRow, 1, currentRow, 6).Merge().Style.Font.SetBold().Fill.SetBackgroundColor(XLColor.FromHtml("#F2F2F2"));
+                        sheet.Range(currentRow, 1, currentRow, 6).Style.Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+                        currentRow++;
+                        string[] transHeaders = { "OrderID", "Timestamp", "Payment", "Cost", "Revenue", "Profit" };
+                        for (int i = 0; i < transHeaders.Length; i++)
                         {
-                            var cells = row.Cells.Cast<DataGridViewCell>();
-                            // Uses FormattedValue so enums display correctly
-                            sb.AppendLine(string.Join(",", cells.Select(c => $"\"{c.FormattedValue?.ToString()}\"")));
+                            var cell = sheet.Cell(currentRow, i + 1);
+                            cell.Value = transHeaders[i];
+                            cell.Style.Font.SetBold().Border.SetBottomBorder(XLBorderStyleValues.Thin);
                         }
+
+                        currentRow++;
+                        foreach (var o in orders)
+                        {
+                            // Track this specific row index for the Summary Formulas later
+                            orderRows.Add(currentRow);
+
+                            sheet.Cell(currentRow, 1).Value = o.Id;
+                            sheet.Cell(currentRow, 2).Value = o.OrderDate.ToString("MM/dd HH:mm");
+                            sheet.Cell(currentRow, 3).Value = o.PaymentMethod.ToString();
+                            sheet.Cell(currentRow, 4).Value = o.TotalCost;
+                            sheet.Cell(currentRow, 5).Value = o.TotalAmount;
+
+                            // EXCEL FORMULA: Profit = Revenue - Cost
+                            sheet.Cell(currentRow, 6).FormulaA1 = $"E{currentRow}-D{currentRow}";
+
+                            sheet.Range(currentRow, 1, currentRow, 6).Style.Font.SetBold();
+                            sheet.Range(currentRow, 4, currentRow, 6).Style.NumberFormat.Format = "₱#,##0.00";
+                            currentRow++;
+
+                            // Itemized Details (Indented sub-rows)
+                            foreach (var detail in o.Details)
+                            {
+                                sheet.Cell(currentRow, 2).Value = $"   ↳ {detail.Product?.Name} ({detail.SelectedSize.ToFriendlyString()})";
+                                sheet.Cell(currentRow, 2).Style.Font.SetItalic().Font.FontColor = XLColor.SlateGray;
+
+                                var addOns = (detail.AddOns != null && detail.AddOns.Any())
+                                             ? " + " + string.Join(", ", detail.AddOns.Select(a => UIHelper.FormatEnumName(a.ToString())))
+                                             : "";
+
+                                sheet.Cell(currentRow, 3).Value = addOns;
+                                sheet.Cell(currentRow, 5).Value = detail.TotalLinePrice;
+                                sheet.Cell(currentRow, 5).Style.NumberFormat.Format = "₱#,##0.00";
+                                currentRow++;
+                            }
+                            currentRow++; // Gap between unique orders
+                        }
+
+                        // ==========================================
+                        // SECTION 3: TOP SELLING TRENDS
+                        // ==========================================
+                        currentRow += 1;
+                        sheet.Cell(currentRow, 1).Value = "=== TOP SELLING PRODUCTS ===";
+                        sheet.Range(currentRow, 1, currentRow, 4).Merge().Style.Font.SetBold().Fill.SetBackgroundColor(XLColor.FromHtml("#F2F2F2"));
+                        sheet.Range(currentRow, 1, currentRow, 4).Style.Border.SetOutsideBorder(XLBorderStyleValues.Thin);
+
+                        currentRow++;
+                        string[] trendHeaders = { "Product", "Category", "Units Sold", "Total Revenue" };
+                        for (int i = 0; i < trendHeaders.Length; i++)
+                        {
+                            sheet.Cell(currentRow, i + 1).Value = trendHeaders[i];
+                            sheet.Cell(currentRow, i + 1).Style.Font.SetBold().Border.SetBottomBorder(XLBorderStyleValues.Thin);
+                        }
+
+                        // Compute trends from the list
+                        var productStats = orders.SelectMany(o => o.Details)
+                            .GroupBy(d => new { d.Product.Name, d.Product.Category })
+                            .Select(g => new {
+                                Name = g.Key.Name,
+                                Cat = g.Key.Category.ToString(),
+                                Sold = g.Sum(x => x.Quantity),
+                                Rev = g.Sum(x => x.TotalLinePrice)
+                            })
+                            .OrderByDescending(x => x.Sold).Take(10);
+
+                        currentRow++;
+                        foreach (var stat in productStats)
+                        {
+                            sheet.Cell(currentRow, 1).Value = stat.Name;
+                            sheet.Cell(currentRow, 2).Value = UIHelper.FormatEnumName(stat.Cat);
+                            sheet.Cell(currentRow, 3).Value = stat.Sold;
+                            sheet.Cell(currentRow, 4).Value = stat.Rev;
+                            sheet.Cell(currentRow, 4).Style.NumberFormat.Format = "₱#,##0.00";
+                            currentRow++;
+                        }
+
+                        // ==========================================
+                        // FINAL STEP: CONNECT SUMMARY TO DATA VIA FORMULAS
+                        // ==========================================
+                        // This creates a formula string like: "E10,E14,E18"
+                        string revenueRange = string.Join(",", orderRows.Select(r => $"E{r}"));
+                        string profitRange = string.Join(",", orderRows.Select(r => $"F{r}"));
+                        string costRange = string.Join(",", orderRows.Select(r => $"D{r}"));
+
+                        sheet.Cell("B3").FormulaA1 = $"SUM({revenueRange})";
+                        sheet.Cell("B4").FormulaA1 = $"SUM({profitRange})";
+                        sheet.Cell("B5").FormulaA1 = $"SUM({costRange})";
+                        sheet.Cell("B6").FormulaA1 = $"AVERAGE({revenueRange})";
+
+                        sheet.Range("B3:B6").Style.NumberFormat.Format = "₱#,##0.00";
+
+                        // Final Polish
+                        sheet.Columns().AdjustToContents();
+                        workbook.SaveAs(saveDialog.FileName);
                     }
 
-                    // Add Top Selling Products section
-                    sb.AppendLine();
-                    sb.AppendLine("=== TOP SELLING PRODUCTS ===");
-
-                    var topHeaders = dgvTopProducts.Columns.Cast<DataGridViewColumn>();
-                    sb.AppendLine(string.Join(",", topHeaders.Select(c => $"\"{c.HeaderText}\"")));
-
-                    foreach (DataGridViewRow row in dgvTopProducts.Rows)
-                    {
-                        if (!row.IsNewRow)
-                        {
-                            var cells = row.Cells.Cast<DataGridViewCell>();
-                            sb.AppendLine(string.Join(",", cells.Select(c => $"\"{c.FormattedValue?.ToString()}\"")));
-                        }
-                    }
-
-                    File.WriteAllText(saveDialog.FileName, sb.ToString(), Encoding.UTF8);
-                    MessageBox.Show("Export Successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Comprehensive Business Report generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {

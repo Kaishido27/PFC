@@ -229,30 +229,30 @@
             // lblGrandProfit
             // 
             lblGrandProfit.AutoSize = true;
-            lblGrandProfit.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandProfit.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             lblGrandProfit.Location = new Point(457, 20);
             lblGrandProfit.Name = "lblGrandProfit";
-            lblGrandProfit.Size = new Size(84, 20);
+            lblGrandProfit.Size = new Size(100, 23);
             lblGrandProfit.TabIndex = 2;
             lblGrandProfit.Text = "Total Profit";
             // 
             // lblGrandRevenue
             // 
             lblGrandRevenue.AutoSize = true;
-            lblGrandRevenue.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandRevenue.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             lblGrandRevenue.Location = new Point(242, 20);
             lblGrandRevenue.Name = "lblGrandRevenue";
-            lblGrandRevenue.Size = new Size(105, 20);
+            lblGrandRevenue.Size = new Size(121, 23);
             lblGrandRevenue.TabIndex = 1;
             lblGrandRevenue.Text = "Total Revenue";
             // 
             // lblGrandCost
             // 
             lblGrandCost.AutoSize = true;
-            lblGrandCost.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblGrandCost.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold);
             lblGrandCost.Location = new Point(52, 20);
             lblGrandCost.Name = "lblGrandCost";
-            lblGrandCost.Size = new Size(75, 20);
+            lblGrandCost.Size = new Size(89, 23);
             lblGrandCost.TabIndex = 0;
             lblGrandCost.Text = "Total Cost";
             // 
@@ -372,11 +372,10 @@
             chartRevenueProfitTrends.ChartArea.CursorLocation = new Point(0, 0);
             chartRevenueProfitTrends.ChartArea.CursorReDraw = false;
             chartRevenueProfitTrends.ChartInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
-            chartRevenueProfitTrends.Legend.Location = new Point(1050, 81);
-            chartRevenueProfitTrends.Legend.Orientation = Syncfusion.Windows.Forms.Chart.ChartOrientation.Vertical;
-            chartRevenueProfitTrends.Legend.Position = Syncfusion.Windows.Forms.Chart.ChartDock.Right;
-            chartRevenueProfitTrends.Legend.Alignment = Syncfusion.Windows.Forms.Chart.ChartAlignment.Near;
-            chartRevenueProfitTrends.LegendPosition = Syncfusion.Windows.Forms.Chart.ChartDock.Right;
+            // 
+            // 
+            // 
+            chartRevenueProfitTrends.Legend.Location = new Point(970, 81);
             chartRevenueProfitTrends.Location = new Point(35, 868);
             chartRevenueProfitTrends.Name = "chartRevenueProfitTrends";
             chartRevenueProfitTrends.PrimaryXAxis.GridLineType.ForeColor = Color.LightGray;
@@ -390,7 +389,6 @@
             chartRevenueProfitTrends.PrimaryYAxis.Title = "Amount (₱)";
             chartSeries1.FancyToolTip.ResizeInsideSymbol = true;
             chartSeries1.Name = "Revenue";
-            chartSeries1.Text = "Revenue (Blue)";
             chartSeries1.Resolution = 0D;
             chartSeries1.StackingGroup = "Default Group";
             chartSeries1.Style.AltTagFormat = "";
@@ -408,11 +406,10 @@
             chartCustomShapeInfo1.Color = SystemColors.HighlightText;
             chartCustomShapeInfo1.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
             chartSeries1.Style.TextShape = chartCustomShapeInfo1;
+            chartSeries1.Text = "Revenue (Blue)";
             chartSeries1.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
-            chartSeries1.ZOrder = 0;
             chartSeries2.FancyToolTip.ResizeInsideSymbol = true;
             chartSeries2.Name = "Profit";
-            chartSeries2.Text = "Profit (Green)";
             chartSeries2.Resolution = 0D;
             chartSeries2.StackingGroup = "Default Group";
             chartSeries2.Style.AltTagFormat = "";
@@ -425,13 +422,18 @@
             chartCustomShapeInfo2.Color = SystemColors.HighlightText;
             chartCustomShapeInfo2.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
             chartSeries2.Style.TextShape = chartCustomShapeInfo2;
+            chartSeries2.Text = "Profit (Green)";
             chartSeries2.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
-            chartSeries2.ZOrder = 1;
             chartRevenueProfitTrends.Series.Add(chartSeries1);
             chartRevenueProfitTrends.Series.Add(chartSeries2);
             chartRevenueProfitTrends.Size = new Size(1142, 475);
             chartRevenueProfitTrends.TabIndex = 12;
             chartRevenueProfitTrends.Text = "Revenue & Profit Trends";
+            // 
+            // 
+            // 
+            chartRevenueProfitTrends.Title.Name = "Default";
+            chartRevenueProfitTrends.Titles.Add(chartRevenueProfitTrends.Title);
             // 
             // label10
             // 
