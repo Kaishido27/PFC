@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries1 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
             Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo1 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
             Syncfusion.Windows.Forms.Chart.ChartLineInfo chartLineInfo1 = new Syncfusion.Windows.Forms.Chart.ChartLineInfo();
@@ -36,6 +37,7 @@
             btnExport = new Button();
             panel1 = new Panel();
             label1 = new Label();
+            pictureBox1 = new PictureBox();
             label2 = new Label();
             label3 = new Label();
             gradientPanel1 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
@@ -62,7 +64,9 @@
             chartRevenueProfitTrends = new Syncfusion.Windows.Forms.Chart.ChartControl();
             label10 = new Label();
             dgvTopProducts = new DataGridView();
+            _orderDetailToolTip = new ToolTip(components);
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvReports).BeginInit();
@@ -100,21 +104,32 @@
             panel1.BackColor = Color.FromArgb(2, 132, 199);
             panel1.BorderStyle = BorderStyle.FixedSingle;
             panel1.Controls.Add(label1);
+            panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1382, 66);
+            panel1.Size = new Size(1382, 72);
             panel1.TabIndex = 2;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(57, 16);
+            label1.Location = new Point(74, 17);
             label1.Name = "label1";
             label1.Size = new Size(247, 31);
             label1.TabIndex = 0;
             label1.Text = "Reports and Analytics";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.Reports_Resized;
+            pictureBox1.Location = new Point(7, 7);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(71, 60);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
             // 
             // label2
             // 
@@ -200,9 +215,13 @@
             dgvReports.Location = new Point(3, 14);
             dgvReports.Name = "dgvReports";
             dgvReports.RowHeadersWidth = 51;
+            dgvReports.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvReports.ShowCellToolTips = false;
             dgvReports.Size = new Size(752, 278);
             dgvReports.TabIndex = 6;
             dgvReports.CellContentClick += dgvReports_CellContentClick;
+            dgvReports.CellMouseEnter += dgvReports_CellMouseEnter;
+            dgvReports.CellMouseLeave += dgvReports_CellMouseLeave;
             // 
             // label4
             // 
@@ -280,6 +299,7 @@
             // label5
             // 
             label5.AutoSize = true;
+            label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.Location = new Point(16, 13);
             label5.Name = "label5";
@@ -302,6 +322,7 @@
             // label6
             // 
             label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.Location = new Point(22, 13);
             label6.Name = "label6";
@@ -324,6 +345,7 @@
             // label7
             // 
             label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label7.Location = new Point(13, 13);
             label7.Name = "label7";
@@ -346,6 +368,7 @@
             // label8
             // 
             label8.AutoSize = true;
+            label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label8.Location = new Point(18, 13);
             label8.Name = "label8";
@@ -366,7 +389,7 @@
             // 
             // chartRevenueProfitTrends
             // 
-            chartRevenueProfitTrends.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.White, Color.White);
+            chartRevenueProfitTrends.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.White, Color.Azure);
             chartRevenueProfitTrends.ChartArea.AutoScale = true;
             chartRevenueProfitTrends.ChartArea.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
             chartRevenueProfitTrends.ChartArea.CursorLocation = new Point(0, 0);
@@ -461,15 +484,25 @@
             dgvTopProducts.ReadOnly = true;
             dgvTopProducts.RowHeadersVisible = false;
             dgvTopProducts.RowHeadersWidth = 51;
+            dgvTopProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvTopProducts.Size = new Size(534, 334);
             dgvTopProducts.TabIndex = 13;
+            // 
+            // _orderDetailToolTip
+            // 
+            _orderDetailToolTip.AutoPopDelay = 10000;
+            _orderDetailToolTip.InitialDelay = 800;
+            _orderDetailToolTip.OwnerDraw = true;
+            _orderDetailToolTip.ReshowDelay = 100;
+            _orderDetailToolTip.Draw += _orderDetailToolTip_Draw;
+            _orderDetailToolTip.Popup += _orderDetailToolTip_Popup;
             // 
             // ReportsView
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            BackColor = Color.White;
+            BackColor = Color.Azure;
             Controls.Add(dgvTopProducts);
             Controls.Add(label10);
             Controls.Add(chartRevenueProfitTrends);
@@ -488,6 +521,7 @@
             Size = new Size(1382, 1424);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
             gradientPanel1.ResumeLayout(false);
             gradientPanel1.PerformLayout();
@@ -543,5 +577,7 @@
         private Syncfusion.Windows.Forms.Chart.ChartControl chartRevenueProfitTrends;
         private Label label10;
         private DataGridView dgvTopProducts;
+        private PictureBox pictureBox1;
+        private ToolTip _orderDetailToolTip;
     }
 }

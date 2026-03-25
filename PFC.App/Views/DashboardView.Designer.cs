@@ -28,10 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             Syncfusion.Windows.Forms.Chart.ChartSeries chartSeries1 = new Syncfusion.Windows.Forms.Chart.ChartSeries();
             Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo chartCustomShapeInfo1 = new Syncfusion.Windows.Forms.Chart.ChartCustomShapeInfo();
             Syncfusion.Windows.Forms.Chart.ChartLineInfo chartLineInfo1 = new Syncfusion.Windows.Forms.Chart.ChartLineInfo();
             panel1 = new Panel();
+            pictureBox2 = new PictureBox();
             label1 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -39,52 +41,71 @@
             panel2 = new Panel();
             pictureBox1 = new PictureBox();
             pnlDailySales = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            pictureBox3 = new PictureBox();
             lblDailySales = new Label();
             label4 = new Label();
             gradientPanel2 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            pictureBox4 = new PictureBox();
             lblTotalRevenue = new Label();
             pnlTotalRevenue = new Label();
             pnlTotalProfit = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            pictureBox5 = new PictureBox();
             lblTotalProfit = new Label();
             label6 = new Label();
             panel3 = new Panel();
-            dgvRecentTransactions = new DataGridView();
             gradientPanel1 = new Syncfusion.Windows.Forms.Tools.GradientPanel();
+            dgvRecentTransactions = new DataGridView();
             label5 = new Label();
             label7 = new Label();
             chartHourlyPulse = new Syncfusion.Windows.Forms.Chart.ChartControl();
+            _dashboardToolTip = new ToolTip(components);
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pnlDailySales).BeginInit();
             pnlDailySales.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gradientPanel2).BeginInit();
             gradientPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pnlTotalProfit).BeginInit();
             pnlTotalProfit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).BeginInit();
             gradientPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(2, 132, 199);
             panel1.BorderStyle = BorderStyle.FixedSingle;
+            panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(label1);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(1363, 66);
+            panel1.Size = new Size(1363, 72);
             panel1.TabIndex = 0;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = Properties.Resources.Dashboard_Resize;
+            pictureBox2.Location = new Point(9, 2);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(71, 67);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 2;
+            pictureBox2.TabStop = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(57, 16);
+            label1.Location = new Point(74, 17);
             label1.Name = "label1";
             label1.Size = new Size(236, 31);
             label1.TabIndex = 0;
@@ -121,7 +142,7 @@
             tableLayoutPanel1.Controls.Add(gradientPanel2, 1, 1);
             tableLayoutPanel1.Controls.Add(pnlTotalProfit, 2, 1);
             tableLayoutPanel1.Dock = DockStyle.Top;
-            tableLayoutPanel1.Location = new Point(0, 66);
+            tableLayoutPanel1.Location = new Point(0, 72);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(10, 0, 10, 5);
             tableLayoutPanel1.RowCount = 2;
@@ -156,6 +177,7 @@
             // 
             pnlDailySales.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, Color.FromArgb(219, 234, 254), Color.FromArgb(191, 219, 254));
             pnlDailySales.BorderColor = Color.White;
+            pnlDailySales.Controls.Add(pictureBox3);
             pnlDailySales.Controls.Add(lblDailySales);
             pnlDailySales.Controls.Add(label4);
             pnlDailySales.Dock = DockStyle.Fill;
@@ -163,6 +185,18 @@
             pnlDailySales.Name = "pnlDailySales";
             pnlDailySales.Size = new Size(441, 129);
             pnlDailySales.TabIndex = 1;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Anchor = AnchorStyles.Right;
+            pictureBox3.BackColor = Color.Transparent;
+            pictureBox3.Image = Properties.Resources.DailySales;
+            pictureBox3.Location = new Point(297, 3);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(137, 119);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 4;
+            pictureBox3.TabStop = false;
             // 
             // lblDailySales
             // 
@@ -190,6 +224,7 @@
             // 
             gradientPanel2.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, Color.FromArgb(147, 197, 253), Color.FromArgb(96, 165, 250));
             gradientPanel2.BorderColor = Color.White;
+            gradientPanel2.Controls.Add(pictureBox4);
             gradientPanel2.Controls.Add(lblTotalRevenue);
             gradientPanel2.Controls.Add(pnlTotalRevenue);
             gradientPanel2.Dock = DockStyle.Fill;
@@ -197,6 +232,18 @@
             gradientPanel2.Name = "gradientPanel2";
             gradientPanel2.Size = new Size(441, 129);
             gradientPanel2.TabIndex = 2;
+            // 
+            // pictureBox4
+            // 
+            pictureBox4.Anchor = AnchorStyles.Right;
+            pictureBox4.BackColor = Color.Transparent;
+            pictureBox4.Image = Properties.Resources.TotalRevenue;
+            pictureBox4.Location = new Point(297, 3);
+            pictureBox4.Name = "pictureBox4";
+            pictureBox4.Size = new Size(137, 119);
+            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.TabIndex = 5;
+            pictureBox4.TabStop = false;
             // 
             // lblTotalRevenue
             // 
@@ -224,6 +271,7 @@
             // 
             pnlTotalProfit.BackgroundColor = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.Horizontal, Color.FromArgb(59, 130, 246), Color.FromArgb(37, 99, 235));
             pnlTotalProfit.BorderColor = Color.White;
+            pnlTotalProfit.Controls.Add(pictureBox5);
             pnlTotalProfit.Controls.Add(lblTotalProfit);
             pnlTotalProfit.Controls.Add(label6);
             pnlTotalProfit.Dock = DockStyle.Fill;
@@ -231,6 +279,18 @@
             pnlTotalProfit.Name = "pnlTotalProfit";
             pnlTotalProfit.Size = new Size(443, 129);
             pnlTotalProfit.TabIndex = 3;
+            // 
+            // pictureBox5
+            // 
+            pictureBox5.Anchor = AnchorStyles.Right;
+            pictureBox5.BackColor = Color.Transparent;
+            pictureBox5.Image = Properties.Resources.TotalProfit;
+            pictureBox5.Location = new Point(299, 3);
+            pictureBox5.Name = "pictureBox5";
+            pictureBox5.Size = new Size(137, 119);
+            pictureBox5.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox5.TabIndex = 6;
+            pictureBox5.TabStop = false;
             // 
             // lblTotalProfit
             // 
@@ -259,22 +319,11 @@
             panel3.Controls.Add(gradientPanel1);
             panel3.Controls.Add(chartHourlyPulse);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 326);
+            panel3.Location = new Point(0, 332);
             panel3.Name = "panel3";
             panel3.Padding = new Padding(10, 0, 10, 10);
-            panel3.Size = new Size(1363, 427);
+            panel3.Size = new Size(1363, 421);
             panel3.TabIndex = 2;
-            // 
-            // dgvRecentTransactions
-            // 
-            dgvRecentTransactions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvRecentTransactions.BackgroundColor = SystemColors.ControlLightLight;
-            dgvRecentTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRecentTransactions.Location = new Point(22, 63);
-            dgvRecentTransactions.Name = "dgvRecentTransactions";
-            dgvRecentTransactions.RowHeadersWidth = 51;
-            dgvRecentTransactions.Size = new Size(537, 317);
-            dgvRecentTransactions.TabIndex = 5;
             // 
             // gradientPanel1
             // 
@@ -286,8 +335,22 @@
             gradientPanel1.Location = new Point(10, 0);
             gradientPanel1.Margin = new Padding(3, 3, 10, 3);
             gradientPanel1.Name = "gradientPanel1";
-            gradientPanel1.Size = new Size(590, 417);
+            gradientPanel1.Size = new Size(590, 411);
             gradientPanel1.TabIndex = 8;
+            // 
+            // dgvRecentTransactions
+            // 
+            dgvRecentTransactions.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dgvRecentTransactions.BackgroundColor = SystemColors.ControlLightLight;
+            dgvRecentTransactions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRecentTransactions.Location = new Point(22, 79);
+            dgvRecentTransactions.Name = "dgvRecentTransactions";
+            dgvRecentTransactions.RowHeadersWidth = 51;
+            dgvRecentTransactions.ShowCellToolTips = false;
+            dgvRecentTransactions.Size = new Size(537, 311);
+            dgvRecentTransactions.TabIndex = 5;
+            dgvRecentTransactions.CellMouseEnter += dgvRecentTransactions_CellMouseEnter;
+            dgvRecentTransactions.CellMouseLeave += dgvRecentTransactions_CellMouseLeave;
             // 
             // label5
             // 
@@ -366,7 +429,7 @@
             chartSeries1.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
             chartHourlyPulse.Series.Add(chartSeries1);
             chartHourlyPulse.ShowLegend = false;
-            chartHourlyPulse.Size = new Size(753, 417);
+            chartHourlyPulse.Size = new Size(753, 411);
             chartHourlyPulse.TabIndex = 9;
             chartHourlyPulse.Text = "Hourly Sales Pulse";
             chartHourlyPulse.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
@@ -375,6 +438,16 @@
             // 
             chartHourlyPulse.Title.Name = "Default";
             chartHourlyPulse.Titles.Add(chartHourlyPulse.Title);
+            // 
+            // _dashboardToolTip
+            // 
+            _dashboardToolTip.AutoPopDelay = 10000;
+            _dashboardToolTip.InitialDelay = 700;
+            _dashboardToolTip.OwnerDraw = true;
+            _dashboardToolTip.ReshowDelay = 100;
+            _dashboardToolTip.ToolTipIcon = ToolTipIcon.Info;
+            _dashboardToolTip.Draw += _dashboardToolTip_Draw;
+            _dashboardToolTip.Popup += _dashboardToolTip_Popup;
             // 
             // DashboardView
             // 
@@ -389,6 +462,7 @@
             Size = new Size(1363, 753);
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -396,17 +470,20 @@
             ((System.ComponentModel.ISupportInitialize)pnlDailySales).EndInit();
             pnlDailySales.ResumeLayout(false);
             pnlDailySales.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)gradientPanel2).EndInit();
             gradientPanel2.ResumeLayout(false);
             gradientPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pnlTotalProfit).EndInit();
             pnlTotalProfit.ResumeLayout(false);
             pnlTotalProfit.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).EndInit();
             ((System.ComponentModel.ISupportInitialize)gradientPanel1).EndInit();
             gradientPanel1.ResumeLayout(false);
             gradientPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRecentTransactions).EndInit();
             ResumeLayout(false);
         }
 
@@ -434,5 +511,10 @@
         private Label label5;
         private Label label7;
         private Syncfusion.Windows.Forms.Chart.ChartControl chartHourlyPulse;
+        private ToolTip _dashboardToolTip;
+        private PictureBox pictureBox3;
+        private PictureBox pictureBox4;
+        private PictureBox pictureBox5;
+        private PictureBox pictureBox2;
     }
 }
