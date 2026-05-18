@@ -82,12 +82,23 @@ namespace PFC.App.Views
 
             chartRevenueProfitTrends.Legend.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             chartRevenueProfitTrends.ShowToolTips = true;
+            
+        
+            // Adjust the margin/padding for the Legend
+            chartRevenueProfitTrends.Legend.Margin = new Padding(10);
+            chartRevenueProfitTrends.Legend.Spacing = 8; // Adjusts spacing between Revenue and Profit lines
+            chartRevenueProfitTrends.Legend.ItemsSize = new Size(20, 20); // Controls the actual square sizes
 
             if (chartRevenueProfitTrends.Series.Count >= 2)
             {
-                chartRevenueProfitTrends.Series[0].Text = "Revenue (Blue)";
-                chartRevenueProfitTrends.Series[1].Text = "Profit (Green)";
+
+                chartRevenueProfitTrends.Series[0].Text = "Revenue";
+                chartRevenueProfitTrends.Series[1].Text = "Profit";
             }
+        }
+        private void chartRevenueProfitTrends_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void InitializeDateRange()
