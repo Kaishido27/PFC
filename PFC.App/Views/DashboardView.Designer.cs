@@ -153,6 +153,7 @@
             // 
             // panel2
             // 
+            panel2.BackColor = Color.Azure;
             tableLayoutPanel1.SetColumnSpan(panel2, 3);
             panel2.Controls.Add(pictureBox1);
             panel2.Controls.Add(label3);
@@ -376,7 +377,7 @@
             // 
             // chartHourlyPulse
             // 
-            chartHourlyPulse.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.White);
+            chartHourlyPulse.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Azure);
             chartHourlyPulse.ChartArea.AutoScale = true;
             chartHourlyPulse.ChartArea.BackInterior = new Syncfusion.Drawing.BrushInfo(Syncfusion.Drawing.GradientStyle.None, Color.Transparent, Color.Transparent);
             chartHourlyPulse.ChartArea.CursorLocation = new Point(0, 0);
@@ -454,10 +455,11 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            BackColor = Color.White;
+            BackColor = Color.Azure;
             Controls.Add(panel3);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panel1);
+            DoubleBuffered = true;
             Name = "DashboardView";
             Size = new Size(1363, 753);
             panel1.ResumeLayout(false);

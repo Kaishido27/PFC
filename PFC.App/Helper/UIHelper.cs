@@ -1,21 +1,14 @@
-﻿using System.Windows.Forms;
-using PFC.Domain.Models;
+﻿using PFC.Domain.Models;
+using System.Reflection;
+using System.Windows.Forms;
+
 
 namespace PFC.App.Helper
 {
     public static class UIHelper
     {
 
-        // 1. Centralizes the ugly reflection code for fixing screen flickering
-        public static void EnableDoubleBuffering(Control control)
-        {
-            try
-            {
-                var prop = typeof(Control).GetProperty("DoubleBuffered", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
-                prop?.SetValue(control, true, null);
-            }
-            catch { }
-        }
+        
 
         // 2. Centralizes the massive blocks of Syncfusion color styling!
         public static void SetPaymentButtonActive(Syncfusion.WinForms.Controls.SfButton activeBtn, Syncfusion.WinForms.Controls.SfButton inactiveBtn)
@@ -104,5 +97,7 @@ namespace PFC.App.Helper
         {
             MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+
+      
     }
 }

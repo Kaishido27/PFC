@@ -519,6 +519,7 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(panel1);
+            DoubleBuffered = true;
             Name = "ReportsView";
             Size = new Size(1382, 1424);
             panel1.ResumeLayout(false);
