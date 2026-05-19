@@ -30,7 +30,6 @@ namespace PFC.App.Views
             // 1 LINE HELPER CALL! (Sets up the form to not flicker)
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
             DoubleBuffered = true;
-            UIHelper.EnableDoubleBuffering(flowLayoutPanel1);
 
             _searchTimer.Interval = 500;
             _searchTimer.Tick += SearchTimer_Tick;

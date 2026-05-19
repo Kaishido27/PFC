@@ -114,6 +114,7 @@
             // 
             flwCartItems.AutoScroll = true;
             flwCartItems.BackColor = Color.GhostWhite;
+            flwCartItems.BackgroundImageLayout = ImageLayout.Zoom;
             flwCartItems.Dock = DockStyle.Fill;
             flwCartItems.Location = new Point(0, 67);
             flwCartItems.Name = "flwCartItems";
@@ -419,6 +420,7 @@
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);
+            DoubleBuffered = true;
             Margin = new Padding(3, 3, 0, 3);
             Name = "ProductView";
             RightToLeft = RightToLeft.No;

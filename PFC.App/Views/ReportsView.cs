@@ -41,6 +41,9 @@ namespace PFC.App.Views
             InitializeChartSettings();
             InitializeDateRange();
             InitializeTopProductsGrid();
+
+            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+            DoubleBuffered = true;
         }
 
         private void InitializeSummaryCards()
@@ -58,6 +61,7 @@ namespace PFC.App.Views
                 AutoSize = false,
                 Font = new Font("Segoe UI", 18F, FontStyle.Bold),
                 ForeColor = Color.FromArgb(64, 64, 64),
+                BackColor = Color.Transparent,
                 Location = new Point(16, 45),
                 Size = new Size(250, 40),
                 Text = "₱0.00",
