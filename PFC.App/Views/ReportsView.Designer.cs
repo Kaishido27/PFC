@@ -398,7 +398,8 @@
             // 
             // 
             // 
-            chartRevenueProfitTrends.Legend.Location = new Point(970, 81);
+
+            chartRevenueProfitTrends.Legend.Location = new Point(1017, 81);
             chartRevenueProfitTrends.Location = new Point(35, 868);
             chartRevenueProfitTrends.Name = "chartRevenueProfitTrends";
             chartRevenueProfitTrends.PrimaryXAxis.GridLineType.ForeColor = Color.LightGray;
@@ -429,7 +430,7 @@
             chartCustomShapeInfo1.Color = SystemColors.HighlightText;
             chartCustomShapeInfo1.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
             chartSeries1.Style.TextShape = chartCustomShapeInfo1;
-            chartSeries1.Text = "Revenue (Blue)";
+            chartSeries1.Text = "Revenue";
             chartSeries1.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
             chartSeries2.FancyToolTip.ResizeInsideSymbol = true;
             chartSeries2.Name = "Profit";
@@ -445,7 +446,7 @@
             chartCustomShapeInfo2.Color = SystemColors.HighlightText;
             chartCustomShapeInfo2.Type = Syncfusion.Windows.Forms.Chart.ChartCustomShape.Square;
             chartSeries2.Style.TextShape = chartCustomShapeInfo2;
-            chartSeries2.Text = "Profit (Green)";
+            chartSeries2.Text = "Profit";
             chartSeries2.Type = Syncfusion.Windows.Forms.Chart.ChartSeriesType.SplineArea;
             chartRevenueProfitTrends.Series.Add(chartSeries1);
             chartRevenueProfitTrends.Series.Add(chartSeries2);
@@ -457,6 +458,7 @@
             // 
             chartRevenueProfitTrends.Title.Name = "Default";
             chartRevenueProfitTrends.Titles.Add(chartRevenueProfitTrends.Title);
+            chartRevenueProfitTrends.Click += chartRevenueProfitTrends_Click;
             // 
             // label10
             // 
