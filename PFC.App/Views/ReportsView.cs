@@ -472,6 +472,10 @@ namespace PFC.App.Views
                     dtpStartDate.Value = DateTime.Today.AddDays(-7);
                     dtpEndDate.Value = DateTime.Today;
                     break;
+                case "Last 14 Days":
+                    dtpStartDate.Value = DateTime.Today.AddDays(-14);
+                    dtpEndDate.Value = DateTime.Today;
+                    break;
                 case "Last 30 Days":
                     dtpStartDate.Value = DateTime.Today.AddDays(-30);
                     dtpEndDate.Value = DateTime.Today;
@@ -485,7 +489,12 @@ namespace PFC.App.Views
                     dtpStartDate.Value = new DateTime(lastMonth.Year, lastMonth.Month, 1);
                     dtpEndDate.Value = new DateTime(lastMonth.Year, lastMonth.Month, DateTime.DaysInMonth(lastMonth.Year, lastMonth.Month));
                     break;
+                case "This Year":
+                    dtpStartDate.Value = new DateTime(DateTime.Today.Year, 1, 1);
+                    dtpEndDate.Value = DateTime.Today; // Caps it right at today's date
+                    break;
             }
+
 
             dtpStartDate.ValueChanged += DatePickers_ValueChanged;
             dtpEndDate.ValueChanged += DatePickers_ValueChanged;
