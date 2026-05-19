@@ -68,6 +68,19 @@ namespace PFC.App.Views
         private void SetFilter(Category category)
         {
             _currentFilter = category;
+
+            _currentFilter = category;
+
+            // 1. Temporarily unhook the event to prevent the 500ms search timer from triggering
+            txtSearch.TextChanged -= txtSearch_TextChanged;
+
+            // 2. Clear the search text box
+            txtSearch.Clear();
+
+            // 3. Re-hook the event so normal searching still works afterward
+            txtSearch.TextChanged += txtSearch_TextChanged;
+
+            // 4. Instantly refresh the display with the new category
             ApplyFilterAndDisplay();
         }
 
@@ -238,7 +251,7 @@ namespace PFC.App.Views
             }
         }
 
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void txtSearch_TextChanged(object? sender, EventArgs e)
         {
             _searchTimer.Stop();
             _searchTimer.Start();

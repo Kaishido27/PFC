@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             pnlSideBar = new Panel();
             tableLayoutPanel1 = new TableLayoutPanel();
             ProductTab = new Syncfusion.WinForms.Controls.SfButton();
@@ -163,6 +164,7 @@
             ClientSize = new Size(1709, 753);
             Controls.Add(pnlMainContent);
             Controls.Add(pnlSideBar);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main";

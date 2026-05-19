@@ -61,6 +61,16 @@ namespace PFC.App.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] App_Icon {
+            get {
+                object obj = ResourceManager.GetObject("App_Icon", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap authenticity {
@@ -206,16 +216,6 @@ namespace PFC.App.Properties {
         internal static System.Drawing.Bitmap Reports_Resized {
             get {
                 object obj = ResourceManager.GetObject("Reports_Resized", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap ShoppingCart {
-            get {
-                object obj = ResourceManager.GetObject("ShoppingCart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
